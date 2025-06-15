@@ -14,8 +14,8 @@ interface SidebarHeaderProps {
 export function SidebarHeader({ isCollapsed, onToggle }: SidebarHeaderProps) {
   return (
     <div className={cn(
-      "flex items-center border-b border-border",
-      isCollapsed ? "justify-center h-[88px]" : "justify-between p-6"
+      "flex items-center border-b border-border h-[88px]",
+      isCollapsed ? "justify-center" : "justify-between p-6"
     )}>
       {!isCollapsed && (
         <div className="flex items-center space-x-3">
