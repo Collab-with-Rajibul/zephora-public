@@ -16,7 +16,7 @@ const Index = () => {
 
   return (
     <ThemeProvider defaultTheme="light" storageKey="financeflow-theme">
-      <div className="flex h-screen w-full bg-background">
+      <div className="flex h-screen w-full bg-background rounded-lg overflow-hidden">
         {/* Sidebar */}
         <Sidebar 
           isCollapsed={isSidebarCollapsed}

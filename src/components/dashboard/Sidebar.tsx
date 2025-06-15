@@ -10,6 +10,8 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useTheme } from '@/components/ThemeProvider';
 import { 
   ChevronDown,
+  ChevronRight,
+  ChevronLeft,
   DollarSign,
   File,
   Users,
@@ -20,7 +22,6 @@ import {
   Settings,
   Bell,
   Folder,
-  Menu,
   Sun,
   Moon
 } from 'lucide-react';
@@ -62,7 +63,7 @@ export function Sidebar({ className, isCollapsed, onToggle }: SidebarProps) {
 
   return (
     <div className={cn(
-      "flex flex-col h-screen bg-background text-foreground border-r border-border transition-all duration-300",
+      "flex flex-col h-screen bg-background text-foreground border-r border-border transition-all duration-300 rounded-r-lg",
       isCollapsed ? "w-16" : "w-72",
       className
     )}>
@@ -70,7 +71,7 @@ export function Sidebar({ className, isCollapsed, onToggle }: SidebarProps) {
       <div className="flex items-center justify-between p-6 border-b border-border">
         {!isCollapsed && (
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-primary rounded-xl flex items-center justify-center">
               <DollarSign className="w-5 h-5 text-primary-foreground" />
             </div>
             <div>
@@ -83,9 +84,12 @@ export function Sidebar({ className, isCollapsed, onToggle }: SidebarProps) {
           variant="ghost"
           size="sm"
           onClick={onToggle}
-          className="text-muted-foreground hover:text-foreground hover:bg-accent"
+          className={cn(
+            "text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg",
+            isCollapsed && "mx-auto"
+          )}
         >
-          <Menu className="w-4 h-4" />
+          {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
         </Button>
       </div>
 
@@ -101,8 +105,8 @@ export function Sidebar({ className, isCollapsed, onToggle }: SidebarProps) {
                 <Button
                   variant="ghost"
                   className={cn(
-                    "w-full justify-start text-muted-foreground hover:text-foreground hover:bg-accent transition-colors",
-                    isCollapsed && "justify-center px-2"
+                    "w-full text-muted-foreground hover:text-foreground hover:bg-accent transition-colors rounded-lg",
+                    isCollapsed ? "justify-center px-2" : "justify-start"
                   )}
                   onClick={() => item.children && toggleExpanded(item.title)}
                 >
@@ -131,7 +135,7 @@ export function Sidebar({ className, isCollapsed, onToggle }: SidebarProps) {
                         <Button
                           key={child.title}
                           variant="ghost"
-                          className="w-full justify-start text-sm text-muted-foreground hover:text-foreground hover:bg-accent"
+                          className="w-full justify-start text-sm text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg"
                         >
                           <ChildIcon className="w-4 h-4 shrink-0" />
                           <span className="ml-3">{child.title}</span>
@@ -151,12 +155,12 @@ export function Sidebar({ className, isCollapsed, onToggle }: SidebarProps) {
       {/* User Profile with Theme Toggle */}
       <div className="p-4 border-t border-border">
         <div className={cn(
-          "flex items-center space-x-3",
-          isCollapsed && "justify-center"
+          "flex items-center",
+          isCollapsed ? "justify-center" : "space-x-3"
         )}>
           <Avatar className="w-8 h-8">
             <AvatarImage src="/placeholder-avatar.jpg" />
-            <AvatarFallback className="bg-primary text-primary-foreground text-sm font-medium">
+            <AvatarFallback className="bg-primary text-primary-foreground text-sm font-medium rounded-lg">
               JD
             </AvatarFallback>
           </Avatar>
@@ -174,7 +178,7 @@ export function Sidebar({ className, isCollapsed, onToggle }: SidebarProps) {
                 variant="ghost"
                 size="sm"
                 onClick={toggleTheme}
-                className="text-muted-foreground hover:text-foreground hover:bg-accent p-2"
+                className="text-muted-foreground hover:text-foreground hover:bg-accent p-2 rounded-lg"
               >
                 {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
               </Button>
