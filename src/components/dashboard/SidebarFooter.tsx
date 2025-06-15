@@ -31,7 +31,7 @@ export function SidebarFooter({ isCollapsed }: SidebarFooterProps) {
               onClick={toggleTheme}
               className="text-muted-foreground hover:text-foreground hover:bg-accent p-2 rounded-lg"
             >
-              {theme === 'dark' ? <Sun className="w-4 h-4 text-yellow-400" /> : <Moon className="w-4 h-4 text-blue-400" />}
+              {theme === 'dark' ? <Sun className="w-4 h-4 text-yellow-400" /> : <Moon className="w-4 h-4 text-slate-900" />}
             </Button>
           </div>
         </div>
@@ -68,7 +68,7 @@ export function SidebarFooter({ isCollapsed }: SidebarFooterProps) {
                 onClick={toggleTheme}
                 className="text-muted-foreground hover:text-foreground hover:bg-accent p-2 rounded-lg"
               >
-                {theme === 'dark' ? <Sun className="w-4 h-4 text-yellow-400" /> : <Moon className="w-4 h-4 text-blue-400" />}
+                {theme === 'dark' ? <Sun className="w-4 h-4 text-yellow-400" /> : <Moon className="w-4 h-4 text-slate-900" />}
               </Button>
             </>
           )}

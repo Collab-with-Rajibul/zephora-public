@@ -53,7 +53,7 @@ export function Header({ className }: HeaderProps) {
       <div className="flex-none flex items-center space-x-4">
         <div className="relative">
           <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground rounded-xl">
-            <Bell className="h-5 w-5" />
+            <Bell className="h-5 w-5 text-yellow-500" />
           </Button>
           <Badge 
             variant="destructive" 
@@ -64,7 +64,7 @@ export function Header({ className }: HeaderProps) {
         </div>
 
         <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground rounded-xl">
-          <Settings className="h-5 w-5" />
+          <Settings className="h-5 w-5 text-gray-500" />
         </Button>
 
         <DropdownMenu>
@@ -72,7 +72,7 @@ export function Header({ className }: HeaderProps) {
             <Button variant="ghost" className="relative h-8 w-8 rounded-full">
               <Avatar className="h-8 w-8">
                 <AvatarImage src="/placeholder-avatar.jpg" alt="@johndoe" />
-                <AvatarFallback className="rounded-lg">JD</AvatarFallback>
+                <AvatarFallback className="text-primary-foreground font-medium bg-gradient-to-br from-blue-500 to-purple-600">JD</AvatarFallback>
               </Avatar>
             </Button>
           </DropdownMenuTrigger>
