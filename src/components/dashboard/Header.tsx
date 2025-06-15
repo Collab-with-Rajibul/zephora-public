@@ -53,25 +53,12 @@ export function Header({ className }: HeaderProps) {
           </p>
         </div>
 
-        {/* Middle - Search (Desktop) */}
-        <div className="hidden sm:flex flex-1 justify-center px-8">
-            <Button
-              variant="outline"
-              className={cn(
-                "relative w-full justify-start text-sm text-muted-foreground sm:max-w-md rounded-full bg-muted/40 border-transparent transition-colors hover:bg-muted hover:text-foreground"
-              )}
-              onClick={() => setOpen(true)}
-            >
-              <Search className="h-4 w-4 mr-2.5" />
-              <span className="inline-flex">Search anything...</span>
-              <kbd className="pointer-events-none absolute right-2.5 top-1/2 hidden h-6 -translate-y-1/2 select-none items-center gap-1 rounded-md border bg-background px-2 font-mono text-xs font-medium opacity-100 lg:flex">
-                <span className="text-sm">⌘</span>K
-              </kbd>
-            </Button>
-        </div>
-
         {/* Right side - Actions (Desktop) */}
-        <div className="hidden sm:flex items-center space-x-2">
+        <div className="hidden sm:flex items-center space-x-4">
+           <Button variant="ghost" size="icon" className="rounded-xl" onClick={() => setOpen(true)}>
+            <Search className="h-5 w-5" />
+          </Button>
+
           <div className="relative">
             <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-xl">
               <Bell className="h-5 w-5 text-blue-500" />
