@@ -4,7 +4,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Sidebar, Feather } from 'lucide-react';
+import { Sidebar } from 'lucide-react';
 
 interface SidebarHeaderProps {
   isCollapsed: boolean;
@@ -19,9 +19,7 @@ export function SidebarHeader({ isCollapsed, onToggle }: SidebarHeaderProps) {
     )}>
       {!isCollapsed && (
         <div className="flex items-center space-x-3">
-          <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary">
-            <Feather className="w-5 h-5 text-primary-foreground" />
-          </div>
+          <img src="/lovable-uploads/66302364-77b8-4f58-9dae-ab86821d9e4e.png" alt="Zephora Logo" className="w-8 h-8" />
           <div>
             <h1 className="text-lg font-semibold text-foreground">Zephora</h1>
             <p className="text-xs text-muted-foreground">
