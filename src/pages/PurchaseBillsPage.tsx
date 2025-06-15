@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { purchaseBills } from "@/data/purchase-bills";
 import { PurchaseBillsTable } from "@/components/purchase-bills/PurchaseBillsTable";
 import { SummaryCard } from "@/components/purchase-bills/SummaryCard";
-import { Plus, Download, FileText, AlertCircle, CheckCircle } from "lucide-react";
+import { Plus, Download, FileText, AlertCircle } from "lucide-react";
 import React from 'react';
 
 const PurchaseBillsPage: React.FC = () => {
@@ -13,7 +13,7 @@ const PurchaseBillsPage: React.FC = () => {
     const overdueAmount = purchaseBills.filter(b => b.status === 'overdue').reduce((sum, bill) => sum + bill.amount, 0);
 
     return (
-        <div className="flex flex-col gap-8 p-4 md:p-8">
+        <div className="flex flex-col gap-8">
             <header className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <div>
                     <h1 className="text-3xl font-bold tracking-tight">Purchase Bills</h1>
