@@ -7,7 +7,7 @@ import { ThemeProvider } from '@/components/ThemeProvider';
 import { Sidebar } from '@/components/dashboard/Sidebar';
 import { PageHeader } from '@/components/dashboard/PageHeader';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { dashboardNav } from '@/config/dashboard-nav';
+import { navigationItems } from '@/config/dashboard-nav';
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -19,8 +19,11 @@ const AppLayout = ({ children }: AppLayoutProps) => {
   const location = useLocation();
 
   const getPageTitle = (pathname: string): string => {
-    const allNavItems = dashboardNav.flatMap(group => group.items);
-    const currentNavItem = allNavItems.find(item => item.href === pathname);
+    if (pathname === '/') {
+      return 'Dashboard';
+    }
+    const allNavItems = navigationItems.flatMap(group => group.children || []);
+    const currentNavItem = allNavItems.find(item => item.path === pathname);
     return currentNavItem?.title || 'Dashboard';
   };
   
