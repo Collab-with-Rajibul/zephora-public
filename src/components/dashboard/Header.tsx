@@ -24,20 +24,20 @@ interface HeaderProps {
 export function Header({ className }: HeaderProps) {
   return (
     <header className={cn(
-      "flex items-center justify-between px-6 py-4 bg-background border-b border-border",
+      "flex items-center px-6 bg-background border-b border-border h-[88px]",
       className
     )}>
-      {/* Left side - Breadcrumb and Search */}
-      <div className="flex items-center space-x-4 flex-1">
-        <div className="hidden sm:block">
-          <nav className="text-sm text-muted-foreground">
-            <span>Dashboard</span>
-            <span className="mx-2">/</span>
-            <span className="text-foreground font-medium">Overview</span>
-          </nav>
-        </div>
-        
-        <div className="relative max-w-md">
+      {/* Left side - Title */}
+      <div className="flex-none">
+        <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
+        <p className="text-sm text-muted-foreground">
+          Welcome back! Here's what's happening with your business today.
+        </p>
+      </div>
+
+      {/* Middle - Search */}
+      <div className="flex-1 flex justify-center px-8">
+        <div className="relative w-full max-w-md">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <Input
             placeholder="Search transactions, customers..."
@@ -50,7 +50,7 @@ export function Header({ className }: HeaderProps) {
       </div>
 
       {/* Right side - Actions */}
-      <div className="flex items-center space-x-4">
+      <div className="flex-none flex items-center space-x-4">
         <div className="relative">
           <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground rounded-xl">
             <Bell className="h-5 w-5" />
