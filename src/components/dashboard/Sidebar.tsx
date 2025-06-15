@@ -9,8 +9,6 @@ import { Separator } from '@/components/ui/separator';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useTheme } from '@/components/ThemeProvider';
 import { 
-  ChevronLeft, 
-  ChevronRight,
   ChevronDown,
   DollarSign,
   File,
@@ -21,7 +19,10 @@ import {
   Search,
   Settings,
   Bell,
-  Folder
+  Folder,
+  Menu,
+  Sun,
+  Moon
 } from 'lucide-react';
 
 const iconMap = {
@@ -39,10 +40,11 @@ const iconMap = {
 
 interface SidebarProps {
   className?: string;
+  isCollapsed: boolean;
+  onToggle: () => void;
 }
 
-export function Sidebar({ className }: SidebarProps) {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+export function Sidebar({ className, isCollapsed, onToggle }: SidebarProps) {
   const [expandedItems, setExpandedItems] = useState<string[]>(['Sales Management']);
   const { theme, setTheme } = useTheme();
 
@@ -60,30 +62,30 @@ export function Sidebar({ className }: SidebarProps) {
 
   return (
     <div className={cn(
-      "flex flex-col h-screen bg-sidebar text-sidebar-foreground border-r border-sidebar-border transition-all duration-300",
+      "flex flex-col h-screen bg-background text-foreground border-r border-border transition-all duration-300",
       isCollapsed ? "w-16" : "w-72",
       className
     )}>
       {/* Header */}
-      <div className="flex items-center justify-between p-6 border-b border-sidebar-border">
+      <div className="flex items-center justify-between p-6 border-b border-border">
         {!isCollapsed && (
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 bg-sidebar-primary rounded-lg flex items-center justify-center">
-              <DollarSign className="w-5 h-5 text-sidebar-primary-foreground" />
+            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+              <DollarSign className="w-5 h-5 text-primary-foreground" />
             </div>
             <div>
-              <h1 className="text-lg font-semibold text-sidebar-primary-foreground">FinanceFlow</h1>
-              <p className="text-xs text-sidebar-foreground">Professional Accounting</p>
+              <h1 className="text-lg font-semibold text-foreground">FinanceFlow</h1>
+              <p className="text-xs text-muted-foreground">Professional Accounting</p>
             </div>
           </div>
         )}
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => setIsCollapsed(!isCollapsed)}
-          className="text-sidebar-foreground hover:text-sidebar-primary-foreground hover:bg-sidebar-accent"
+          onClick={onToggle}
+          className="text-muted-foreground hover:text-foreground hover:bg-accent"
         >
-          {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+          <Menu className="w-4 h-4" />
         </Button>
       </div>
 
@@ -99,7 +101,7 @@ export function Sidebar({ className }: SidebarProps) {
                 <Button
                   variant="ghost"
                   className={cn(
-                    "w-full justify-start text-sidebar-foreground hover:text-sidebar-primary-foreground hover:bg-sidebar-accent transition-colors",
+                    "w-full justify-start text-muted-foreground hover:text-foreground hover:bg-accent transition-colors",
                     isCollapsed && "justify-center px-2"
                   )}
                   onClick={() => item.children && toggleExpanded(item.title)}
@@ -129,7 +131,7 @@ export function Sidebar({ className }: SidebarProps) {
                         <Button
                           key={child.title}
                           variant="ghost"
-                          className="w-full justify-start text-sm text-sidebar-foreground hover:text-sidebar-primary-foreground hover:bg-sidebar-accent"
+                          className="w-full justify-start text-sm text-muted-foreground hover:text-foreground hover:bg-accent"
                         >
                           <ChildIcon className="w-4 h-4 shrink-0" />
                           <span className="ml-3">{child.title}</span>
@@ -144,45 +146,39 @@ export function Sidebar({ className }: SidebarProps) {
         </nav>
       </div>
 
-      <Separator className="bg-sidebar-border" />
+      <Separator className="bg-border" />
 
-      {/* Theme Toggle */}
-      {!isCollapsed && (
-        <div className="p-4">
-          <Button
-            variant="ghost"
-            onClick={toggleTheme}
-            className="w-full justify-start text-sidebar-foreground hover:text-sidebar-primary-foreground hover:bg-sidebar-accent"
-          >
-            <div className="w-5 h-5 rounded-full bg-gradient-to-r from-orange-400 to-rose-400 shrink-0" />
-            <span className="ml-3 text-sm">
-              {theme === 'dark' ? 'Switch to Light' : 'Switch to Dark'}
-            </span>
-          </Button>
-        </div>
-      )}
-
-      {/* User Profile */}
-      <div className="p-4 border-t border-sidebar-border">
+      {/* User Profile with Theme Toggle */}
+      <div className="p-4 border-t border-border">
         <div className={cn(
           "flex items-center space-x-3",
           isCollapsed && "justify-center"
         )}>
           <Avatar className="w-8 h-8">
             <AvatarImage src="/placeholder-avatar.jpg" />
-            <AvatarFallback className="bg-sidebar-primary text-sidebar-primary-foreground text-sm font-medium">
+            <AvatarFallback className="bg-primary text-primary-foreground text-sm font-medium">
               JD
             </AvatarFallback>
           </Avatar>
           {!isCollapsed && (
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-sidebar-primary-foreground truncate">
-                John Doe
-              </p>
-              <p className="text-xs text-sidebar-foreground truncate">
-                john.doe@company.com
-              </p>
-            </div>
+            <>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-foreground truncate">
+                  John Doe
+                </p>
+                <p className="text-xs text-muted-foreground truncate">
+                  john.doe@company.com
+                </p>
+              </div>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={toggleTheme}
+                className="text-muted-foreground hover:text-foreground hover:bg-accent p-2"
+              >
+                {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              </Button>
+            </>
           )}
         </div>
       </div>

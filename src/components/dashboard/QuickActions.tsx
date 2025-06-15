@@ -6,13 +6,16 @@ import { cn } from '@/lib/utils';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { quickActions } from '@/lib/constants';
-import { Plus, DollarSign, File, Users } from 'lucide-react';
+import { Plus, DollarSign, File, Users, Package, FileText, BarChart3 } from 'lucide-react';
 
 const iconMap = {
   'plus': Plus,
   'dollar-sign': DollarSign,
   'file': File,
-  'users': Users
+  'users': Users,
+  'package': Package,
+  'file-text': FileText,
+  'bar-chart-3': BarChart3
 };
 
 interface QuickActionsProps {
@@ -20,28 +23,23 @@ interface QuickActionsProps {
 }
 
 export function QuickActions({ className }: QuickActionsProps) {
-  const getVariantStyles = (variant: string) => {
+  const getActionStyles = (variant: string) => {
     switch (variant) {
       case 'primary':
-        return 'bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg';
+        return 'bg-blue-500 hover:bg-blue-600 text-white border-0';
       case 'secondary':
-        return 'bg-secondary text-secondary-foreground hover:bg-secondary/80';
+        return 'bg-green-500 hover:bg-green-600 text-white border-0';
       case 'accent':
-        return 'bg-success text-success-foreground hover:bg-success/90';
+        return 'bg-orange-500 hover:bg-orange-600 text-white border-0';
       default:
-        return 'bg-muted text-muted-foreground hover:bg-muted/80';
+        return 'bg-gray-100 hover:bg-gray-200 text-gray-700 border-0 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200';
     }
   };
 
   return (
-    <Card className={cn("overflow-hidden", className)}>
-      <CardContent className="p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-lg font-semibold">Quick Actions</h2>
-          <p className="text-sm text-muted-foreground">Common tasks</p>
-        </div>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+    <Card className={cn("overflow-hidden border-0 bg-transparent shadow-none", className)}>
+      <CardContent className="p-0">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-7 gap-4">
           {quickActions.map((action) => {
             const Icon = iconMap[action.icon as keyof typeof iconMap];
             
@@ -50,17 +48,15 @@ export function QuickActions({ className }: QuickActionsProps) {
                 key={action.id}
                 variant="outline"
                 className={cn(
-                  "h-auto p-4 flex flex-col items-center space-y-2 card-hover border-0",
-                  getVariantStyles(action.variant)
+                  "h-24 p-4 flex flex-col items-center justify-center space-y-2 rounded-lg transition-all duration-200 hover:scale-105 hover:shadow-md",
+                  getActionStyles(action.variant)
                 )}
                 onClick={() => console.log(`Navigate to ${action.href}`)}
               >
-                <div className="p-2 bg-white/20 rounded-lg">
-                  <Icon className="w-5 h-5" />
-                </div>
+                <Icon className="w-6 h-6" />
                 <div className="text-center">
-                  <div className="text-sm font-medium">{action.title}</div>
-                  <div className="text-xs opacity-80 mt-1">{action.description}</div>
+                  <div className="text-sm font-medium leading-tight">{action.title}</div>
+                  <div className="text-xs opacity-80 mt-1 leading-tight">{action.description}</div>
                 </div>
               </Button>
             );

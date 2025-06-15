@@ -24,7 +24,7 @@ interface HeaderProps {
 export function Header({ className }: HeaderProps) {
   return (
     <header className={cn(
-      "flex items-center justify-between px-6 py-4 bg-card border-b border-border",
+      "flex items-center justify-between px-6 py-4 bg-background border-b border-border",
       className
     )}>
       {/* Left side - Breadcrumb and Search */}
@@ -51,7 +51,7 @@ export function Header({ className }: HeaderProps) {
 
       {/* Right side - Actions */}
       <div className="flex items-center space-x-4">
-        <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
+        <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground relative">
           <Bell className="h-5 w-5" />
           <Badge variant="destructive" className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 text-xs">
             3
