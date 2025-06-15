@@ -1,4 +1,3 @@
-
 "use client";
 
 import React from 'react';
@@ -74,10 +73,6 @@ export function Header({ className }: HeaderProps) {
               3
             </Badge>
           </div>
-
-          <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-xl">
-            <Settings className="h-5 w-5 text-gray-500" />
-          </Button>
         </div>
 
         {/* Mobile Actions */}
