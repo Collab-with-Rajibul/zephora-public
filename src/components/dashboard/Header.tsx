@@ -14,14 +14,17 @@ import {
   CommandList,
   CommandSeparator,
 } from "@/components/ui/command";
-import { Search, Bell, Settings, LayoutDashboard, Users, CreditCard, FileText } from 'lucide-react';
+import { Search, Bell, Settings, LayoutDashboard, Users, CreditCard, FileText, Menu } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface HeaderProps {
   className?: string;
+  onMenuClick?: () => void;
 }
 
-export function Header({ className }: HeaderProps) {
+export function Header({ className, onMenuClick }: HeaderProps) {
   const [open, setOpen] = React.useState(false);
+  const isMobile = useIsMobile();
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -42,19 +45,26 @@ export function Header({ className }: HeaderProps) {
   return (
     <>
       <header className={cn(
-        "flex items-center justify-between px-4 sm:px-6 bg-background border-b border-border h-[88px]",
+        "flex items-center justify-between px-4 md:px-6 bg-background border-b border-border h-[88px]",
         className
       )}>
         {/* Left side - Title */}
-        <div className="flex-none">
-          <h1 className="text-xl sm:text-2xl font-bold text-foreground">Dashboard</h1>
-          <p className="hidden sm:block text-sm text-muted-foreground">
-            Welcome back! Here's what's happening with your business today.
-          </p>
+        <div className="flex items-center gap-2">
+          {isMobile && (
+            <Button variant="ghost" size="icon" className="md:hidden rounded-lg" onClick={onMenuClick}>
+              <Menu className="h-6 w-6" />
+            </Button>
+          )}
+          <div className="flex-none">
+            <h1 className="text-xl md:text-2xl font-bold text-foreground">Dashboard</h1>
+            <p className="hidden md:block text-sm text-muted-foreground">
+              Welcome back! Here's what's happening with your business today.
+            </p>
+          </div>
         </div>
 
         {/* Right side - Actions (Desktop) */}
-        <div className="hidden sm:flex items-center space-x-4">
+        <div className="hidden md:flex items-center space-x-4">
            <Button variant="ghost" size="icon" className="rounded-xl" onClick={() => setOpen(true)}>
             <Search className="h-5 w-5" />
           </Button>
@@ -77,7 +87,7 @@ export function Header({ className }: HeaderProps) {
         </div>
 
         {/* Mobile Actions */}
-        <div className="sm:hidden flex items-center space-x-1">
+        <div className="md:hidden flex items-center space-x-1">
           <Button variant="ghost" size="icon" onClick={() => setOpen(true)} className="rounded-xl">
             <Search className="h-5 w-5" />
           </Button>

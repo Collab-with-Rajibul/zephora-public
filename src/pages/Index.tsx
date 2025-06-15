@@ -6,9 +6,20 @@ import { ThemeProvider } from '@/components/ThemeProvider';
 import { Sidebar } from '@/components/dashboard/Sidebar';
 import { Header } from '@/components/dashboard/Header';
 import { DashboardOverview } from '@/components/dashboard/DashboardOverview';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Index = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const isMobile = useIsMobile();
+
+  React.useEffect(() => {
+    if (isMobile) {
+      setIsSidebarCollapsed(true);
+    } else {
+      setIsSidebarCollapsed(false);
+    }
+  }, [isMobile]);
+
 
   const toggleSidebar = () => {
     setIsSidebarCollapsed(!isSidebarCollapsed);
@@ -26,7 +37,7 @@ const Index = () => {
         {/* Main Content */}
         <div className="flex-1 flex flex-col overflow-hidden">
           {/* Header */}
-          <Header />
+          <Header onMenuClick={toggleSidebar} />
           
           {/* Dashboard Content */}
           <main className="flex-1 overflow-y-auto">
