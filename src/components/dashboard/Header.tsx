@@ -53,7 +53,7 @@ export function Header({ className }: HeaderProps) {
       <div className="flex-none flex items-center space-x-4">
         <div className="relative">
           <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground rounded-xl">
-            <Bell className="h-5 w-5 text-yellow-500" />
+            <Bell className="h-5 w-5 text-blue-500" />
           </Button>
           <Badge 
             variant="destructive" 
