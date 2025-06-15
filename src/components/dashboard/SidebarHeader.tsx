@@ -4,7 +4,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { DollarSign, Split } from 'lucide-react';
+import { DollarSign, Sidebar } from 'lucide-react';
 
 interface SidebarHeaderProps {
   isCollapsed: boolean;
@@ -34,7 +34,7 @@ export function SidebarHeader({ isCollapsed, onToggle }: SidebarHeaderProps) {
         onClick={onToggle}
         className="text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg p-2"
       >
-        <Split className="w-4 h-4" />
+        <Sidebar className="w-4 h-4" />
       </Button>
     </div>
   );
