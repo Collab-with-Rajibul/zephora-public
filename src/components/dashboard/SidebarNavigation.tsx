@@ -236,6 +236,16 @@ export function SidebarNavigation({ isCollapsed, onToggle }: SidebarNavigationPr
                       );
                     }
 
+                    if (child.title === 'Customers') {
+                      return (
+                        <Button {...buttonProps} asChild key={child.title}>
+                          <Link to="/customers">
+                            {buttonContent}
+                          </Link>
+                        </Button>
+                      );
+                    }
+
                     return (
                       <Button key={child.title} {...buttonProps}>
                         {buttonContent}

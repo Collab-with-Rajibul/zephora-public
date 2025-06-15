@@ -20,6 +20,7 @@ import { Copy, Download, Edit, Eye, MoreHorizontal, Printer, Send, Trash, X, Dol
 import { invoices } from "@/data/sales-invoices";
 import { InvoiceStatus } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 
 const statusColorMap: Record<InvoiceStatus, string> = {
   paid: "bg-green-100 text-green-800 border-green-200 dark:bg-green-900/50 dark:text-green-300 dark:border-green-700",
@@ -70,15 +71,15 @@ export function InvoicesTable() {
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
-                    <DropdownMenuItem><Eye className="mr-2 h-4 w-4" />View Invoice</DropdownMenuItem>
-                    <DropdownMenuItem><Edit className="mr-2 h-4 w-4" />Edit Invoice</DropdownMenuItem>
-                    <DropdownMenuItem><Copy className="mr-2 h-4 w-4" />Duplicate Invoice</DropdownMenuItem>
-                    <DropdownMenuItem><Send className="mr-2 h-4 w-4" />Send Invoice</DropdownMenuItem>
-                    <DropdownMenuItem><DollarSign className="mr-2 h-4 w-4" />Record Payment</DropdownMenuItem>
-                    <DropdownMenuItem><Download className="mr-2 h-4 w-4" />Download PDF</DropdownMenuItem>
-                    <DropdownMenuItem><Printer className="mr-2 h-4 w-4" />Print Invoice</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => toast.info(`Viewing invoice ${invoice.invoiceNumber}`)}><Eye className="mr-2 h-4 w-4" />View Invoice</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => toast.info(`Editing invoice ${invoice.invoiceNumber}`)}><Edit className="mr-2 h-4 w-4" />Edit Invoice</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => toast.info(`Duplicating invoice ${invoice.invoiceNumber}`)}><Copy className="mr-2 h-4 w-4" />Duplicate Invoice</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => toast.info(`Sending invoice ${invoice.invoiceNumber}`)}><Send className="mr-2 h-4 w-4" />Send Invoice</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => toast.success(`Recording payment for ${invoice.invoiceNumber}`)}><DollarSign className="mr-2 h-4 w-4" />Record Payment</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => toast.info(`Downloading PDF for ${invoice.invoiceNumber}`)}><Download className="mr-2 h-4 w-4" />Download PDF</DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => toast.info(`Printing invoice ${invoice.invoiceNumber}`)}><Printer className="mr-2 h-4 w-4" />Print Invoice</DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem className="text-red-600 focus:text-red-600 focus:bg-red-50 dark:focus:bg-red-900/80"><X className="mr-2 h-4 w-4" />Cancel Invoice</DropdownMenuItem>
+                    <DropdownMenuItem className="text-red-600 focus:text-red-600 focus:bg-red-50 dark:focus:bg-red-900/80" onClick={() => toast.error(`Cancelling invoice ${invoice.invoiceNumber}`)}><X className="mr-2 h-4 w-4" />Cancel Invoice</DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               </TableCell>

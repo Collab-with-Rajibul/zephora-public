@@ -1,13 +1,5 @@
-
 import { Invoice, Customer, InvoiceStatus } from '@/lib/types';
-
-export const customers: Customer[] = [
-  { id: '1', name: 'Innovate LLC', email: 'contact@innovatellc.com' },
-  { id: '2', name: 'Quantum Solutions', email: 'sales@quantum.com' },
-  { id: '3', name: 'Vertex Designs', email: 'support@vertex.com' },
-  { id: '4', name: 'Nexus Group', email: 'info@nexus.com' },
-  { id: '5', name: 'Apex Industries', email: 'hello@apex.com' },
-];
+import { customers } from './customers';
 
 const descriptions = [
   "Web design and development services",
@@ -38,4 +30,3 @@ export const invoices: Invoice[] = Array.from({ length: 15 }, (_, i) => {
     description: descriptions[i % descriptions.length],
   };
 });
-

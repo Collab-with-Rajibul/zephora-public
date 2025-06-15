@@ -52,6 +52,12 @@ export interface Customer {
   id: string;
   name: string;
   email: string;
+  phone?: string;
+  company?: string;
+  created_at: string;
+  total_spent: number;
+  last_order_date?: string;
+  status: 'active' | 'churned' | 'new';
 }
 
 export type InvoiceStatus = 'draft' | 'sent' | 'paid' | 'overdue' | 'cancelled' | 'partially-paid';

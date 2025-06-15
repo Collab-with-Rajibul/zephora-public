@@ -18,6 +18,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
+import { toast } from 'sonner';
 
 export default function SalesInvoicesPage() {
   const [isCollapsed, setIsCollapsed] = React.useState(false);
@@ -55,13 +56,13 @@ export default function SalesInvoicesPage() {
               <Badge variant="secondary">{invoices.length}</Badge>
             </div>
             <div className="flex items-center space-x-2">
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" onClick={() => toast.info("Importing invoices...")}>
                 Import Invoices
               </Button>
-              <Button variant="ghost" size="sm">
+              <Button variant="ghost" size="sm" onClick={() => toast.info("Exporting data...")}>
                 <Download className="mr-2 h-4 w-4" /> Export Data
               </Button>
-              <Button size="sm">
+              <Button size="sm" onClick={() => toast.success("This would open the invoice creation page.")}>
                 <Plus className="mr-2 h-4 w-4" /> Create New Invoice
               </Button>
             </div>
