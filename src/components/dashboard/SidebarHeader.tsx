@@ -33,7 +33,7 @@ export function SidebarHeader({ isCollapsed, onToggle }: SidebarHeaderProps) {
         variant="ghost"
         size="sm"
         onClick={onToggle}
-        className="text-black dark:text-white hover:text-black/80 dark:hover:text-white/80 hover:bg-accent rounded-lg p-2"
+        className="text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg p-2"
       >
         <Sidebar className="w-4 h-4" />
       </Button>

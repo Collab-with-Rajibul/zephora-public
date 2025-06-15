@@ -1,3 +1,4 @@
+
 "use client";
 
 import React from 'react';
@@ -51,11 +52,12 @@ export function Header({ className }: HeaderProps) {
       {/* Right side - Actions */}
       <div className="flex-none flex items-center space-x-4">
         <div className="relative">
-          <Button size="sm" className="rounded-xl bg-blue-500 text-white hover:bg-blue-600">
-            <Bell className="h-5 w-5" />
+          <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground rounded-xl">
+            <Bell className="h-5 w-5 text-blue-500" />
           </Button>
           <Badge 
-            className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 text-xs flex items-center justify-center bg-transparent text-destructive"
+            variant="destructive" 
+            className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 text-xs flex items-center justify-center"
           >
             3
           </Badge>
