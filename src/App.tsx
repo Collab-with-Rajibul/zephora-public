@@ -11,6 +11,9 @@ import SalesInvoicesPage from "./pages/SalesInvoices";
 import CustomersPage from "./pages/CustomersPage";
 import SalesReportsPage from "./pages/SalesReportsPage";
 import PurchaseBillsPage from "./pages/PurchaseBillsPage";
+import SuppliersPage from "./pages/SuppliersPage";
+import PurchaseReportsPage from "./pages/PurchaseReportsPage";
+import PurchaseAnalyticsPage from "./pages/PurchaseAnalyticsPage";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +29,9 @@ const App = () => (
           <Route path="/customers" element={<AppLayout><CustomersPage /></AppLayout>} />
           <Route path="/sales-reports" element={<AppLayout><SalesReportsPage /></AppLayout>} />
           <Route path="/purchase-bills" element={<AppLayout><PurchaseBillsPage /></AppLayout>} />
+          <Route path="/suppliers" element={<AppLayout><SuppliersPage /></AppLayout>} />
+          <Route path="/purchase-reports" element={<AppLayout><PurchaseReportsPage /></AppLayout>} />
+          <Route path="/purchase-analytics" element={<AppLayout><PurchaseAnalyticsPage /></AppLayout>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
