@@ -30,11 +30,18 @@ export function SidebarHeader({ isCollapsed, onToggle }: SidebarHeaderProps) {
       )}
       <Button
         variant="ghost"
-        size="sm"
+        size={isCollapsed ? "icon" : "sm"}
         onClick={onToggle}
-        className="text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg p-2"
+        className={cn(
+          "text-muted-foreground hover:text-foreground hover:bg-accent",
+          isCollapsed ? "rounded-full" : "rounded-lg p-2"
+        )}
       >
-        <Sidebar className="w-4 h-4" />
+        {isCollapsed ? (
+          <img src="/lovable-uploads/66302364-77b8-4f58-9dae-ab86821d9e4e.png" alt="Zephora Logo" className="w-8 h-8 rounded-full object-cover" />
+        ) : (
+          <Sidebar className="w-4 h-4" />
+        )}
       </Button>
     </div>
   );
