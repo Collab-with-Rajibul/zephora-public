@@ -246,6 +246,16 @@ export function SidebarNavigation({ isCollapsed, onToggle }: SidebarNavigationPr
                       );
                     }
 
+                    if (child.title === 'Sales Reports') {
+                      return (
+                        <Button {...buttonProps} asChild key={child.title}>
+                          <Link to="/sales-reports">
+                            {buttonContent}
+                          </Link>
+                        </Button>
+                      );
+                    }
+
                     return (
                       <Button key={child.title} {...buttonProps}>
                         {buttonContent}
