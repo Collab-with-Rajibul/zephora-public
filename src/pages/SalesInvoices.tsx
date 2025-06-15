@@ -43,7 +43,7 @@ export default function SalesInvoicesPage() {
       
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between space-y-2 md:space-y-0">
         <div className="flex items-center gap-2">
-          <h2 className="text-3xl font-bold tracking-tight">Sales Invoices</h2>
+          <h1 className="text-3xl font-bold tracking-tight">Sales Invoices</h1>
           <Badge variant="secondary">{invoices.length}</Badge>
         </div>
         <div className="flex items-center space-x-2">
