@@ -4,7 +4,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Sidebar, Compass } from 'lucide-react';
+import { Sidebar, Briefcase } from 'lucide-react';
 
 interface SidebarHeaderProps {
   isCollapsed: boolean;
@@ -20,11 +20,13 @@ export function SidebarHeader({ isCollapsed, onToggle }: SidebarHeaderProps) {
       {!isCollapsed && (
         <div className="flex items-center space-x-3">
           <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary">
-            <Compass className="w-5 h-5 text-primary-foreground" />
+            <Briefcase className="w-5 h-5 text-primary-foreground" />
           </div>
           <div>
-            <h1 className="text-lg font-semibold text-foreground">BizCompass</h1>
-            <p className="text-xs text-muted-foreground">Navigate your business finances.</p>
+            <h1 className="text-lg font-semibold text-foreground">FinSuite SME</h1>
+            <p className="text-xs text-muted-foreground">
+              Your all-in-one toolkit for small business growth.
+            </p>
           </div>
         </div>
       )}
@@ -39,3 +41,4 @@ export function SidebarHeader({ isCollapsed, onToggle }: SidebarHeaderProps) {
     </div>
   );
 }
+
