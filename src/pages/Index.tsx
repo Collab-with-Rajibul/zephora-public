@@ -24,6 +24,8 @@ const Index = () => {
   const toggleSidebar = () => {
     setIsSidebarCollapsed(!isSidebarCollapsed);
   };
+  
+  const isSidebarOpenOnMobile = isMobile && !isSidebarCollapsed;
 
   return (
     <ThemeProvider defaultTheme="light" storageKey="financeflow-theme">
@@ -35,9 +37,16 @@ const Index = () => {
         />
         
         {/* Main Content */}
-        <div className="flex-1 flex flex-col overflow-hidden">
+        <div className="flex-1 flex flex-col overflow-hidden relative">
+          {isSidebarOpenOnMobile && (
+            <div
+              onClick={toggleSidebar}
+              className="absolute inset-0 bg-black/20 backdrop-blur-sm z-30 transition-opacity duration-300 md:hidden"
+            />
+          )}
+
           {/* Header */}
-          <Header onMenuClick={toggleSidebar} />
+          <Header />
           
           {/* Dashboard Content */}
           <main className="flex-1 overflow-y-auto">

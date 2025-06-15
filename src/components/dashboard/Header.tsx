@@ -14,15 +14,14 @@ import {
   CommandList,
   CommandSeparator,
 } from "@/components/ui/command";
-import { Search, Bell, Settings, LayoutDashboard, Users, CreditCard, FileText, Menu } from 'lucide-react';
+import { Search, Bell, Settings, LayoutDashboard, Users, CreditCard, FileText } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 interface HeaderProps {
   className?: string;
-  onMenuClick?: () => void;
 }
 
-export function Header({ className, onMenuClick }: HeaderProps) {
+export function Header({ className }: HeaderProps) {
   const [open, setOpen] = React.useState(false);
   const isMobile = useIsMobile();
 
@@ -50,11 +49,6 @@ export function Header({ className, onMenuClick }: HeaderProps) {
       )}>
         {/* Left side - Title */}
         <div className="flex items-center gap-2">
-          {isMobile && (
-            <Button variant="ghost" size="icon" className="md:hidden rounded-lg" onClick={onMenuClick}>
-              <Menu className="h-6 w-6" />
-            </Button>
-          )}
           <div className="flex-none">
             <h1 className="text-xl md:text-2xl font-bold text-foreground">Dashboard</h1>
             <p className="hidden md:block text-sm text-muted-foreground">
