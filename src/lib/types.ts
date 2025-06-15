@@ -72,3 +72,27 @@ export interface Invoice {
   status: InvoiceStatus;
   description: string;
 }
+
+export interface Supplier {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  company?: string;
+  created_at: string;
+  total_spent: number;
+  last_order_date?: string;
+}
+
+export type BillStatus = 'draft' | 'unpaid' | 'paid' | 'overdue' | 'cancelled' | 'partially-paid';
+
+export interface PurchaseBill {
+  id: string;
+  billNumber: string;
+  supplier: Supplier;
+  date: string;
+  dueDate: string;
+  amount: number;
+  status: BillStatus;
+  description: string;
+}

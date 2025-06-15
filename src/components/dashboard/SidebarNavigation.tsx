@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState } from 'react';
@@ -250,6 +249,16 @@ export function SidebarNavigation({ isCollapsed, onToggle }: SidebarNavigationPr
                       return (
                         <Button {...buttonProps} asChild key={child.title}>
                           <Link to="/sales-reports">
+                            {buttonContent}
+                          </Link>
+                        </Button>
+                      );
+                    }
+
+                    if (child.title === 'Purchase Bills') {
+                      return (
+                        <Button {...buttonProps} asChild key={child.title}>
+                          <Link to="/purchase-bills">
                             {buttonContent}
                           </Link>
                         </Button>
