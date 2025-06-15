@@ -1,8 +1,10 @@
+
 "use client";
 
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 import { 
   ChevronDown,
   DollarSign,
@@ -211,14 +213,32 @@ export function SidebarNavigation({ isCollapsed, onToggle }: SidebarNavigationPr
                 <div className="ml-8 mt-2 space-y-1">
                   {item.children.map((child) => {
                     const ChildIcon = iconMap[child.icon as keyof typeof iconMap];
-                    return (
-                      <Button
-                        key={child.title}
-                        variant="ghost"
-                        className="w-full justify-start text-sm text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg"
-                      >
+                    
+                    const buttonContent = (
+                      <>
                         <ChildIcon className={cn("w-4 h-4 shrink-0", child.color)} />
                         <span className="ml-3">{child.title}</span>
+                      </>
+                    );
+                    
+                    const buttonProps = {
+                      variant: "ghost" as const,
+                      className: "w-full justify-start text-sm text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg",
+                    };
+
+                    if (child.title === 'Sales Invoices') {
+                      return (
+                        <Button {...buttonProps} asChild key={child.title}>
+                          <Link to="/sales-invoices">
+                            {buttonContent}
+                          </Link>
+                        </Button>
+                      );
+                    }
+
+                    return (
+                      <Button key={child.title} {...buttonProps}>
+                        {buttonContent}
                       </Button>
                     );
                   })}

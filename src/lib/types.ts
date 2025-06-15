@@ -1,4 +1,3 @@
-
 export interface DashboardMetric {
   id: string;
   title: string;
@@ -47,4 +46,23 @@ export interface NavItem {
   icon: string;
   badge?: string;
   children?: NavItem[];
+}
+
+export interface Customer {
+  id: string;
+  name: string;
+  email: string;
+}
+
+export type InvoiceStatus = 'draft' | 'sent' | 'paid' | 'overdue' | 'cancelled' | 'partially-paid';
+
+export interface Invoice {
+  id: string;
+  invoiceNumber: string;
+  customer: Customer;
+  date: string;
+  dueDate: string;
+  amount: number;
+  status: InvoiceStatus;
+  description: string;
 }
