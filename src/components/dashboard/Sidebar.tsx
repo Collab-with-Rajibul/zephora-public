@@ -22,7 +22,7 @@ export function Sidebar({ className, isCollapsed, onToggle }: SidebarProps) {
       className
     )}>
       <SidebarHeader isCollapsed={isCollapsed} onToggle={onToggle} />
-      <SidebarNavigation isCollapsed={isCollapsed} />
+      <SidebarNavigation isCollapsed={isCollapsed} onToggle={onToggle} />
       <Separator className="bg-border" />
       <SidebarFooter isCollapsed={isCollapsed} />
     </div>

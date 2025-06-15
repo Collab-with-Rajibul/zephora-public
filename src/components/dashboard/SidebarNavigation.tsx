@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState } from 'react';
@@ -151,9 +150,10 @@ const iconMap = {
 
 interface SidebarNavigationProps {
   isCollapsed: boolean;
+  onToggle: () => void;
 }
 
-export function SidebarNavigation({ isCollapsed }: SidebarNavigationProps) {
+export function SidebarNavigation({ isCollapsed, onToggle }: SidebarNavigationProps) {
   const [expandedItems, setExpandedItems] = useState<string[]>(['Sales Management']);
 
   const toggleExpanded = (title: string) => {
@@ -179,7 +179,16 @@ export function SidebarNavigation({ isCollapsed }: SidebarNavigationProps) {
                   "w-full text-muted-foreground hover:text-foreground hover:bg-accent transition-colors rounded-lg",
                   isCollapsed ? "justify-center px-2" : "justify-start"
                 )}
-                onClick={() => item.children && toggleExpanded(item.title)}
+                onClick={() => {
+                  if (isCollapsed) {
+                    onToggle();
+                    if (item.children && !expandedItems.includes(item.title)) {
+                      setExpandedItems(prev => [...prev, item.title]);
+                    }
+                  } else if (item.children) {
+                    toggleExpanded(item.title);
+                  }
+                }}
               >
                 <Icon className={cn("w-5 h-5 shrink-0", item.color)} />
                 {!isCollapsed && (
