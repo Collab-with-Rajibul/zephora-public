@@ -5,6 +5,7 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Sidebar } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface SidebarHeaderProps {
   isCollapsed: boolean;
@@ -18,7 +19,7 @@ export function SidebarHeader({ isCollapsed, onToggle }: SidebarHeaderProps) {
       isCollapsed ? "justify-center" : "justify-between p-6"
     )}>
       {!isCollapsed && (
-        <div className="flex items-center space-x-3">
+        <Link to="/" className="flex items-center space-x-3">
           <img src="/lovable-uploads/66302364-77b8-4f58-9dae-ab86821d9e4e.png" alt="Zephora Logo" className="w-8 h-8 rounded-full object-cover" />
           <div>
             <h1 className="text-lg font-semibold text-foreground">Zephora</h1>
@@ -26,7 +27,7 @@ export function SidebarHeader({ isCollapsed, onToggle }: SidebarHeaderProps) {
               Simplify with Elegance
             </p>
           </div>
-        </div>
+        </Link>
       )}
       <Button
         variant="ghost"
