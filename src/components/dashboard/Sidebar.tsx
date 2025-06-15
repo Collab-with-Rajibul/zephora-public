@@ -69,7 +69,10 @@ export function Sidebar({ className, isCollapsed, onToggle }: SidebarProps) {
       className
     )}>
       {/* Header */}
-      <div className="flex items-center justify-between p-6 border-b border-border">
+      <div className={cn(
+        "flex items-center border-b border-border",
+        isCollapsed ? "justify-center p-4" : "justify-between p-6"
+      )}>
         {!isCollapsed && (
           <div className="flex items-center space-x-3">
             <div className="w-8 h-8 bg-primary rounded-xl flex items-center justify-center">
@@ -85,10 +88,7 @@ export function Sidebar({ className, isCollapsed, onToggle }: SidebarProps) {
           variant="ghost"
           size="sm"
           onClick={onToggle}
-          className={cn(
-            "text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg p-2",
-            isCollapsed && "mx-auto"
-          )}
+          className="text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg p-2"
         >
           <Menu className="w-4 h-4" />
         </Button>
