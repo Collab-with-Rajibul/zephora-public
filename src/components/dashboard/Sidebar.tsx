@@ -23,7 +23,8 @@ import {
   Bell,
   Folder,
   Sun,
-  Moon
+  Moon,
+  Menu
 } from 'lucide-react';
 
 const iconMap = {
@@ -85,11 +86,11 @@ export function Sidebar({ className, isCollapsed, onToggle }: SidebarProps) {
           size="sm"
           onClick={onToggle}
           className={cn(
-            "text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg",
+            "text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg p-2",
             isCollapsed && "mx-auto"
           )}
         >
-          {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+          <Menu className="w-4 h-4" />
         </Button>
       </div>
 
@@ -152,7 +153,23 @@ export function Sidebar({ className, isCollapsed, onToggle }: SidebarProps) {
 
       <Separator className="bg-border" />
 
-      {/* User Profile with Theme Toggle */}
+      {/* Theme Toggle for Collapsed State */}
+      {isCollapsed && (
+        <div className="p-4 border-t border-border">
+          <div className="flex justify-center">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={toggleTheme}
+              className="text-muted-foreground hover:text-foreground hover:bg-accent p-2 rounded-lg"
+            >
+              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {/* User Profile with Theme Toggle for Expanded State */}
       <div className="p-4 border-t border-border">
         <div className={cn(
           "flex items-center",
