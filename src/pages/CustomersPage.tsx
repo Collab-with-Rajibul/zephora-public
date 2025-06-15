@@ -5,7 +5,6 @@ import { Plus, Upload, Download } from "lucide-react";
 import { CustomersTable } from "@/components/customers/CustomersTable";
 import { Input } from "@/components/ui/input";
 import { customers } from "@/data/customers";
-import { Badge } from '@/components/ui/badge';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -19,27 +18,22 @@ import { toast } from "sonner";
 export default function CustomersPage() {
   return (
     <div className="space-y-4">
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/">Dashboard</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href="#">Sales Management</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Customers</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
-      
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between space-y-2 md:space-y-0">
-        <div className="flex items-center gap-2">
-          <h1 className="text-3xl font-bold tracking-tight">Customers</h1>
-          <Badge variant="secondary">{customers.length}</Badge>
-        </div>
+      <div className="flex flex-col md:flex-row items-center justify-between space-y-2 md:space-y-0">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/">Dashboard</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbLink href="#">Sales Management</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>Customers</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
         <div className="flex items-center space-x-2">
            <Button variant="outline" size="sm" onClick={() => toast.info("Importing customers...")}>
             <Upload className="mr-2 h-4 w-4" /> Import Customers
