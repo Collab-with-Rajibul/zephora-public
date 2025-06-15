@@ -5,7 +5,15 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useTheme } from '@/components/ThemeProvider';
-import { Sun, Moon } from 'lucide-react';
+import { Sun, Moon, Users, Settings } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 interface SidebarFooterProps {
   isCollapsed: boolean;
@@ -29,20 +37,49 @@ export function SidebarFooter({ isCollapsed }: SidebarFooterProps) {
     </Button>
   );
 
-  const userAvatar = (
-    <Avatar className="w-8 h-8">
-      <AvatarImage src="/placeholder-avatar.jpg" />
-      <AvatarFallback className="text-primary-foreground text-sm font-medium rounded-lg bg-gradient-to-br from-blue-500 to-purple-600">
-        JD
-      </AvatarFallback>
-    </Avatar>
+  const UserProfileMenu = () => (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" className="h-8 w-8 rounded-full p-0 flex items-center justify-center">
+          <Avatar className="w-8 h-8">
+            <AvatarImage src="/placeholder-avatar.jpg" />
+            <AvatarFallback className="text-primary-foreground text-sm font-medium bg-gradient-to-br from-blue-500 to-purple-600">
+              JD
+            </AvatarFallback>
+          </Avatar>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-56 bg-popover rounded-xl mb-2" side="top" align={isCollapsed ? "center" : "start"} forceMount>
+        <DropdownMenuLabel className="font-normal">
+          <div className="flex flex-col space-y-1">
+            <p className="text-sm font-medium leading-none">John Doe</p>
+            <p className="text-xs leading-none text-muted-foreground">
+              john.doe@company.com
+            </p>
+          </div>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem className="rounded-lg">
+          <Users className="mr-2 h-4 w-4" />
+          <span>Profile</span>
+        </DropdownMenuItem>
+        <DropdownMenuItem className="rounded-lg">
+          <Settings className="mr-2 h-4 w-4" />
+          <span>Settings</span>
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem className="text-red-600 rounded-lg">
+          <span>Log out</span>
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 
   if (isCollapsed) {
     return (
       <div className="flex flex-col items-center space-y-2 p-4">
         {themeToggleButton}
-        {userAvatar}
+        <UserProfileMenu />
       </div>
     );
   }
@@ -50,7 +87,7 @@ export function SidebarFooter({ isCollapsed }: SidebarFooterProps) {
   return (
     <div className="p-4 border-t border-border">
       <div className="flex items-center space-x-3">
-        {userAvatar}
+        <UserProfileMenu />
         <div className="flex-1 min-w-0">
           <p className="text-sm font-medium text-foreground truncate">
             John Doe
