@@ -165,6 +165,12 @@ export function SidebarNavigation({ isCollapsed, onToggle }: SidebarNavigationPr
     );
   };
 
+  const handleLinkClick = () => {
+    if (!isCollapsed) {
+      onToggle();
+    }
+  };
+
   return (
     <div className="flex-1 overflow-y-auto p-4">
       <nav className="space-y-2">
@@ -227,7 +233,7 @@ export function SidebarNavigation({ isCollapsed, onToggle }: SidebarNavigationPr
 
                     if (child.title === 'Sales Invoices') {
                       return (
-                        <Button {...buttonProps} asChild key={child.title}>
+                        <Button {...buttonProps} asChild key={child.title} onClick={handleLinkClick}>
                           <Link to="/sales-invoices">
                             {buttonContent}
                           </Link>
@@ -237,7 +243,7 @@ export function SidebarNavigation({ isCollapsed, onToggle }: SidebarNavigationPr
 
                     if (child.title === 'Customers') {
                       return (
-                        <Button {...buttonProps} asChild key={child.title}>
+                        <Button {...buttonProps} asChild key={child.title} onClick={handleLinkClick}>
                           <Link to="/customers">
                             {buttonContent}
                           </Link>
@@ -247,7 +253,7 @@ export function SidebarNavigation({ isCollapsed, onToggle }: SidebarNavigationPr
 
                     if (child.title === 'Sales Reports') {
                       return (
-                        <Button {...buttonProps} asChild key={child.title}>
+                        <Button {...buttonProps} asChild key={child.title} onClick={handleLinkClick}>
                           <Link to="/sales-reports">
                             {buttonContent}
                           </Link>
@@ -257,7 +263,7 @@ export function SidebarNavigation({ isCollapsed, onToggle }: SidebarNavigationPr
 
                     if (child.title === 'Purchase Bills') {
                       return (
-                        <Button {...buttonProps} asChild key={child.title}>
+                        <Button {...buttonProps} asChild key={child.title} onClick={handleLinkClick}>
                           <Link to="/purchase-bills">
                             {buttonContent}
                           </Link>
