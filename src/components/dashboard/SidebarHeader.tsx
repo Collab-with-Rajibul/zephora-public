@@ -19,7 +19,7 @@ export function SidebarHeader({ isCollapsed, onToggle }: SidebarHeaderProps) {
     )}>
       {!isCollapsed && (
         <div className="flex items-center space-x-3">
-          <img src="/lovable-uploads/23e44653-ef42-4289-89ce-df83c28fdebd.png" alt="Zephora Logo" className="w-8 h-8" />
+          <img src="/lovable-uploads/66302364-77b8-4f58-9dae-ab86821d9e4e.png" alt="Zephora Logo" className="w-8 h-8" />
           <div>
             <h1 className="text-lg font-semibold text-foreground">Zephora</h1>
             <p className="text-xs text-muted-foreground">
