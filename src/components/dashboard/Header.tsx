@@ -15,6 +15,7 @@ import {
   CommandSeparator,
 } from "@/components/ui/command";
 import { Search, Bell, Settings, LayoutDashboard, Users, CreditCard, FileText } from 'lucide-react';
+import { SidebarTrigger } from '@/components/ui/sidebar';
 
 interface HeaderProps {
   className?: string;
@@ -45,12 +46,15 @@ export function Header({ className }: HeaderProps) {
         "flex items-center justify-between px-4 sm:px-6 bg-background border-b border-border h-[88px]",
         className
       )}>
-        {/* Left side - Title */}
-        <div className="flex-none">
-          <h1 className="text-xl sm:text-2xl font-bold text-foreground">Dashboard</h1>
-          <p className="hidden sm:block text-sm text-muted-foreground">
-            Welcome back! Here's what's happening with your business today.
-          </p>
+        <div className="flex items-center gap-2">
+          <SidebarTrigger className="sm:hidden" />
+          {/* Left side - Title */}
+          <div className="flex-none">
+            <h1 className="text-xl sm:text-2xl font-bold text-foreground">Dashboard</h1>
+            <p className="hidden sm:block text-sm text-muted-foreground">
+              Welcome back! Here's what's happening with your business today.
+            </p>
+          </div>
         </div>
 
         {/* Right side - Actions (Desktop) */}

@@ -7,24 +7,24 @@ import { Separator } from '@/components/ui/separator';
 import { SidebarHeader } from './SidebarHeader';
 import { SidebarNavigation } from './SidebarNavigation';
 import { SidebarFooter } from './SidebarFooter';
+import { Sidebar as UiSidebar, SidebarContent, useSidebar } from '@/components/ui/sidebar';
 
 interface SidebarProps {
   className?: string;
-  isCollapsed: boolean;
-  onToggle: () => void;
 }
 
-export function Sidebar({ className, isCollapsed, onToggle }: SidebarProps) {
+export function Sidebar({ className }: SidebarProps) {
+  const { state, toggleSidebar } = useSidebar();
+  const isCollapsed = state === 'collapsed';
+
   return (
-    <div className={cn(
-      "flex flex-col h-screen bg-background text-foreground border-r border-border transition-all duration-300 rounded-r-lg",
-      isCollapsed ? "w-16" : "w-72",
-      className
-    )}>
-      <SidebarHeader isCollapsed={isCollapsed} onToggle={onToggle} />
-      <SidebarNavigation isCollapsed={isCollapsed} onToggle={onToggle} />
-      <Separator className="bg-border" />
-      <SidebarFooter isCollapsed={isCollapsed} />
-    </div>
+    <UiSidebar>
+      <SidebarContent className={cn("flex flex-col p-0 h-full", className)}>
+        <SidebarHeader isCollapsed={isCollapsed} onToggle={toggleSidebar} />
+        <SidebarNavigation isCollapsed={isCollapsed} onToggle={toggleSidebar} />
+        <Separator className="bg-border" />
+        <SidebarFooter isCollapsed={isCollapsed} />
+      </SidebarContent>
+    </UiSidebar>
   );
 }
