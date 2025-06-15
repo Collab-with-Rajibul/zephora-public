@@ -3,33 +3,143 @@
 
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
-import { navigationItems } from '@/lib/constants';
 import { Button } from '@/components/ui/button';
 import { 
   ChevronDown,
   DollarSign,
-  File,
   Users,
-  ArrowUp,
-  ArrowDown,
   Clock,
-  Search,
   Settings,
-  Bell,
-  Folder
+  Receipt,
+  BarChart3,
+  LineChart,
+  ShoppingCart,
+  FileText,
+  Building2,
+  BookOpen,
+  Scale,
+  ArrowRightLeft,
+  ClipboardCheck,
+  CreditCard,
+  ArrowUpFromLine,
+  ArrowDownToLine,
+  History,
+  Package,
+  Layers,
+  AlertTriangle,
+  PieChart,
+  Target,
+  FilePlus2,
+  GitCompareArrows,
+  Building,
+  Wrench,
+  Plug,
+  TrendingUp,
 } from 'lucide-react';
+
+const navigationItems = [
+    {
+      title: 'Sales Management',
+      icon: 'dollar-sign',
+      children: [
+        { title: 'Sales Invoices', icon: 'receipt' },
+        { title: 'Customers', icon: 'users' },
+        { title: 'Sales Reports', icon: 'bar-chart-3' },
+        { title: 'Sales Analytics', icon: 'line-chart' },
+      ],
+    },
+    {
+      title: 'Purchase Management',
+      icon: 'shopping-cart',
+      children: [
+        { title: 'Purchase Bills', icon: 'file-text' },
+        { title: 'Suppliers', icon: 'building-2' },
+        { title: 'Purchase Reports', icon: 'bar-chart-3' },
+        { title: 'Purchase Analytics', icon: 'line-chart' },
+      ],
+    },
+    {
+      title: 'Financial Statements',
+      icon: 'book-open',
+      children: [
+        { title: 'Profit & Loss', icon: 'trending-up' },
+        { title: 'Balance Sheet', icon: 'scale' },
+        { title: 'Cash Flow', icon: 'arrow-right-left' },
+        { title: 'Trial Balance', icon: 'clipboard-check' },
+      ],
+    },
+    {
+      title: 'Payments',
+      icon: 'credit-card',
+      children: [
+        { title: 'Payments Sent', icon: 'arrow-up-from-line' },
+        { title: 'Payments Received', icon: 'arrow-down-to-line' },
+        { title: 'Outstanding Payments', icon: 'clock' },
+        { title: 'Payment Tracking', icon: 'history' },
+      ],
+    },
+    {
+      title: 'Inventory & Stock',
+      icon: 'package',
+      children: [
+        { title: 'Stock Levels', icon: 'layers' },
+        { title: 'Stock Reports', icon: 'bar-chart-3' },
+        { title: 'Low Stock Alerts', icon: 'alert-triangle' },
+        { title: 'Stock Analytics', icon: 'line-chart' },
+      ],
+    },
+    {
+      title: 'Reports & Analytics',
+      icon: 'pie-chart',
+      children: [
+        { title: 'Financial Analytics', icon: 'line-chart' },
+        { title: 'Business Insights', icon: 'target' },
+        { title: 'Custom Reports', icon: 'file-plus-2' },
+        { title: 'Comparative Analysis', icon: 'git-compare-arrows' },
+      ],
+    },
+    {
+      title: 'Settings',
+      icon: 'settings',
+      children: [
+        { title: 'Company Profile', icon: 'building' },
+        { title: 'User Management', icon: 'users' },
+        { title: 'System Settings', icon: 'wrench' },
+        { title: 'Integrations', icon: 'plug' },
+      ],
+    },
+];
 
 const iconMap = {
   'dollar-sign': DollarSign,
-  'file': File,
   'users': Users,
-  'arrow-up': ArrowUp,
-  'arrow-down': ArrowDown,
   'clock': Clock,
-  'search': Search,
   'settings': Settings,
-  'bell': Bell,
-  'folder': Folder
+  'receipt': Receipt,
+  'bar-chart-3': BarChart3,
+  'line-chart': LineChart,
+  'shopping-cart': ShoppingCart,
+  'file-text': FileText,
+  'building-2': Building2,
+  'book-open': BookOpen,
+  'scale': Scale,
+  'arrow-right-left': ArrowRightLeft,
+  'clipboard-check': ClipboardCheck,
+  'credit-card': CreditCard,
+  'arrow-up-from-line': ArrowUpFromLine,
+  'arrow-down-to-line': ArrowDownToLine,
+  'history': History,
+  'package': Package,
+  'layers': Layers,
+  'alert-triangle': AlertTriangle,
+  'pie-chart': PieChart,
+  'target': Target,
+  'file-plus-2': FilePlus2,
+  'git-compare-arrows': GitCompareArrows,
+  'building': Building,
+  'wrench': Wrench,
+  'plug': Plug,
+  'trending-up': TrendingUp,
 };
 
 interface SidebarNavigationProps {
