@@ -38,7 +38,10 @@ export function SidebarFooter({ isCollapsed }: SidebarFooterProps) {
       )}
 
       {/* User Profile with Theme Toggle for Expanded State */}
-      <div className="p-4 border-t border-border">
+      <div className={cn(
+        "p-4",
+        !isCollapsed && "border-t border-border"
+      )}>
         <div className={cn(
           "flex items-center",
           isCollapsed ? "justify-center" : "space-x-3"
