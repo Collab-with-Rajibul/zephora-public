@@ -31,7 +31,7 @@ export function SidebarFooter({ isCollapsed }: SidebarFooterProps) {
               onClick={toggleTheme}
               className="text-muted-foreground hover:text-foreground hover:bg-accent p-2 rounded-lg"
             >
-              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              {theme === 'dark' ? <Sun className="w-4 h-4 text-yellow-400" /> : <Moon className="w-4 h-4 text-blue-400" />}
             </Button>
           </div>
         </div>
@@ -48,7 +48,7 @@ export function SidebarFooter({ isCollapsed }: SidebarFooterProps) {
         )}>
           <Avatar className="w-8 h-8">
             <AvatarImage src="/placeholder-avatar.jpg" />
-            <AvatarFallback className="bg-primary text-primary-foreground text-sm font-medium rounded-lg">
+            <AvatarFallback className="text-primary-foreground text-sm font-medium rounded-lg bg-gradient-to-br from-blue-500 to-purple-600">
               JD
             </AvatarFallback>
           </Avatar>
@@ -68,7 +68,7 @@ export function SidebarFooter({ isCollapsed }: SidebarFooterProps) {
                 onClick={toggleTheme}
                 className="text-muted-foreground hover:text-foreground hover:bg-accent p-2 rounded-lg"
               >
-                {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                {theme === 'dark' ? <Sun className="w-4 h-4 text-yellow-400" /> : <Moon className="w-4 h-4 text-blue-400" />}
               </Button>
             </>
           )}

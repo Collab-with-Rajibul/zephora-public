@@ -41,71 +41,78 @@ const navigationItems = [
     {
       title: 'Sales Management',
       icon: 'dollar-sign',
+      color: 'text-green-500',
       children: [
-        { title: 'Sales Invoices', icon: 'receipt' },
-        { title: 'Customers', icon: 'users' },
-        { title: 'Sales Reports', icon: 'bar-chart-3' },
-        { title: 'Sales Analytics', icon: 'line-chart' },
+        { title: 'Sales Invoices', icon: 'receipt', color: 'text-sky-500' },
+        { title: 'Customers', icon: 'users', color: 'text-amber-500' },
+        { title: 'Sales Reports', icon: 'bar-chart-3', color: 'text-indigo-500' },
+        { title: 'Sales Analytics', icon: 'line-chart', color: 'text-rose-500' },
       ],
     },
     {
       title: 'Purchase Management',
       icon: 'shopping-cart',
+      color: 'text-blue-500',
       children: [
-        { title: 'Purchase Bills', icon: 'file-text' },
-        { title: 'Suppliers', icon: 'building-2' },
-        { title: 'Purchase Reports', icon: 'bar-chart-3' },
-        { title: 'Purchase Analytics', icon: 'line-chart' },
+        { title: 'Purchase Bills', icon: 'file-text', color: 'text-teal-500' },
+        { title: 'Suppliers', icon: 'building-2', color: 'text-orange-500' },
+        { title: 'Purchase Reports', icon: 'bar-chart-3', color: 'text-indigo-500' },
+        { title: 'Purchase Analytics', icon: 'line-chart', color: 'text-rose-500' },
       ],
     },
     {
       title: 'Financial Statements',
       icon: 'book-open',
+      color: 'text-cyan-500',
       children: [
-        { title: 'Profit & Loss', icon: 'trending-up' },
-        { title: 'Balance Sheet', icon: 'scale' },
-        { title: 'Cash Flow', icon: 'arrow-right-left' },
-        { title: 'Trial Balance', icon: 'clipboard-check' },
+        { title: 'Profit & Loss', icon: 'trending-up', color: 'text-emerald-500' },
+        { title: 'Balance Sheet', icon: 'scale', color: 'text-fuchsia-500' },
+        { title: 'Cash Flow', icon: 'arrow-right-left', color: 'text-violet-500' },
+        { title: 'Trial Balance', icon: 'clipboard-check', color: 'text-lime-500' },
       ],
     },
     {
       title: 'Payments',
       icon: 'credit-card',
+      color: 'text-pink-500',
       children: [
-        { title: 'Payments Sent', icon: 'arrow-up-from-line' },
-        { title: 'Payments Received', icon: 'arrow-down-to-line' },
-        { title: 'Outstanding Payments', icon: 'clock' },
-        { title: 'Payment Tracking', icon: 'history' },
+        { title: 'Payments Sent', icon: 'arrow-up-from-line', color: 'text-red-500' },
+        { title: 'Payments Received', icon: 'arrow-down-to-line', color: 'text-green-500' },
+        { title: 'Outstanding Payments', icon: 'clock', color: 'text-yellow-500' },
+        { title: 'Payment Tracking', icon: 'history', color: 'text-stone-500' },
       ],
     },
     {
       title: 'Inventory & Stock',
       icon: 'package',
+      color: 'text-purple-500',
       children: [
-        { title: 'Stock Levels', icon: 'layers' },
-        { title: 'Stock Reports', icon: 'bar-chart-3' },
-        { title: 'Low Stock Alerts', icon: 'alert-triangle' },
-        { title: 'Stock Analytics', icon: 'line-chart' },
+        { title: 'Stock Levels', icon: 'layers', color: 'text-cyan-400' },
+        { title: 'Stock Reports', icon: 'bar-chart-3', color: 'text-indigo-500' },
+        { title: 'Low Stock Alerts', icon: 'alert-triangle', color: 'text-red-600' },
+        { title: 'Stock Analytics', icon: 'line-chart', color: 'text-rose-500' },
       ],
     },
     {
       title: 'Reports & Analytics',
       icon: 'pie-chart',
+      color: 'text-yellow-400',
       children: [
-        { title: 'Financial Analytics', icon: 'line-chart' },
-        { title: 'Business Insights', icon: 'target' },
-        { title: 'Custom Reports', icon: 'file-plus-2' },
-        { title: 'Comparative Analysis', icon: 'git-compare-arrows' },
+        { title: 'Financial Analytics', icon: 'line-chart', color: 'text-rose-500' },
+        { title: 'Business Insights', icon: 'target', color: 'text-blue-600' },
+        { title: 'Custom Reports', icon: 'file-plus-2', color: 'text-green-600' },
+        { title: 'Comparative Analysis', icon: 'git-compare-arrows', color: 'text-orange-400' },
       ],
     },
     {
       title: 'Settings',
       icon: 'settings',
+      color: 'text-gray-500',
       children: [
-        { title: 'Company Profile', icon: 'building' },
-        { title: 'User Management', icon: 'users' },
-        { title: 'System Settings', icon: 'wrench' },
-        { title: 'Integrations', icon: 'plug' },
+        { title: 'Company Profile', icon: 'building', color: 'text-sky-600' },
+        { title: 'User Management', icon: 'users', color: 'text-amber-500' },
+        { title: 'System Settings', icon: 'wrench', color: 'text-slate-500' },
+        { title: 'Integrations', icon: 'plug', color: 'text-teal-400' },
       ],
     },
 ];
@@ -174,7 +181,7 @@ export function SidebarNavigation({ isCollapsed }: SidebarNavigationProps) {
                 )}
                 onClick={() => item.children && toggleExpanded(item.title)}
               >
-                <Icon className="w-5 h-5 shrink-0" />
+                <Icon className={cn("w-5 h-5 shrink-0", item.color)} />
                 {!isCollapsed && (
                   <>
                     <span className="ml-3 text-sm font-medium">{item.title}</span>
@@ -201,7 +208,7 @@ export function SidebarNavigation({ isCollapsed }: SidebarNavigationProps) {
                         variant="ghost"
                         className="w-full justify-start text-sm text-muted-foreground hover:text-foreground hover:bg-accent rounded-lg"
                       >
-                        <ChildIcon className="w-4 h-4 shrink-0" />
+                        <ChildIcon className={cn("w-4 h-4 shrink-0", child.color)} />
                         <span className="ml-3">{child.title}</span>
                       </Button>
                     );
