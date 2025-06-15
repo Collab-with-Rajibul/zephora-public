@@ -53,44 +53,35 @@ export function Header({ className }: HeaderProps) {
           </p>
         </div>
 
-        {/* Middle - Search (Desktop) */}
-        <div className="hidden sm:flex flex-1 justify-center px-8">
-            <Button
-              variant="outline"
-              className={cn(
-                "relative w-full justify-start text-sm text-muted-foreground sm:max-w-md rounded-xl bg-muted/50 border-0 hover:bg-muted hover:text-muted-foreground"
-              )}
-              onClick={() => setOpen(true)}
-            >
-              <Search className="h-4 w-4 mr-2" />
-              <span className="inline-flex">Search anything...</span>
-              <kbd className="pointer-events-none absolute right-3 top-1/2 hidden h-5 -translate-y-1/2 select-none items-center gap-1 rounded-lg border bg-background px-1.5 font-mono text-[10px] font-medium opacity-100 lg:flex">
-                <span className="text-xs">⌘</span>K
-              </kbd>
-            </Button>
-        </div>
-
         {/* Right side - Actions (Desktop) */}
         <div className="hidden sm:flex items-center space-x-4">
+           <Button variant="ghost" size="icon" className="rounded-xl" onClick={() => setOpen(true)}>
+            <Search className="h-5 w-5" />
+          </Button>
+
           <div className="relative">
-            <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground rounded-xl">
+            <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-xl">
               <Bell className="h-5 w-5 text-blue-500" />
             </Button>
             <Badge 
               variant="destructive" 
-              className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 text-xs flex items-center justify-center"
+              className="absolute top-0 right-0 h-5 w-5 rounded-full p-0 text-xs flex items-center justify-center"
             >
               3
             </Badge>
           </div>
 
-          <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground rounded-xl">
+          <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-xl">
             <Settings className="h-5 w-5 text-gray-500" />
           </Button>
         </div>
 
         {/* Mobile Actions */}
         <div className="sm:hidden flex items-center space-x-1">
+          <Button variant="ghost" size="icon" onClick={() => setOpen(true)} className="rounded-xl">
+            <Search className="h-5 w-5" />
+          </Button>
+
           <div className="relative">
             <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-xl">
               <Bell className="h-5 w-5 text-blue-500" />
@@ -102,10 +93,6 @@ export function Header({ className }: HeaderProps) {
               3
             </Badge>
           </div>
-          
-          <Button variant="ghost" size="icon" onClick={() => setOpen(true)}>
-            <Search className="h-5 w-5" />
-          </Button>
         </div>
       </header>
 
