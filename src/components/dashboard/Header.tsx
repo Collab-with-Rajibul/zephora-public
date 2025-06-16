@@ -1,3 +1,4 @@
+
 "use client";
 
 import React from 'react';
@@ -36,9 +37,9 @@ export function Header({ className }: HeaderProps) {
   }, []);
 
   const runCommand = (command: () => unknown) => {
-    setOpen(false)
-    command()
-  }
+    setOpen(false);
+    command();
+  };
 
   return (
     <>
@@ -58,39 +59,43 @@ export function Header({ className }: HeaderProps) {
 
         {/* Right side - Actions (Desktop) */}
         <div className="hidden md:flex items-center space-x-4">
-           <Button variant="ghost" size="icon" className="rounded-xl" onClick={() => setOpen(true)}>
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="rounded-xl" 
+            onClick={() => setOpen(true)}
+          >
             <Search className="h-5 w-5" />
           </Button>
 
           <div className="relative">
             <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-xl">
-              <Bell className="h-5 w-5 text-blue-500" />
+              <Bell className="h-5 w-5" />
             </Button>
-            <Badge 
-              variant="destructive" 
-              className="absolute top-0 right-0 h-5 w-5 rounded-full p-0 text-xs flex items-center justify-center"
-            >
-              3
-            </Badge>
+            <div className="absolute -top-1 -right-1 h-5 w-5 bg-red-500 rounded-full flex items-center justify-center">
+              <span className="text-white text-xs font-medium">3</span>
+            </div>
           </div>
         </div>
 
         {/* Mobile Actions */}
         <div className="md:hidden flex items-center space-x-1">
-          <Button variant="ghost" size="icon" onClick={() => setOpen(true)} className="rounded-xl">
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            onClick={() => setOpen(true)} 
+            className="rounded-xl"
+          >
             <Search className="h-5 w-5" />
           </Button>
 
           <div className="relative">
             <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-xl">
-              <Bell className="h-5 w-5 text-blue-500" />
+              <Bell className="h-5 w-5" />
             </Button>
-            <Badge 
-              variant="destructive" 
-              className="absolute top-0 right-0 h-4 w-4 rounded-full p-0 text-[10px] flex items-center justify-center"
-            >
-              3
-            </Badge>
+            <div className="absolute -top-1 -right-1 h-4 w-4 bg-red-500 rounded-full flex items-center justify-center">
+              <span className="text-white text-[10px] font-medium">3</span>
+            </div>
           </div>
         </div>
       </header>
@@ -100,29 +105,41 @@ export function Header({ className }: HeaderProps) {
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Suggestions">
-            <CommandItem onSelect={() => runCommand(() => console.log("Navigating to Dashboard"))}>
+            <CommandItem onSelect={() => runCommand(() => window.location.href = "/")}>
               <LayoutDashboard className="mr-2 h-4 w-4" />
               <span>Dashboard</span>
             </CommandItem>
-            <CommandItem onSelect={() => runCommand(() => console.log("Navigating to Customers"))}>
+            <CommandItem onSelect={() => runCommand(() => window.location.href = "/customers")}>
               <Users className="mr-2 h-4 w-4" />
               <span>Customers</span>
             </CommandItem>
-            <CommandItem onSelect={() => runCommand(() => console.log("Navigating to Billing"))}>
+            <CommandItem onSelect={() => runCommand(() => window.location.href = "/sales-invoices")}>
               <CreditCard className="mr-2 h-4 w-4" />
-              <span>Billing</span>
+              <span>Sales Invoices</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => window.location.href = "/purchase-bills")}>
+              <FileText className="mr-2 h-4 w-4" />
+              <span>Purchase Bills</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => window.location.href = "/suppliers")}>
+              <Users className="mr-2 h-4 w-4" />
+              <span>Suppliers</span>
             </CommandItem>
           </CommandGroup>
           <CommandSeparator />
           <CommandGroup heading="Reports">
-            <CommandItem onSelect={() => runCommand(() => console.log("Navigating to Invoices"))}>
+            <CommandItem onSelect={() => runCommand(() => window.location.href = "/sales-reports")}>
               <FileText className="mr-2 h-4 w-4" />
-              <span>Invoices</span>
+              <span>Sales Reports</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => window.location.href = "/purchase-reports")}>
+              <FileText className="mr-2 h-4 w-4" />
+              <span>Purchase Reports</span>
             </CommandItem>
           </CommandGroup>
-           <CommandSeparator />
+          <CommandSeparator />
           <CommandGroup heading="Settings">
-             <CommandItem onSelect={() => runCommand(() => console.log("Navigating to Settings"))}>
+            <CommandItem onSelect={() => runCommand(() => console.log("Navigating to Settings"))}>
               <Settings className="mr-2 h-4 w-4" />
               <span>Settings</span>
             </CommandItem>
