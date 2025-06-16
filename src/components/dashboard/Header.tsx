@@ -1,3 +1,4 @@
+
 "use client";
 
 import React from 'react';
@@ -15,6 +16,7 @@ import {
 } from "@/components/ui/command";
 import { Search, Bell, Settings, LayoutDashboard, Users, CreditCard, FileText } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useNavigate } from 'react-router-dom';
 
 interface HeaderProps {
   className?: string;
@@ -23,6 +25,7 @@ interface HeaderProps {
 export function Header({ className }: HeaderProps) {
   const [open, setOpen] = React.useState(false);
   const isMobile = useIsMobile();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -64,11 +67,11 @@ export function Header({ className }: HeaderProps) {
 
           <div className="relative">
             <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-xl">
-              <Bell className="h-5 w-5 text-blue-500" />
+              <Bell className="h-5 w-5" />
             </Button>
             <Badge 
               variant="destructive" 
-              className="absolute top-0 right-0 h-5 w-5 rounded-full p-0 text-xs flex items-center justify-center"
+              className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 text-xs flex items-center justify-center bg-red-500 hover:bg-red-500"
             >
               3
             </Badge>
@@ -83,11 +86,11 @@ export function Header({ className }: HeaderProps) {
 
           <div className="relative">
             <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-xl">
-              <Bell className="h-5 w-5 text-blue-500" />
+              <Bell className="h-5 w-5" />
             </Button>
             <Badge 
               variant="destructive" 
-              className="absolute top-0 right-0 h-4 w-4 rounded-full p-0 text-[10px] flex items-center justify-center"
+              className="absolute -top-1 -right-1 h-4 w-4 rounded-full p-0 text-[10px] flex items-center justify-center bg-red-500 hover:bg-red-500"
             >
               3
             </Badge>
@@ -100,24 +103,36 @@ export function Header({ className }: HeaderProps) {
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Suggestions">
-            <CommandItem onSelect={() => runCommand(() => console.log("Navigating to Dashboard"))}>
+            <CommandItem onSelect={() => runCommand(() => navigate("/"))}>
               <LayoutDashboard className="mr-2 h-4 w-4" />
               <span>Dashboard</span>
             </CommandItem>
-            <CommandItem onSelect={() => runCommand(() => console.log("Navigating to Customers"))}>
+            <CommandItem onSelect={() => runCommand(() => navigate("/customers"))}>
               <Users className="mr-2 h-4 w-4" />
               <span>Customers</span>
             </CommandItem>
-            <CommandItem onSelect={() => runCommand(() => console.log("Navigating to Billing"))}>
+            <CommandItem onSelect={() => runCommand(() => navigate("/sales-invoices"))}>
               <CreditCard className="mr-2 h-4 w-4" />
-              <span>Billing</span>
+              <span>Sales Invoices</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => navigate("/suppliers"))}>
+              <Users className="mr-2 h-4 w-4" />
+              <span>Suppliers</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => navigate("/purchase-bills"))}>
+              <CreditCard className="mr-2 h-4 w-4" />
+              <span>Purchase Bills</span>
             </CommandItem>
           </CommandGroup>
           <CommandSeparator />
           <CommandGroup heading="Reports">
-            <CommandItem onSelect={() => runCommand(() => console.log("Navigating to Invoices"))}>
+            <CommandItem onSelect={() => runCommand(() => navigate("/sales-reports"))}>
               <FileText className="mr-2 h-4 w-4" />
-              <span>Invoices</span>
+              <span>Sales Reports</span>
+            </CommandItem>
+            <CommandItem onSelect={() => runCommand(() => navigate("/purchase-reports"))}>
+              <FileText className="mr-2 h-4 w-4" />
+              <span>Purchase Reports</span>
             </CommandItem>
           </CommandGroup>
            <CommandSeparator />
