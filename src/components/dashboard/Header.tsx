@@ -69,9 +69,12 @@ export function Header({ className }: HeaderProps) {
             <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-xl">
               <Bell className="h-5 w-5" />
             </Button>
-            <div className="absolute -top-1 -right-1 h-5 w-5 bg-red-500 rounded-full flex items-center justify-center">
-              <span className="text-white text-xs font-medium">3</span>
-            </div>
+            <Badge 
+              variant="destructive" 
+              className="absolute -top-1 -right-1 h-5 w-5 rounded-full p-0 text-xs flex items-center justify-center bg-red-500 hover:bg-red-500"
+            >
+              3
+            </Badge>
           </div>
         </div>
 
@@ -85,9 +88,12 @@ export function Header({ className }: HeaderProps) {
             <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-xl">
               <Bell className="h-5 w-5" />
             </Button>
-            <div className="absolute -top-1 -right-1 h-4 w-4 bg-red-500 rounded-full flex items-center justify-center">
-              <span className="text-white text-[10px] font-medium">3</span>
-            </div>
+            <Badge 
+              variant="destructive" 
+              className="absolute -top-1 -right-1 h-4 w-4 rounded-full p-0 text-[10px] flex items-center justify-center bg-red-500 hover:bg-red-500"
+            >
+              3
+            </Badge>
           </div>
         </div>
       </header>
