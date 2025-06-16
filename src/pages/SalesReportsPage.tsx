@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Download, Printer } from "lucide-react";
@@ -36,10 +35,6 @@ export default function SalesReportsPage() {
       <div className="flex flex-col md:flex-row items-center justify-between space-y-2 md:space-y-0">
         <Breadcrumb>
           <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink href="/">Dashboard</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
             <BreadcrumbItem>
               <BreadcrumbLink href="#">Sales Management</BreadcrumbLink>
             </BreadcrumbItem>

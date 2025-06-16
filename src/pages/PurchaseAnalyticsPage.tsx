@@ -15,10 +15,6 @@ const PurchaseAnalyticsPage: React.FC = () => {
             <Breadcrumb>
                 <BreadcrumbList>
                     <BreadcrumbItem>
-                        <BreadcrumbLink href="/">Dashboard</BreadcrumbLink>
-                    </BreadcrumbItem>
-                    <BreadcrumbSeparator />
-                    <BreadcrumbItem>
                         <BreadcrumbLink href="#">Purchase Management</BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbSeparator />

@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { purchaseBills } from "@/data/purchase-bills";
 import { PurchaseBillsTable } from "@/components/purchase-bills/PurchaseBillsTable";
@@ -25,10 +24,6 @@ const PurchaseBillsPage: React.FC = () => {
             <div className="flex flex-col md:flex-row items-center justify-between space-y-2 md:space-y-0">
                 <Breadcrumb>
                     <BreadcrumbList>
-                        <BreadcrumbItem>
-                            <BreadcrumbLink href="/">Dashboard</BreadcrumbLink>
-                        </BreadcrumbItem>
-                        <BreadcrumbSeparator />
                         <BreadcrumbItem>
                             <BreadcrumbLink href="#">Purchase Management</BreadcrumbLink>
                         </BreadcrumbItem>
