@@ -1,17 +1,10 @@
+
 import { Button } from "@/components/ui/button";
 import { purchaseBills } from "@/data/purchase-bills";
 import { PurchaseBillsTable } from "@/components/purchase-bills/PurchaseBillsTable";
 import { SummaryCard } from "@/components/purchase-bills/SummaryCard";
 import { Plus, Download, FileText, AlertCircle } from "lucide-react";
 import React from 'react';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 
 const PurchaseBillsPage: React.FC = () => {
     const totalBills = purchaseBills.length;
@@ -21,18 +14,7 @@ const PurchaseBillsPage: React.FC = () => {
 
     return (
         <div className="flex flex-col gap-8">
-            <div className="flex flex-col md:flex-row items-center justify-between space-y-2 md:space-y-0">
-                <Breadcrumb>
-                    <BreadcrumbList>
-                        <BreadcrumbItem>
-                            <BreadcrumbLink href="#">Purchase Management</BreadcrumbLink>
-                        </BreadcrumbItem>
-                        <BreadcrumbSeparator />
-                        <BreadcrumbItem>
-                            <BreadcrumbPage>Purchase Bills</BreadcrumbPage>
-                        </BreadcrumbItem>
-                    </BreadcrumbList>
-                </Breadcrumb>
+            <div className="flex flex-col md:flex-row items-center justify-end space-y-2 md:space-y-0">
                 <div className="flex items-center gap-2">
                     <Button variant="outline">
                         <Download className="mr-2 h-4 w-4" />

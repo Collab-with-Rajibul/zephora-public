@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Download, Plus } from "lucide-react";
@@ -6,14 +7,6 @@ import { SummaryCard } from "@/components/sales-invoices/SummaryCard";
 import { DollarSign, FileText, XCircle, Clock } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { invoices } from "@/data/sales-invoices";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
 import { toast } from 'sonner';
 
 export default function SalesInvoicesPage() {
@@ -23,18 +16,7 @@ export default function SalesInvoicesPage() {
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-col md:flex-row items-center justify-between space-y-2 md:space-y-0">
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink href="#">Sales Management</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Sales Invoices</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+      <div className="flex flex-col md:flex-row items-center justify-end space-y-2 md:space-y-0">
         <div className="flex items-center space-x-2">
           <Button variant="outline" size="sm" onClick={() => toast.info("Importing invoices...")}>
             Import Invoices

@@ -1,14 +1,7 @@
+
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Download, Printer } from "lucide-react";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import { toast } from "sonner";
 import { RevenueChart } from '@/components/sales-reports/RevenueChart';
 import { SalesByCustomerChart } from '@/components/sales-reports/SalesByCustomerChart';
@@ -29,21 +22,9 @@ export default function SalesReportsPage() {
 
   const overdueInvoices = invoices.filter(inv => inv.status === 'overdue').length;
 
-
   return (
     <div className="space-y-4">
-      <div className="flex flex-col md:flex-row items-center justify-between space-y-2 md:space-y-0">
-        <Breadcrumb>
-          <BreadcrumbList>
-            <BreadcrumbItem>
-              <BreadcrumbLink href="#">Sales Management</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage>Sales Reports</BreadcrumbPage>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+      <div className="flex flex-col md:flex-row items-center justify-end space-y-2 md:space-y-0">
         <div className="flex items-center space-x-2">
            <Button variant="outline" size="sm" onClick={() => toast.info("Downloading PDF report...")}>
             <Download className="mr-2 h-4 w-4" /> Download PDF
