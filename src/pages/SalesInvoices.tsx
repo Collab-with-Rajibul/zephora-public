@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Download, Plus } from "lucide-react";
@@ -8,14 +7,6 @@ import { DollarSign, FileText, XCircle, Clock } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { invoices } from "@/data/sales-invoices";
 import { Badge } from '@/components/ui/badge';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
 import { toast } from 'sonner';
 
 export default function SalesInvoicesPage() {
@@ -25,22 +16,6 @@ export default function SalesInvoicesPage() {
 
   return (
     <div className="space-y-4">
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/">Dashboard</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink href="#">Sales Management</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Sales Invoices</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
-      
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between space-y-2 md:space-y-0">
         <div className="flex items-center gap-2">
           <h2 className="text-3xl font-bold tracking-tight">Sales Invoices</h2>
