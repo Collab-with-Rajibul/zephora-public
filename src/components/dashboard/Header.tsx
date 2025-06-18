@@ -4,7 +4,6 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import {
   CommandDialog,
   CommandEmpty,
@@ -14,7 +13,7 @@ import {
   CommandList,
   CommandSeparator,
 } from "@/components/ui/command";
-import { Search, Bell, Settings, LayoutDashboard, Users, CreditCard, FileText } from 'lucide-react';
+import { Search, Bell, LayoutDashboard, Users, CreditCard, FileText } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 interface HeaderProps {
@@ -135,13 +134,6 @@ export function Header({ className }: HeaderProps) {
             <CommandItem onSelect={() => runCommand(() => window.location.href = "/purchase-reports")}>
               <FileText className="mr-2 h-4 w-4" />
               <span>Purchase Reports</span>
-            </CommandItem>
-          </CommandGroup>
-          <CommandSeparator />
-          <CommandGroup heading="Settings">
-            <CommandItem onSelect={() => runCommand(() => console.log("Navigating to Settings"))}>
-              <Settings className="mr-2 h-4 w-4" />
-              <span>Settings</span>
             </CommandItem>
           </CommandGroup>
         </CommandList>
