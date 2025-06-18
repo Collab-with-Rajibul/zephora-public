@@ -1,3 +1,4 @@
+
 "use client";
 
 import React from 'react';
@@ -15,6 +16,7 @@ import {
 } from "@/components/ui/command";
 import { Search, Bell, Settings, LayoutDashboard, Users, CreditCard, FileText } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useLocation } from 'react-router-dom';
 
 interface HeaderProps {
   className?: string;
@@ -23,6 +25,55 @@ interface HeaderProps {
 export function Header({ className }: HeaderProps) {
   const [open, setOpen] = React.useState(false);
   const isMobile = useIsMobile();
+  const location = useLocation();
+
+  // Function to get page title and description based on route
+  const getPageInfo = () => {
+    switch (location.pathname) {
+      case '/':
+        return {
+          title: 'Dashboard',
+          description: 'Welcome back! Here\'s what\'s happening with your business today.'
+        };
+      case '/sales-invoices':
+        return {
+          title: 'Sales Invoices',
+          description: 'Manage and track your sales invoices.'
+        };
+      case '/customers':
+        return {
+          title: 'Customers',
+          description: 'Manage your customer relationships and information.'
+        };
+      case '/sales-reports':
+        return {
+          title: 'Sales Reports',
+          description: 'Analyze your sales performance and trends.'
+        };
+      case '/purchase-bills':
+        return {
+          title: 'Purchase Bills',
+          description: 'Track and manage your purchase bills and expenses.'
+        };
+      case '/suppliers':
+        return {
+          title: 'Suppliers',
+          description: 'Manage your supplier relationships and contacts.'
+        };
+      case '/purchase-reports':
+        return {
+          title: 'Purchase Reports',
+          description: 'Analyze your purchase activities and spending.'
+        };
+      default:
+        return {
+          title: 'Dashboard',
+          description: 'Welcome back! Here\'s what\'s happening with your business today.'
+        };
+    }
+  };
+
+  const { title, description } = getPageInfo();
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -49,9 +100,9 @@ export function Header({ className }: HeaderProps) {
         {/* Left side - Title */}
         <div className="flex items-center gap-2">
           <div className="flex-none">
-            <h1 className="text-xl md:text-2xl font-bold text-foreground">Dashboard</h1>
+            <h1 className="text-xl md:text-2xl font-bold text-foreground">{title}</h1>
             <p className="hidden md:block text-sm text-muted-foreground">
-              Welcome back! Here's what's happening with your business today.
+              {description}
             </p>
           </div>
         </div>
