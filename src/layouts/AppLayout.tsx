@@ -2,12 +2,10 @@
 "use client";
 
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { Sidebar } from '@/components/dashboard/Sidebar';
-import { PageHeader } from '@/components/dashboard/PageHeader';
+import { Header } from '@/components/dashboard/Header';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { navigationItems } from '@/config/dashboard-nav';
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -16,18 +14,6 @@ interface AppLayoutProps {
 const AppLayout = ({ children }: AppLayoutProps) => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const isMobile = useIsMobile();
-  const location = useLocation();
-
-  const getPageTitle = (pathname: string): string => {
-    if (pathname === '/') {
-      return 'Dashboard';
-    }
-    const allNavItems = navigationItems.flatMap(group => group.children || []);
-    const currentNavItem = allNavItems.find(item => item.path === pathname);
-    return currentNavItem?.title || 'Dashboard';
-  };
-  
-  const pageTitle = getPageTitle(location.pathname);
 
   React.useEffect(() => {
     if (isMobile) {
@@ -60,7 +46,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
             />
           )}
 
-          <PageHeader title={pageTitle} />
+          <Header />
           
           <main className="flex-1 overflow-y-auto">
             <div className="container mx-auto p-6 max-w-7xl">

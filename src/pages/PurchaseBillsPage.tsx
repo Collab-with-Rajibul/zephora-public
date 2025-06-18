@@ -14,18 +14,22 @@ const PurchaseBillsPage: React.FC = () => {
 
     return (
         <div className="flex flex-col gap-8">
-            <div className="flex flex-col md:flex-row items-center justify-end space-y-2 md:space-y-0">
+            <header className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                <div>
+                    <h1 className="text-3xl font-bold tracking-tight">Purchase Bills</h1>
+                    <p className="text-muted-foreground">Manage your company's purchase bills.</p>
+                </div>
                 <div className="flex items-center gap-2">
                     <Button variant="outline">
-                        <Download className="mr-2 h-4 w-4" />
+                        <Download className="mr-2" />
                         Export Data
                     </Button>
                     <Button>
-                        <Plus className="mr-2 h-4 w-4" />
+                        <Plus className="mr-2" />
                         Create New Bill
                     </Button>
                 </div>
-            </div>
+            </header>
 
             <section className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
                 <SummaryCard

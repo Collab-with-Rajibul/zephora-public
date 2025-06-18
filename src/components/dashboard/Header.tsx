@@ -1,9 +1,9 @@
-
 "use client";
 
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import {
   CommandDialog,
   CommandEmpty,
@@ -13,7 +13,7 @@ import {
   CommandList,
   CommandSeparator,
 } from "@/components/ui/command";
-import { Search, Bell, LayoutDashboard, Users, CreditCard, FileText } from 'lucide-react';
+import { Search, Bell, Settings, LayoutDashboard, Users, CreditCard, FileText } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 interface HeaderProps {
@@ -36,9 +36,9 @@ export function Header({ className }: HeaderProps) {
   }, []);
 
   const runCommand = (command: () => unknown) => {
-    setOpen(false);
-    command();
-  };
+    setOpen(false)
+    command()
+  }
 
   return (
     <>
@@ -58,43 +58,39 @@ export function Header({ className }: HeaderProps) {
 
         {/* Right side - Actions (Desktop) */}
         <div className="hidden md:flex items-center space-x-4">
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            className="rounded-xl" 
-            onClick={() => setOpen(true)}
-          >
+           <Button variant="ghost" size="icon" className="rounded-xl" onClick={() => setOpen(true)}>
             <Search className="h-5 w-5" />
           </Button>
 
           <div className="relative">
             <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-xl">
-              <Bell className="h-5 w-5" />
+              <Bell className="h-5 w-5 text-blue-500" />
             </Button>
-            <div className="absolute -top-1 -right-1 h-5 w-5 bg-red-500 rounded-full flex items-center justify-center">
-              <span className="text-white text-xs font-medium">3</span>
-            </div>
+            <Badge 
+              variant="destructive" 
+              className="absolute top-0 right-0 h-5 w-5 rounded-full p-0 text-xs flex items-center justify-center"
+            >
+              3
+            </Badge>
           </div>
         </div>
 
         {/* Mobile Actions */}
         <div className="md:hidden flex items-center space-x-1">
-          <Button 
-            variant="ghost" 
-            size="icon" 
-            onClick={() => setOpen(true)} 
-            className="rounded-xl"
-          >
+          <Button variant="ghost" size="icon" onClick={() => setOpen(true)} className="rounded-xl">
             <Search className="h-5 w-5" />
           </Button>
 
           <div className="relative">
             <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-xl">
-              <Bell className="h-5 w-5" />
+              <Bell className="h-5 w-5 text-blue-500" />
             </Button>
-            <div className="absolute -top-1 -right-1 h-4 w-4 bg-red-500 rounded-full flex items-center justify-center">
-              <span className="text-white text-[10px] font-medium">3</span>
-            </div>
+            <Badge 
+              variant="destructive" 
+              className="absolute top-0 right-0 h-4 w-4 rounded-full p-0 text-[10px] flex items-center justify-center"
+            >
+              3
+            </Badge>
           </div>
         </div>
       </header>
@@ -104,36 +100,31 @@ export function Header({ className }: HeaderProps) {
         <CommandList>
           <CommandEmpty>No results found.</CommandEmpty>
           <CommandGroup heading="Suggestions">
-            <CommandItem onSelect={() => runCommand(() => window.location.href = "/")}>
+            <CommandItem onSelect={() => runCommand(() => console.log("Navigating to Dashboard"))}>
               <LayoutDashboard className="mr-2 h-4 w-4" />
               <span>Dashboard</span>
             </CommandItem>
-            <CommandItem onSelect={() => runCommand(() => window.location.href = "/customers")}>
+            <CommandItem onSelect={() => runCommand(() => console.log("Navigating to Customers"))}>
               <Users className="mr-2 h-4 w-4" />
               <span>Customers</span>
             </CommandItem>
-            <CommandItem onSelect={() => runCommand(() => window.location.href = "/sales-invoices")}>
+            <CommandItem onSelect={() => runCommand(() => console.log("Navigating to Billing"))}>
               <CreditCard className="mr-2 h-4 w-4" />
-              <span>Sales Invoices</span>
-            </CommandItem>
-            <CommandItem onSelect={() => runCommand(() => window.location.href = "/purchase-bills")}>
-              <FileText className="mr-2 h-4 w-4" />
-              <span>Purchase Bills</span>
-            </CommandItem>
-            <CommandItem onSelect={() => runCommand(() => window.location.href = "/suppliers")}>
-              <Users className="mr-2 h-4 w-4" />
-              <span>Suppliers</span>
+              <span>Billing</span>
             </CommandItem>
           </CommandGroup>
           <CommandSeparator />
           <CommandGroup heading="Reports">
-            <CommandItem onSelect={() => runCommand(() => window.location.href = "/sales-reports")}>
+            <CommandItem onSelect={() => runCommand(() => console.log("Navigating to Invoices"))}>
               <FileText className="mr-2 h-4 w-4" />
-              <span>Sales Reports</span>
+              <span>Invoices</span>
             </CommandItem>
-            <CommandItem onSelect={() => runCommand(() => window.location.href = "/purchase-reports")}>
-              <FileText className="mr-2 h-4 w-4" />
-              <span>Purchase Reports</span>
+          </CommandGroup>
+           <CommandSeparator />
+          <CommandGroup heading="Settings">
+             <CommandItem onSelect={() => runCommand(() => console.log("Navigating to Settings"))}>
+              <Settings className="mr-2 h-4 w-4" />
+              <span>Settings</span>
             </CommandItem>
           </CommandGroup>
         </CommandList>
