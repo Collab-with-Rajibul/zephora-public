@@ -6,7 +6,6 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Sidebar } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useIsMobile } from '@/hooks/use-mobile';
 
 interface SidebarHeaderProps {
   isCollapsed: boolean;
@@ -14,21 +13,13 @@ interface SidebarHeaderProps {
 }
 
 export function SidebarHeader({ isCollapsed, onToggle }: SidebarHeaderProps) {
-  const isMobile = useIsMobile();
-
-  const handleLogoClick = () => {
-    if (isMobile && !isCollapsed) {
-      onToggle();
-    }
-  };
-
   return (
     <div className={cn(
       "flex items-center border-b border-border h-[88px]",
       isCollapsed ? "justify-center" : "justify-between p-6"
     )}>
       {!isCollapsed && (
-        <Link to="/" className="flex items-center space-x-3" onClick={handleLogoClick}>
+        <Link to="/" className="flex items-center space-x-3">
           <img src="/lovable-uploads/66302364-77b8-4f58-9dae-ab86821d9e4e.png" alt="Zephora Logo" className="w-8 h-8 rounded-full object-cover" />
           <div>
             <h1 className="text-lg font-semibold text-foreground">Zephora</h1>

@@ -50,7 +50,7 @@ export default function SalesReportsPage() {
       </Breadcrumb>
       
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between space-y-2 md:space-y-0">
-        <h1 className="text-3xl font-bold tracking-tight">Sales Reports</h1>
+        <h2 className="text-3xl font-bold tracking-tight">Sales Reports</h2>
         <div className="flex items-center space-x-2">
            <Button variant="outline" size="sm" onClick={() => toast.info("Downloading PDF report...")}>
             <Download className="mr-2 h-4 w-4" /> Download PDF
