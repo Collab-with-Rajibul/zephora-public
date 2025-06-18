@@ -1,4 +1,3 @@
-
 import { 
   ChevronDown,
   DollarSign,
@@ -55,7 +54,6 @@ export const navigationItems: NavItem[] = [
         { title: 'Sales Invoices', path: '/sales-invoices', icon: 'receipt', color: 'text-sky-500' },
         { title: 'Customers', path: '/customers', icon: 'users', color: 'text-amber-500' },
         { title: 'Sales Reports', path: '/sales-reports', icon: 'bar-chart-3', color: 'text-indigo-500' },
-        { title: 'Sales Analytics', icon: 'line-chart', color: 'text-rose-500' },
       ],
     },
     {
@@ -66,7 +64,6 @@ export const navigationItems: NavItem[] = [
         { title: 'Purchase Bills', path: '/purchase-bills', icon: 'file-text', color: 'text-teal-500' },
         { title: 'Suppliers', path: '/suppliers', icon: 'building-2', color: 'text-orange-500' },
         { title: 'Purchase Reports', path: '/purchase-reports', icon: 'bar-chart-3', color: 'text-indigo-500' },
-        { title: 'Purchase Analytics', path: '/purchase-analytics', icon: 'line-chart', color: 'text-rose-500' },
       ],
     },
     {
@@ -99,7 +96,6 @@ export const navigationItems: NavItem[] = [
         { title: 'Stock Levels', icon: 'layers', color: 'text-cyan-400' },
         { title: 'Stock Reports', icon: 'bar-chart-3', color: 'text-indigo-500' },
         { title: 'Low Stock Alerts', icon: 'alert-triangle', color: 'text-red-600' },
-        { title: 'Stock Analytics', icon: 'line-chart', color: 'text-rose-500' },
       ],
     },
     {
