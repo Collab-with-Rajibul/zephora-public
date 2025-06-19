@@ -1,9 +1,8 @@
 # Zephora
 
-🔗 **Zephora-public**  
-[https://zephora-public.lovable.app](https://zephora-public.lovable.app)
+🔗 **Preview :** [https://zephora-public.lovable.app](https://zephora-public.lovable.app)
 
-Zephora is an open source platform that empowers small businesses and SME owners to manage operations and finances seamlessly, all through a clean and modern interface.
+Zephora is an open source platform that empowers small businesses and SME owners to manage operations and finances seamlessly, all through a clean and modern interface.  
 Its open source nature makes it the perfect starting point for anyone looking to learn, customize, or contribute to robust business management software.
 
 ---
