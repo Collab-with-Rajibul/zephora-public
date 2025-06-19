@@ -3,17 +3,17 @@
 🔗 **Preview :** [https://zephora-public.lovable.app](https://zephora-public.lovable.app)
 
 Zephora is an open source platform that empowers small businesses and SME owners to manage operations and finances seamlessly, all through a clean and modern interface.  
-Its open source nature makes it the perfect starting point for anyone looking to learn, customize, or contribute to robust business management software.
 
 ---
 
 ## Features
 
-- ⚡️ Fast development with [Vite](https://vitejs.dev/)
-- 🛠️ Type-safe codebase with [TypeScript](https://www.typescriptlang.org/)
-- ⚛️ Built using [React](https://react.dev/)
-- 🎨 Beautiful UI with [Tailwind CSS](https://tailwindcss.com/) and [shadcn-ui](https://ui.shadcn.com/)
-- 🧩 Easily customizable and extendable
+- **Dashboard:** Get a quick snapshot of your business with key metrics, recent activity, and financial summaries.
+- **Sales & Purchase Management:** Easily create, track, and manage sales invoices and purchase bills.
+- **Customer & Supplier Directory:** Maintain organized records of your customers and suppliers for smooth business operations.
+- **Employee Management:** Add, manage, and track your employees and their salaries.
+- **Payment Tracking:** Record and monitor payments received and due, including outstanding and overdue amounts.
+- **Financial Reports:** Generate insightful reports and analytics to understand your revenue, expenses, and business performance.
 
 ---
 
@@ -87,8 +87,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## Acknowledgments
 
-- [Vite](https://vitejs.dev/)
-- [React](https://react.dev/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [shadcn-ui](https://ui.shadcn.com/)
+- ⚡️ Fast development with [Vite](https://vitejs.dev/)
+- 🛠️ Type-safe codebase with [TypeScript](https://www.typescriptlang.org/)
+- ⚛️ Built using [React](https://react.dev/)
+- 🎨 Beautiful UI with [Tailwind CSS](https://tailwindcss.com/) and [shadcn-ui](https://ui.shadcn.com/)
