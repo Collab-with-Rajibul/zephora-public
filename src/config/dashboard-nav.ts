@@ -1,3 +1,4 @@
+
 import { 
   ChevronDown,
   DollarSign,
@@ -29,6 +30,9 @@ import {
   Wrench,
   Plug,
   TrendingUp,
+  UserCheck,
+  CalendarDays,
+  Banknote,
 } from 'lucide-react';
 
 export interface NavItemChild {
@@ -64,6 +68,16 @@ export const navigationItems: NavItem[] = [
         { title: 'Purchase Bills', path: '/purchase-bills', icon: 'file-text', color: 'text-teal-500' },
         { title: 'Suppliers', path: '/suppliers', icon: 'building-2', color: 'text-orange-500' },
         { title: 'Purchase Reports', path: '/purchase-reports', icon: 'bar-chart-3', color: 'text-indigo-500' },
+      ],
+    },
+    {
+      title: 'Employee Management',
+      icon: 'user-check',
+      color: 'text-purple-500',
+      children: [
+        { title: 'Employees', path: '/employees', icon: 'users', color: 'text-blue-500' },
+        { title: 'Attendance', path: '/attendance', icon: 'calendar-days', color: 'text-green-500' },
+        { title: 'Advances', path: '/advances', icon: 'banknote', color: 'text-yellow-500' },
       ],
     },
     {
@@ -152,4 +166,7 @@ export const iconMap = {
   'wrench': Wrench,
   'plug': Plug,
   'trending-up': TrendingUp,
+  'user-check': UserCheck,
+  'calendar-days': CalendarDays,
+  'banknote': Banknote,
 };
