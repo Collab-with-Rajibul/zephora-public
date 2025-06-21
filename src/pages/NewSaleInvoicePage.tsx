@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -6,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { ArrowLeft, Plus, Trash2 } from 'lucide-react';
+import { ArrowLeft, Plus, Trash2, Users } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
@@ -101,8 +100,18 @@ const NewSaleInvoicePage: React.FC = () => {
               <Label htmlFor="due-date">Due Date</Label>
               <Input id="due-date" type="date" />
             </div>
-            <div>
-              <Label htmlFor="customer">Customer</Label>
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <Label htmlFor="customer">Customer</Label>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => navigate('/customers/new')}
+                >
+                  <Users className="h-4 w-4 mr-1" />
+                  Add Customer
+                </Button>
+              </div>
               <Select>
                 <SelectTrigger>
                   <SelectValue placeholder="Select customer" />

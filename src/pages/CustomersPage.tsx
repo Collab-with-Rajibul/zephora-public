@@ -7,8 +7,11 @@ import { Input } from "@/components/ui/input";
 import { customers } from "@/data/customers";
 import { Badge } from '@/components/ui/badge';
 import { toast } from "sonner";
+import { useNavigate } from 'react-router-dom';
 
 export default function CustomersPage() {
+  const navigate = useNavigate();
+
   return (
     <div className="space-y-4">
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between space-y-2 md:space-y-0">
@@ -23,7 +26,7 @@ export default function CustomersPage() {
           <Button variant="ghost" size="sm" onClick={() => toast.info("Exporting data...")}>
             <Download className="mr-2 h-4 w-4" /> Export Data
           </Button>
-          <Button size="sm" onClick={() => toast.success("Navigating to create new customer page...")}>
+          <Button size="sm" onClick={() => navigate('/customers/new')}>
             <Plus className="mr-2 h-4 w-4" /> Add New Customer
           </Button>
         </div>
