@@ -15,6 +15,7 @@ import {
   Receipt,
   CreditCard
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface QuickAction {
   id: string;
@@ -32,7 +33,7 @@ const quickActions: QuickAction[] = [
     description: 'Create a new sales invoice',
     icon: 'receipt',
     variant: 'primary',
-    href: '/invoices/new'
+    href: '/sales-invoices/new'
   },
   {
     id: 'new-purchase-bill',
@@ -40,7 +41,7 @@ const quickActions: QuickAction[] = [
     description: 'Record a new purchase',
     icon: 'file-text',
     variant: 'success',
-    href: '/purchases/new'
+    href: '/purchase-bills/new'
   },
   {
     id: 'record-payment',
@@ -92,6 +93,8 @@ interface QuickActionsProps {
 }
 
 export function QuickActions({ className }: QuickActionsProps) {
+  const navigate = useNavigate();
+
   const getActionStyles = (variant: string) => {
     switch (variant) {
       case 'primary':
@@ -126,7 +129,7 @@ export function QuickActions({ className }: QuickActionsProps) {
                   "h-24 p-4 flex flex-col items-center justify-center space-y-2 rounded-xl transition-all duration-200 hover:scale-105",
                   getActionStyles(action.variant)
                 )}
-                onClick={() => console.log(`Navigate to ${action.href}`)}
+                onClick={() => navigate(action.href)}
               >
                 <Icon className="w-6 h-6" />
                 <div className="text-center">

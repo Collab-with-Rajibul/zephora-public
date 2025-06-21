@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -16,6 +15,8 @@ import PurchaseReportsPage from "./pages/PurchaseReportsPage";
 import EmployeesPage from "./pages/EmployeesPage";
 import AttendancePage from "./pages/AttendancePage";
 import AdvancesPage from "./pages/AdvancesPage";
+import NewSaleInvoicePage from "./pages/NewSaleInvoicePage";
+import NewPurchaseBillPage from "./pages/NewPurchaseBillPage";
 
 const queryClient = new QueryClient();
 
@@ -28,9 +29,11 @@ const App = () => (
         <Routes>
           <Route path="/" element={<AppLayout><Index /></AppLayout>} />
           <Route path="/sales-invoices" element={<AppLayout><SalesInvoicesPage /></AppLayout>} />
+          <Route path="/sales-invoices/new" element={<AppLayout><NewSaleInvoicePage /></AppLayout>} />
           <Route path="/customers" element={<AppLayout><CustomersPage /></AppLayout>} />
           <Route path="/sales-reports" element={<AppLayout><SalesReportsPage /></AppLayout>} />
           <Route path="/purchase-bills" element={<AppLayout><PurchaseBillsPage /></AppLayout>} />
+          <Route path="/purchase-bills/new" element={<AppLayout><NewPurchaseBillPage /></AppLayout>} />
           <Route path="/suppliers" element={<AppLayout><SuppliersPage /></AppLayout>} />
           <Route path="/purchase-reports" element={<AppLayout><PurchaseReportsPage /></AppLayout>} />
           <Route path="/employees" element={<AppLayout><EmployeesPage /></AppLayout>} />
