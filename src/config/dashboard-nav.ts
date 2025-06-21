@@ -85,10 +85,10 @@ export const navigationItems: NavItem[] = [
       icon: 'book-open',
       color: 'text-cyan-500',
       children: [
-        { title: 'Profit & Loss', icon: 'trending-up', color: 'text-emerald-500' },
-        { title: 'Balance Sheet', icon: 'scale', color: 'text-fuchsia-500' },
-        { title: 'Cash Flow', icon: 'arrow-right-left', color: 'text-violet-500' },
-        { title: 'Trial Balance', icon: 'clipboard-check', color: 'text-lime-500' },
+        { title: 'Profit & Loss', path: '/profit-loss', icon: 'trending-up', color: 'text-emerald-500' },
+        { title: 'Balance Sheet', path: '/balance-sheet', icon: 'scale', color: 'text-fuchsia-500' },
+        { title: 'Cash Flow', path: '/cash-flow', icon: 'arrow-right-left', color: 'text-violet-500' },
+        { title: 'Trial Balance', path: '/trial-balance', icon: 'clipboard-check', color: 'text-lime-500' },
       ],
     },
     {
@@ -96,10 +96,10 @@ export const navigationItems: NavItem[] = [
       icon: 'credit-card',
       color: 'text-pink-500',
       children: [
-        { title: 'Payments Sent', icon: 'arrow-up-from-line', color: 'text-red-500' },
-        { title: 'Payments Received', icon: 'arrow-down-to-line', color: 'text-green-500' },
-        { title: 'Outstanding Payments', icon: 'clock', color: 'text-yellow-500' },
-        { title: 'Payment Tracking', icon: 'history', color: 'text-stone-500' },
+        { title: 'Payments Sent', path: '/payments-sent', icon: 'arrow-up-from-line', color: 'text-red-500' },
+        { title: 'Payments Received', path: '/payments-received', icon: 'arrow-down-to-line', color: 'text-green-500' },
+        { title: 'Outstanding Payments', path: '/outstanding-payments', icon: 'clock', color: 'text-yellow-500' },
+        { title: 'Payment Tracking', path: '/payment-tracking', icon: 'history', color: 'text-stone-500' },
       ],
     },
     {
@@ -107,9 +107,9 @@ export const navigationItems: NavItem[] = [
       icon: 'package',
       color: 'text-purple-500',
       children: [
-        { title: 'Stock Levels', icon: 'layers', color: 'text-cyan-400' },
-        { title: 'Stock Reports', icon: 'bar-chart-3', color: 'text-indigo-500' },
-        { title: 'Low Stock Alerts', icon: 'alert-triangle', color: 'text-red-600' },
+        { title: 'Stock Levels', path: '/stock-levels', icon: 'layers', color: 'text-cyan-400' },
+        { title: 'Stock Reports', path: '/stock-reports', icon: 'bar-chart-3', color: 'text-indigo-500' },
+        { title: 'Low Stock Alerts', path: '/low-stock-alerts', icon: 'alert-triangle', color: 'text-red-600' },
       ],
     },
     {
@@ -117,10 +117,10 @@ export const navigationItems: NavItem[] = [
       icon: 'pie-chart',
       color: 'text-yellow-400',
       children: [
-        { title: 'Financial Analytics', icon: 'line-chart', color: 'text-rose-500' },
-        { title: 'Business Insights', icon: 'target', color: 'text-blue-600' },
-        { title: 'Custom Reports', icon: 'file-plus-2', color: 'text-green-600' },
-        { title: 'Comparative Analysis', icon: 'git-compare-arrows', color: 'text-orange-400' },
+        { title: 'Financial Analytics', path: '/financial-analytics', icon: 'line-chart', color: 'text-rose-500' },
+        { title: 'Business Insights', path: '/business-insights', icon: 'target', color: 'text-blue-600' },
+        { title: 'Custom Reports', path: '/custom-reports', icon: 'file-plus-2', color: 'text-green-600' },
+        { title: 'Comparative Analysis', path: '/comparative-analysis', icon: 'git-compare-arrows', color: 'text-orange-400' },
       ],
     },
     {
@@ -128,10 +128,10 @@ export const navigationItems: NavItem[] = [
       icon: 'settings',
       color: 'text-gray-500',
       children: [
-        { title: 'Company Profile', icon: 'building', color: 'text-sky-600' },
-        { title: 'User Management', icon: 'users', color: 'text-amber-500' },
-        { title: 'System Settings', icon: 'wrench', color: 'text-slate-500' },
-        { title: 'Integrations', icon: 'plug', color: 'text-teal-400' },
+        { title: 'Company Profile', path: '/company-profile', icon: 'building', color: 'text-sky-600' },
+        { title: 'User Management', path: '/user-management', icon: 'users', color: 'text-amber-500' },
+        { title: 'System Settings', path: '/system-settings', icon: 'wrench', color: 'text-slate-500' },
+        { title: 'Integrations', path: '/integrations', icon: 'plug', color: 'text-teal-400' },
       ],
     },
 ];
