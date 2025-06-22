@@ -5,36 +5,29 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "./layouts/AppLayout";
-import Index from "./pages/dashboard/Index";
+import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-
-// Sales Management
-import SalesInvoicesPage from "./pages/sales-management/SalesInvoicesPage";
-import NewSaleInvoicePage from "./pages/sales-management/NewSaleInvoicePage";
-import CustomersPage from "./pages/sales-management/CustomersPage";
-import NewCustomerPage from "./pages/sales-management/NewCustomerPage";
+import SalesInvoicesPage from "./pages/SalesInvoices";
+import CustomersPage from "./pages/CustomersPage";
 import SalesReportsPage from "./pages/SalesReportsPage";
-
-// Purchase Management
-import PurchaseBillsPage from "./pages/purchase-management/PurchaseBillsPage";
-import NewPurchaseBillPage from "./pages/NewPurchaseBillPage";
-import SuppliersPage from "./pages/purchase-management/SuppliersPage";
-import NewSupplierPage from "./pages/NewSupplierPage";
+import PurchaseBillsPage from "./pages/PurchaseBillsPage";
+import SuppliersPage from "./pages/SuppliersPage";
 import PurchaseReportsPage from "./pages/PurchaseReportsPage";
-
-// Employee Management
-import EmployeesPage from "./pages/employee-management/EmployeesPage";
+import EmployeesPage from "./pages/EmployeesPage";
 import AttendancePage from "./pages/AttendancePage";
 import AdvancesPage from "./pages/AdvancesPage";
+import NewSaleInvoicePage from "./pages/NewSaleInvoicePage";
+import NewPurchaseBillPage from "./pages/NewPurchaseBillPage";
+import NewCustomerPage from "./pages/NewCustomerPage";
+import NewSupplierPage from "./pages/NewSupplierPage";
 
 // Financial Statements
-import ProfitLossPage from "./pages/financial-statements/ProfitLossPage";
+import ProfitLossPage from "./pages/ProfitLossPage";
 import BalanceSheetPage from "./pages/BalanceSheetPage";
 import CashFlowPage from "./pages/CashFlowPage";
 import TrialBalancePage from "./pages/TrialBalancePage";
 
 // Payments
-import RecordPaymentPage from "./pages/payments/RecordPaymentPage";
 import PaymentsSentPage from "./pages/PaymentsSentPage";
 import PaymentsReceivedPage from "./pages/PaymentsReceivedPage";
 import OutstandingPaymentsPage from "./pages/OutstandingPaymentsPage";
@@ -43,20 +36,23 @@ import PaymentTrackingPage from "./pages/PaymentTrackingPage";
 // Inventory & Stock
 import StockLevelsPage from "./pages/StockLevelsPage";
 import StockReportsPage from "./pages/StockReportsPage";
-import LowStockAlertsPage from "./pages/inventory-stock/LowStockAlertsPage";
+import LowStockAlertsPage from "./pages/LowStockAlertsPage";
 
 // Reports & Analytics
 import FinancialAnalyticsPage from "./pages/FinancialAnalyticsPage";
 import BusinessInsightsPage from "./pages/BusinessInsightsPage";
 import CustomReportsPage from "./pages/CustomReportsPage";
 import ComparativeAnalysisPage from "./pages/ComparativeAnalysisPage";
-import GenerateReportPage from "./pages/GenerateReportPage";
 
 // Settings
 import CompanyProfilePage from "./pages/CompanyProfilePage";
 import UserManagementPage from "./pages/UserManagementPage";
 import SystemSettingsPage from "./pages/SystemSettingsPage";
 import IntegrationsPage from "./pages/IntegrationsPage";
+
+// Quick Action Pages
+import RecordPaymentPage from "./pages/RecordPaymentPage";
+import GenerateReportPage from "./pages/GenerateReportPage";
 
 const queryClient = new QueryClient();
 
@@ -95,7 +91,6 @@ const App = () => (
           <Route path="/trial-balance" element={<AppLayout><TrialBalancePage /></AppLayout>} />
           
           {/* Payments */}
-          <Route path="/payments/new" element={<AppLayout><RecordPaymentPage /></AppLayout>} />
           <Route path="/payments-sent" element={<AppLayout><PaymentsSentPage /></AppLayout>} />
           <Route path="/payments-received" element={<AppLayout><PaymentsReceivedPage /></AppLayout>} />
           <Route path="/outstanding-payments" element={<AppLayout><OutstandingPaymentsPage /></AppLayout>} />
@@ -107,7 +102,6 @@ const App = () => (
           <Route path="/low-stock-alerts" element={<AppLayout><LowStockAlertsPage /></AppLayout>} />
           
           {/* Reports & Analytics */}
-          <Route path="/reports" element={<AppLayout><GenerateReportPage /></AppLayout>} />
           <Route path="/financial-analytics" element={<AppLayout><FinancialAnalyticsPage /></AppLayout>} />
           <Route path="/business-insights" element={<AppLayout><BusinessInsightsPage /></AppLayout>} />
           <Route path="/custom-reports" element={<AppLayout><CustomReportsPage /></AppLayout>} />
@@ -118,6 +112,10 @@ const App = () => (
           <Route path="/user-management" element={<AppLayout><UserManagementPage /></AppLayout>} />
           <Route path="/system-settings" element={<AppLayout><SystemSettingsPage /></AppLayout>} />
           <Route path="/integrations" element={<AppLayout><IntegrationsPage /></AppLayout>} />
+          
+          {/* Quick Action Pages */}
+          <Route path="/payments/new" element={<AppLayout><RecordPaymentPage /></AppLayout>} />
+          <Route path="/reports" element={<AppLayout><GenerateReportPage /></AppLayout>} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
