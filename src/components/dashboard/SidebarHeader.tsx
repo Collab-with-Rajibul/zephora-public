@@ -29,7 +29,7 @@ export function SidebarHeader({ isCollapsed, onToggle }: SidebarHeaderProps) {
     )}>
       {!isCollapsed && (
         <button onClick={handleLogoClick} className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
-          <img src="/lovable-uploads/66302364-77b8-4f58-9dae-ab86821d9e4e.png" alt="Zephora Logo" className="w-8 h-8 rounded-full object-cover" />
+          <img src="/lovable-uploads/zephora-logo.png" alt="Zephora Logo" className="w-8 h-8 rounded-full object-cover" />
           <div>
             <h1 className="text-lg font-semibold text-foreground">Zephora</h1>
             <p className="text-xs text-muted-foreground">
@@ -49,7 +49,7 @@ export function SidebarHeader({ isCollapsed, onToggle }: SidebarHeaderProps) {
       >
         {isCollapsed ? (
           <button onClick={handleLogoClick}>
-            <img src="/lovable-uploads/66302364-77b8-4f58-9dae-ab86821d9e4e.png" alt="Zephora Logo" className="w-8 h-8 rounded-full object-cover" />
+            <img src="/lovable-uploads/zephora-logo.png" alt="Zephora Logo" className="w-8 h-8 rounded-full object-cover" />
           </button>
         ) : (
           <Sidebar className="w-4 h-4" />
