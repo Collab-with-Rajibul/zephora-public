@@ -9,7 +9,7 @@ import { ArrowLeft, Plus, Trash2, Users } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
-interface InvoiceItem {
+interface BillItem {
   id: string;
   description: string;
   quantity: number;
@@ -17,14 +17,14 @@ interface InvoiceItem {
   amount: number;
 }
 
-const NewSaleInvoicePage: React.FC = () => {
+const NewPurchaseBillPage: React.FC = () => {
   const navigate = useNavigate();
-  const [items, setItems] = useState<InvoiceItem[]>([
+  const [items, setItems] = useState<BillItem[]>([
     { id: '1', description: '', quantity: 1, rate: 0, amount: 0 }
   ]);
 
   const addItem = () => {
-    const newItem: InvoiceItem = {
+    const newItem: BillItem = {
       id: Date.now().toString(),
       description: '',
       quantity: 1,
@@ -40,7 +40,7 @@ const NewSaleInvoicePage: React.FC = () => {
     }
   };
 
-  const updateItem = (id: string, field: keyof InvoiceItem, value: string | number) => {
+  const updateItem = (id: string, field: keyof BillItem, value: string | number) => {
     setItems(items.map(item => {
       if (item.id === id) {
         const updatedItem = { ...item, [field]: value };
@@ -58,8 +58,8 @@ const NewSaleInvoicePage: React.FC = () => {
   const total = subtotal + tax;
 
   const handleSave = () => {
-    toast.success('Sale invoice created successfully!');
-    navigate('/sales-invoices');
+    toast.success('Purchase bill created successfully!');
+    navigate('/purchase-bills');
   };
 
   return (
@@ -70,29 +70,30 @@ const NewSaleInvoicePage: React.FC = () => {
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Dashboard
           </Button>
+          <h1 className="text-3xl font-bold tracking-tight">New Purchase Bill</h1>
         </div>
         <div className="flex space-x-2">
-          <Button variant="outline" onClick={() => navigate('/sales-invoices')}>
+          <Button variant="outline" onClick={() => navigate('/purchase-bills')}>
             Cancel
           </Button>
-          <Button onClick={handleSave}>Save Invoice</Button>
+          <Button onClick={handleSave}>Save Bill</Button>
         </div>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle>Invoice Details</CardTitle>
+            <CardTitle>Bill Details</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="invoice-number">Invoice Number</Label>
-                <Input id="invoice-number" placeholder="INV-001" />
+                <Label htmlFor="bill-number">Bill Number</Label>
+                <Input id="bill-number" placeholder="BILL-001" />
               </div>
               <div>
-                <Label htmlFor="invoice-date">Invoice Date</Label>
-                <Input id="invoice-date" type="date" />
+                <Label htmlFor="bill-date">Bill Date</Label>
+                <Input id="bill-date" type="date" />
               </div>
             </div>
             <div>
@@ -101,24 +102,24 @@ const NewSaleInvoicePage: React.FC = () => {
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Label htmlFor="customer">Customer</Label>
+                <Label htmlFor="supplier">Supplier</Label>
                 <Button 
                   variant="outline" 
                   size="sm"
-                  onClick={() => navigate('/customers/new')}
+                  onClick={() => navigate('/suppliers/new')}
                 >
                   <Users className="h-4 w-4 mr-1" />
-                  Add Customer
+                  Add Supplier
                 </Button>
               </div>
               <Select>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select customer" />
+                  <SelectValue placeholder="Select supplier" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="john-doe">John Doe</SelectItem>
-                  <SelectItem value="jane-smith">Jane Smith</SelectItem>
-                  <SelectItem value="acme-corp">ACME Corp</SelectItem>
+                  <SelectItem value="abc-suppliers">ABC Suppliers</SelectItem>
+                  <SelectItem value="xyz-corp">XYZ Corp</SelectItem>
+                  <SelectItem value="global-trade">Global Trade Co.</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -135,8 +136,12 @@ const NewSaleInvoicePage: React.FC = () => {
               <Input id="reference" placeholder="Reference number" />
             </div>
             <div>
+              <Label htmlFor="po-number">Purchase Order</Label>
+              <Input id="po-number" placeholder="PO number" />
+            </div>
+            <div>
               <Label htmlFor="notes">Notes</Label>
-              <Textarea id="notes" placeholder="Additional notes..." rows={4} />
+              <Textarea id="notes" placeholder="Additional notes..." rows={3} />
             </div>
           </CardContent>
         </Card>
@@ -145,7 +150,7 @@ const NewSaleInvoicePage: React.FC = () => {
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
-            <CardTitle>Invoice Items</CardTitle>
+            <CardTitle>Bill Items</CardTitle>
             <Button onClick={addItem} size="sm">
               <Plus className="h-4 w-4 mr-2" />
               Add Item
@@ -226,4 +231,4 @@ const NewSaleInvoicePage: React.FC = () => {
   );
 };
 
-export default NewSaleInvoicePage;
+export default NewPurchaseBillPage;

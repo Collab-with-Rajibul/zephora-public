@@ -1,10 +1,11 @@
 
 import React, { useState } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Plus } from 'lucide-react';
-import { EmployeeSummaryCards } from '@/components/employees/EmployeeSummaryCards';
-import { EmployeeSearch } from '@/components/employees/EmployeeSearch';
-import { EmployeeTable } from '@/components/employees/EmployeeTable';
+import { Input } from '@/components/ui/input';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Badge } from '@/components/ui/badge';
+import { Plus, Search, Users, DollarSign, Calendar, Clock } from 'lucide-react';
 
 interface Employee {
   id: string;
@@ -86,6 +87,20 @@ const EmployeesPage: React.FC = () => {
     employee.position.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const getStatusColor = (status: Employee['status']) => {
+    switch (status) {
+      case 'active': return 'bg-green-500';
+      case 'inactive': return 'bg-red-500';
+      case 'on-leave': return 'bg-yellow-500';
+      default: return 'bg-gray-500';
+    }
+  };
+
+  const totalEmployees = employees.length;
+  const activeEmployees = employees.filter(emp => emp.status === 'active').length;
+  const totalPayroll = employees.filter(emp => emp.status === 'active').reduce((sum, emp) => sum + emp.salary, 0);
+  const avgSalary = totalPayroll / activeEmployees;
+
   return (
     <div className="flex flex-col gap-8">
       <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -95,14 +110,108 @@ const EmployeesPage: React.FC = () => {
         </Button>
       </header>
 
-      <EmployeeSummaryCards employees={employees} />
+      {/* Summary Cards */}
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total Employees</CardTitle>
+            <Users className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{totalEmployees}</div>
+            <p className="text-xs text-muted-foreground">{activeEmployees} active</p>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Monthly Payroll</CardTitle>
+            <DollarSign className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">${(totalPayroll / 12).toLocaleString()}</div>
+            <p className="text-xs text-muted-foreground">Annual: ${totalPayroll.toLocaleString()}</p>
+          </CardContent>
+        </Card>
 
-      <EmployeeSearch 
-        searchTerm={searchTerm} 
-        onSearchChange={setSearchTerm} 
-      />
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Average Salary</CardTitle>
+            <Calendar className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">${avgSalary.toLocaleString()}</div>
+            <p className="text-xs text-muted-foreground">Per year</p>
+          </CardContent>
+        </Card>
 
-      <EmployeeTable employees={filteredEmployees} />
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">On Leave</CardTitle>
+            <Clock className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">{employees.filter(emp => emp.status === 'on-leave').length}</div>
+            <p className="text-xs text-muted-foreground">Currently away</p>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Search and Filter */}
+      <div className="flex items-center space-x-2">
+        <div className="relative flex-1 max-w-sm">
+          <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+          <Input
+            placeholder="Search employees..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="pl-8"
+          />
+        </div>
+      </div>
+
+      {/* Employees Table */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Employee Directory</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Employee</TableHead>
+                <TableHead>Position</TableHead>
+                <TableHead>Department</TableHead>
+                <TableHead>Salary</TableHead>
+                <TableHead>Join Date</TableHead>
+                <TableHead>Status</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {filteredEmployees.map((employee) => (
+                <TableRow key={employee.id}>
+                  <TableCell>
+                    <div>
+                      <div className="font-medium">{employee.name}</div>
+                      <div className="text-sm text-muted-foreground">{employee.email}</div>
+                      <div className="text-sm text-muted-foreground">{employee.phone}</div>
+                    </div>
+                  </TableCell>
+                  <TableCell>{employee.position}</TableCell>
+                  <TableCell>{employee.department}</TableCell>
+                  <TableCell>${employee.salary.toLocaleString()}</TableCell>
+                  <TableCell>{new Date(employee.joinDate).toLocaleDateString()}</TableCell>
+                  <TableCell>
+                    <Badge className={`${getStatusColor(employee.status)} text-white`}>
+                      {employee.status.replace('-', ' ')}
+                    </Badge>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </CardContent>
+      </Card>
     </div>
   );
 };

@@ -9,7 +9,7 @@ import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
-const NewSupplierPage: React.FC = () => {
+const NewCustomerPage: React.FC = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
@@ -29,38 +29,38 @@ const NewSupplierPage: React.FC = () => {
       toast.error('Please fill in required fields (Name and Email)');
       return;
     }
-    toast.success('Supplier created successfully!');
-    navigate('/suppliers');
+    toast.success('Customer created successfully!');
+    navigate('/customers');
   };
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
-          <Button variant="ghost" size="sm" onClick={() => navigate('/suppliers')}>
+          <Button variant="ghost" size="sm" onClick={() => navigate('/customers')}>
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Suppliers
+            Back to Customers
           </Button>
         </div>
         <div className="flex space-x-2">
-          <Button variant="outline" onClick={() => navigate('/suppliers')}>
+          <Button variant="outline" onClick={() => navigate('/customers')}>
             Cancel
           </Button>
-          <Button onClick={handleSave}>Save Supplier</Button>
+          <Button onClick={handleSave}>Save Customer</Button>
         </div>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle>Supplier Information</CardTitle>
+            <CardTitle>Customer Information</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
               <Label htmlFor="name">Name *</Label>
               <Input
                 id="name"
-                placeholder="Enter supplier name"
+                placeholder="Enter customer name"
                 value={formData.name}
                 onChange={(e) => handleInputChange('name', e.target.value)}
               />
@@ -84,14 +84,6 @@ const NewSupplierPage: React.FC = () => {
                 onChange={(e) => handleInputChange('phone', e.target.value)}
               />
             </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Additional Information</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
             <div>
               <Label htmlFor="company">Company</Label>
               <Input
@@ -101,11 +93,20 @@ const NewSupplierPage: React.FC = () => {
                 onChange={(e) => handleInputChange('company', e.target.value)}
               />
             </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Additional Details</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
             <div>
               <Label htmlFor="address">Address</Label>
               <Textarea
                 id="address"
-                placeholder="Enter address"
+                placeholder="Enter customer address"
+                rows={3}
                 value={formData.address}
                 onChange={(e) => handleInputChange('address', e.target.value)}
               />
@@ -114,7 +115,8 @@ const NewSupplierPage: React.FC = () => {
               <Label htmlFor="notes">Notes</Label>
               <Textarea
                 id="notes"
-                placeholder="Enter additional notes"
+                placeholder="Additional notes about the customer"
+                rows={4}
                 value={formData.notes}
                 onChange={(e) => handleInputChange('notes', e.target.value)}
               />
@@ -126,4 +128,4 @@ const NewSupplierPage: React.FC = () => {
   );
 };
 
-export default NewSupplierPage;
+export default NewCustomerPage;

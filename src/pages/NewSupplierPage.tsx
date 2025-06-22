@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -8,7 +9,7 @@ import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
 
-const NewCustomerPage: React.FC = () => {
+const NewSupplierPage: React.FC = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
@@ -28,38 +29,38 @@ const NewCustomerPage: React.FC = () => {
       toast.error('Please fill in required fields (Name and Email)');
       return;
     }
-    toast.success('Customer created successfully!');
-    navigate('/customers');
+    toast.success('Supplier created successfully!');
+    navigate('/suppliers');
   };
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
-          <Button variant="ghost" size="sm" onClick={() => navigate('/customers')}>
+          <Button variant="ghost" size="sm" onClick={() => navigate('/suppliers')}>
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Customers
+            Back to Suppliers
           </Button>
         </div>
         <div className="flex space-x-2">
-          <Button variant="outline" onClick={() => navigate('/customers')}>
+          <Button variant="outline" onClick={() => navigate('/suppliers')}>
             Cancel
           </Button>
-          <Button onClick={handleSave}>Save Customer</Button>
+          <Button onClick={handleSave}>Save Supplier</Button>
         </div>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
         <Card>
           <CardHeader>
-            <CardTitle>Customer Information</CardTitle>
+            <CardTitle>Supplier Information</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
               <Label htmlFor="name">Name *</Label>
               <Input
                 id="name"
-                placeholder="Enter customer name"
+                placeholder="Enter supplier name"
                 value={formData.name}
                 onChange={(e) => handleInputChange('name', e.target.value)}
               />
@@ -104,7 +105,7 @@ const NewCustomerPage: React.FC = () => {
               <Label htmlFor="address">Address</Label>
               <Textarea
                 id="address"
-                placeholder="Enter customer address"
+                placeholder="Enter supplier address"
                 rows={3}
                 value={formData.address}
                 onChange={(e) => handleInputChange('address', e.target.value)}
@@ -114,7 +115,7 @@ const NewCustomerPage: React.FC = () => {
               <Label htmlFor="notes">Notes</Label>
               <Textarea
                 id="notes"
-                placeholder="Additional notes about the customer"
+                placeholder="Additional notes about the supplier"
                 rows={4}
                 value={formData.notes}
                 onChange={(e) => handleInputChange('notes', e.target.value)}
@@ -127,4 +128,4 @@ const NewCustomerPage: React.FC = () => {
   );
 };
 
-export default NewCustomerPage;
+export default NewSupplierPage;

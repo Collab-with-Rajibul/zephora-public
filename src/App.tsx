@@ -1,124 +1,128 @@
 
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Layout } from '@/components/Layout';
-import { Toaster } from '@/components/ui/sonner';
-
-// Dashboard
-import Index from '@/pages/dashboard/Index';
-
-// Sales Management
-import SalesInvoices from '@/pages/sales-management/SalesInvoices';
-import NewSaleInvoicePage from '@/pages/sales-management/NewSaleInvoicePage';
-import CustomersPage from '@/pages/sales-management/CustomersPage';
-import NewCustomerPage from '@/pages/sales-management/NewCustomerPage';
-import SalesReportsPage from '@/pages/sales-management/SalesReportsPage';
-
-// Purchase Management
-import PurchaseBillsPage from '@/pages/purchase-management/PurchaseBillsPage';
-import NewPurchaseBillPage from '@/pages/purchase-management/NewPurchaseBillPage';
-import SuppliersPage from '@/pages/purchase-management/SuppliersPage';
-import NewSupplierPage from '@/pages/purchase-management/NewSupplierPage';
-import PurchaseReportsPage from '@/pages/purchase-management/PurchaseReportsPage';
-
-// Employee Management
-import EmployeesPage from '@/pages/employee-management/EmployeesPage';
-import AttendancePage from '@/pages/employee-management/AttendancePage';
-import AdvancesPage from '@/pages/employee-management/AdvancesPage';
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AppLayout from "./layouts/AppLayout";
+import Index from "./pages/Index";
+import NotFound from "./pages/NotFound";
+import SalesInvoicesPage from "./pages/SalesInvoices";
+import CustomersPage from "./pages/CustomersPage";
+import SalesReportsPage from "./pages/SalesReportsPage";
+import PurchaseBillsPage from "./pages/PurchaseBillsPage";
+import SuppliersPage from "./pages/SuppliersPage";
+import PurchaseReportsPage from "./pages/PurchaseReportsPage";
+import EmployeesPage from "./pages/EmployeesPage";
+import AttendancePage from "./pages/AttendancePage";
+import AdvancesPage from "./pages/AdvancesPage";
+import NewSaleInvoicePage from "./pages/NewSaleInvoicePage";
+import NewPurchaseBillPage from "./pages/NewPurchaseBillPage";
+import NewCustomerPage from "./pages/NewCustomerPage";
+import NewSupplierPage from "./pages/NewSupplierPage";
 
 // Financial Statements
-import ProfitLossPage from '@/pages/financial-statements/ProfitLossPage';
-import BalanceSheetPage from '@/pages/financial-statements/BalanceSheetPage';
-import CashFlowPage from '@/pages/financial-statements/CashFlowPage';
-import TrialBalancePage from '@/pages/TrialBalancePage';
+import ProfitLossPage from "./pages/ProfitLossPage";
+import BalanceSheetPage from "./pages/BalanceSheetPage";
+import CashFlowPage from "./pages/CashFlowPage";
+import TrialBalancePage from "./pages/TrialBalancePage";
 
 // Payments
-import RecordPaymentPage from '@/pages/RecordPaymentPage';
-import PaymentsSentPage from '@/pages/payments/PaymentsSentPage';
-import PaymentsReceivedPage from '@/pages/payments/PaymentsReceivedPage';
-import OutstandingPaymentsPage from '@/pages/payments/OutstandingPaymentsPage';
-import PaymentTrackingPage from '@/pages/payments/PaymentTrackingPage';
+import PaymentsSentPage from "./pages/PaymentsSentPage";
+import PaymentsReceivedPage from "./pages/PaymentsReceivedPage";
+import OutstandingPaymentsPage from "./pages/OutstandingPaymentsPage";
+import PaymentTrackingPage from "./pages/PaymentTrackingPage";
 
 // Inventory & Stock
-import StockLevelsPage from '@/pages/StockLevelsPage';
-import StockReportsPage from '@/pages/StockReportsPage';
-import LowStockAlertsPage from '@/pages/LowStockAlertsPage';
+import StockLevelsPage from "./pages/StockLevelsPage";
+import StockReportsPage from "./pages/StockReportsPage";
+import LowStockAlertsPage from "./pages/LowStockAlertsPage";
 
 // Reports & Analytics
-import GenerateReportPage from '@/pages/reports-analytics/GenerateReportPage';
-import FinancialAnalyticsPage from '@/pages/reports-analytics/FinancialAnalyticsPage';
-import BusinessInsightsPage from '@/pages/reports-analytics/BusinessInsightsPage';
-import CustomReportsPage from '@/pages/reports-analytics/CustomReportsPage';
-import ComparativeAnalysisPage from '@/pages/reports-analytics/ComparativeAnalysisPage';
+import FinancialAnalyticsPage from "./pages/FinancialAnalyticsPage";
+import BusinessInsightsPage from "./pages/BusinessInsightsPage";
+import CustomReportsPage from "./pages/CustomReportsPage";
+import ComparativeAnalysisPage from "./pages/ComparativeAnalysisPage";
 
 // Settings
-import CompanyProfilePage from '@/pages/settings/CompanyProfilePage';
-import UserManagementPage from '@/pages/settings/UserManagementPage';
-import SystemSettingsPage from '@/pages/SystemSettingsPage';
-import IntegrationsPage from '@/pages/IntegrationsPage';
+import CompanyProfilePage from "./pages/CompanyProfilePage";
+import UserManagementPage from "./pages/UserManagementPage";
+import SystemSettingsPage from "./pages/SystemSettingsPage";
+import IntegrationsPage from "./pages/IntegrationsPage";
 
-function App() {
-  return (
-    <Router>
-      <Layout>
+// Quick Action Pages
+import RecordPaymentPage from "./pages/RecordPaymentPage";
+import GenerateReportPage from "./pages/GenerateReportPage";
+
+const queryClient = new QueryClient();
+
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
         <Routes>
-          {/* Dashboard */}
-          <Route path="/" element={<Index />} />
+          <Route path="/" element={<AppLayout><Index /></AppLayout>} />
           
           {/* Sales Management */}
-          <Route path="/sales-invoices" element={<SalesInvoices />} />
-          <Route path="/sales-invoices/new" element={<NewSaleInvoicePage />} />
-          <Route path="/customers" element={<CustomersPage />} />
-          <Route path="/customers/new" element={<NewCustomerPage />} />
-          <Route path="/sales-reports" element={<SalesReportsPage />} />
+          <Route path="/sales-invoices" element={<AppLayout><SalesInvoicesPage /></AppLayout>} />
+          <Route path="/sales-invoices/new" element={<AppLayout><NewSaleInvoicePage /></AppLayout>} />
+          <Route path="/customers" element={<AppLayout><CustomersPage /></AppLayout>} />
+          <Route path="/customers/new" element={<AppLayout><NewCustomerPage /></AppLayout>} />
+          <Route path="/sales-reports" element={<AppLayout><SalesReportsPage /></AppLayout>} />
           
           {/* Purchase Management */}
-          <Route path="/purchase-bills" element={<PurchaseBillsPage />} />
-          <Route path="/purchase-bills/new" element={<NewPurchaseBillPage />} />
-          <Route path="/suppliers" element={<SuppliersPage />} />
-          <Route path="/suppliers/new" element={<NewSupplierPage />} />
-          <Route path="/purchase-reports" element={<PurchaseReportsPage />} />
+          <Route path="/purchase-bills" element={<AppLayout><PurchaseBillsPage /></AppLayout>} />
+          <Route path="/purchase-bills/new" element={<AppLayout><NewPurchaseBillPage /></AppLayout>} />
+          <Route path="/suppliers" element={<AppLayout><SuppliersPage /></AppLayout>} />
+          <Route path="/suppliers/new" element={<AppLayout><NewSupplierPage /></AppLayout>} />
+          <Route path="/purchase-reports" element={<AppLayout><PurchaseReportsPage /></AppLayout>} />
           
           {/* Employee Management */}
-          <Route path="/employees" element={<EmployeesPage />} />
-          <Route path="/attendance" element={<AttendancePage />} />
-          <Route path="/advances" element={<AdvancesPage />} />
+          <Route path="/employees" element={<AppLayout><EmployeesPage /></AppLayout>} />
+          <Route path="/attendance" element={<AppLayout><AttendancePage /></AppLayout>} />
+          <Route path="/advances" element={<AppLayout><AdvancesPage /></AppLayout>} />
           
           {/* Financial Statements */}
-          <Route path="/profit-loss" element={<ProfitLossPage />} />
-          <Route path="/balance-sheet" element={<BalanceSheetPage />} />
-          <Route path="/cash-flow" element={<CashFlowPage />} />
-          <Route path="/trial-balance" element={<TrialBalancePage />} />
+          <Route path="/profit-loss" element={<AppLayout><ProfitLossPage /></AppLayout>} />
+          <Route path="/balance-sheet" element={<AppLayout><BalanceSheetPage /></AppLayout>} />
+          <Route path="/cash-flow" element={<AppLayout><CashFlowPage /></AppLayout>} />
+          <Route path="/trial-balance" element={<AppLayout><TrialBalancePage /></AppLayout>} />
           
           {/* Payments */}
-          <Route path="/record-payment" element={<RecordPaymentPage />} />
-          <Route path="/payments-sent" element={<PaymentsSentPage />} />
-          <Route path="/payments-received" element={<PaymentsReceivedPage />} />
-          <Route path="/outstanding-payments" element={<OutstandingPaymentsPage />} />
-          <Route path="/payment-tracking" element={<PaymentTrackingPage />} />
+          <Route path="/payments-sent" element={<AppLayout><PaymentsSentPage /></AppLayout>} />
+          <Route path="/payments-received" element={<AppLayout><PaymentsReceivedPage /></AppLayout>} />
+          <Route path="/outstanding-payments" element={<AppLayout><OutstandingPaymentsPage /></AppLayout>} />
+          <Route path="/payment-tracking" element={<AppLayout><PaymentTrackingPage /></AppLayout>} />
           
           {/* Inventory & Stock */}
-          <Route path="/stock-levels" element={<StockLevelsPage />} />
-          <Route path="/stock-reports" element={<StockReportsPage />} />
-          <Route path="/low-stock-alerts" element={<LowStockAlertsPage />} />
+          <Route path="/stock-levels" element={<AppLayout><StockLevelsPage /></AppLayout>} />
+          <Route path="/stock-reports" element={<AppLayout><StockReportsPage /></AppLayout>} />
+          <Route path="/low-stock-alerts" element={<AppLayout><LowStockAlertsPage /></AppLayout>} />
           
           {/* Reports & Analytics */}
-          <Route path="/generate-report" element={<GenerateReportPage />} />
-          <Route path="/financial-analytics" element={<FinancialAnalyticsPage />} />
-          <Route path="/business-insights" element={<BusinessInsightsPage />} />
-          <Route path="/custom-reports" element={<CustomReportsPage />} />
-          <Route path="/comparative-analysis" element={<ComparativeAnalysisPage />} />
+          <Route path="/financial-analytics" element={<AppLayout><FinancialAnalyticsPage /></AppLayout>} />
+          <Route path="/business-insights" element={<AppLayout><BusinessInsightsPage /></AppLayout>} />
+          <Route path="/custom-reports" element={<AppLayout><CustomReportsPage /></AppLayout>} />
+          <Route path="/comparative-analysis" element={<AppLayout><ComparativeAnalysisPage /></AppLayout>} />
           
           {/* Settings */}
-          <Route path="/company-profile" element={<CompanyProfilePage />} />
-          <Route path="/user-management" element={<UserManagementPage />} />
-          <Route path="/system-settings" element={<SystemSettingsPage />} />
-          <Route path="/integrations" element={<IntegrationsPage />} />
+          <Route path="/company-profile" element={<AppLayout><CompanyProfilePage /></AppLayout>} />
+          <Route path="/user-management" element={<AppLayout><UserManagementPage /></AppLayout>} />
+          <Route path="/system-settings" element={<AppLayout><SystemSettingsPage /></AppLayout>} />
+          <Route path="/integrations" element={<AppLayout><IntegrationsPage /></AppLayout>} />
+          
+          {/* Quick Action Pages */}
+          <Route path="/payments/new" element={<AppLayout><RecordPaymentPage /></AppLayout>} />
+          <Route path="/reports" element={<AppLayout><GenerateReportPage /></AppLayout>} />
+          
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
-      </Layout>
-      <Toaster />
-    </Router>
-  );
-}
+      </BrowserRouter>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
 
 export default App;
