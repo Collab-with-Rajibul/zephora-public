@@ -4,204 +4,165 @@ export interface PageInfo {
   description: string;
 }
 
-export const getPageInfo = (pathname: string): PageInfo => {
-  switch (pathname) {
-    case '/':
-      return {
-        title: 'Dashboard',
-        description: 'Welcome back! Here\'s what\'s happening with your business today.'
-      };
+export function getPageInfo(pathname: string): PageInfo {
+  // Remove trailing slash and normalize the path
+  const normalizedPath = pathname === '/' ? '/' : pathname.replace(/\/$/, '');
+  
+  const pageMap: Record<string, PageInfo> = {
+    '/': {
+      title: 'Dashboard',
+      description: 'Overview of your business performance'
+    },
     
     // Sales Management
-    case '/sales-invoices':
-      return {
-        title: 'Sales Invoices',
-        description: 'Manage and track your sales invoices.'
-      };
-    case '/sales-invoices/new':
-      return {
-        title: 'New Sales Invoice',
-        description: 'Create a new sales invoice for your customers.'
-      };
-    case '/customers':
-      return {
-        title: 'Customers',
-        description: 'Manage your customer relationships and information.'
-      };
-    case '/customers/new':
-      return {
-        title: 'New Customer',
-        description: 'Add a new customer to your database.'
-      };
-    case '/sales-reports':
-      return {
-        title: 'Sales Reports',
-        description: 'Analyze your sales performance and trends.'
-      };
+    '/sales-invoices': {
+      title: 'Sales Invoices',
+      description: 'Manage customer invoices and track payments'
+    },
+    '/sales-invoices/new': {
+      title: 'New Sale Invoice',
+      description: 'Create a new invoice for your customer'
+    },
     
     // Purchase Management
-    case '/purchase-bills':
-      return {
-        title: 'Purchase Bills',
-        description: 'Track and manage your purchase bills and expenses.'
-      };
-    case '/purchase-bills/new':
-      return {
-        title: 'New Purchase Bill',
-        description: 'Create a new purchase bill for your suppliers.'
-      };
-    case '/suppliers':
-      return {
-        title: 'Suppliers',
-        description: 'Manage your supplier relationships and contacts.'
-      };
-    case '/suppliers/new':
-      return {
-        title: 'New Supplier',
-        description: 'Add a new supplier to your database.'
-      };
-    case '/purchase-reports':
-      return {
-        title: 'Purchase Reports',
-        description: 'Analyze your purchase activities and spending.'
-      };
+    '/purchase-bills': {
+      title: 'Purchase Bills',
+      description: 'Manage supplier bills and expenses'
+    },
+    '/purchase-bills/new': {
+      title: 'New Purchase Bill',
+      description: 'Create a new purchase bill from supplier'
+    },
+    '/purchase-reports': {
+      title: 'Purchase Reports',
+      description: 'Analyze purchase trends and supplier performance'
+    },
+    
+    // Customer & Supplier Management
+    '/customers': {
+      title: 'Customers',
+      description: 'Manage your customer database'
+    },
+    '/customers/new': {
+      title: 'Add New Customer',
+      description: 'Create a new customer profile'
+    },
+    '/suppliers': {
+      title: 'Suppliers',
+      description: 'Manage your supplier database'
+    },
+    '/suppliers/new': {
+      title: 'Add New Supplier',
+      description: 'Create a new supplier profile'
+    },
     
     // Employee Management
-    case '/employees':
-      return {
-        title: 'Employees',
-        description: 'Manage your team members and their information.'
-      };
-    case '/attendance':
-      return {
-        title: 'Attendance',
-        description: 'Track employee attendance and working hours.'
-      };
-    case '/advances':
-      return {
-        title: 'Advances',
-        description: 'Manage employee salary advances and payments.'
-      };
+    '/employees': {
+      title: 'Employees',
+      description: 'Manage your workforce and employee information'
+    },
+    '/attendance': {
+      title: 'Attendance Management',
+      description: 'Track employee attendance and manage weekly payroll calculations'
+    },
     
     // Financial Statements
-    case '/profit-loss':
-      return {
-        title: 'Profit & Loss',
-        description: 'View your company\'s profit and loss statement.'
-      };
-    case '/balance-sheet':
-      return {
-        title: 'Balance Sheet',
-        description: 'Review your company\'s balance sheet and financial position.'
-      };
-    case '/cash-flow':
-      return {
-        title: 'Cash Flow',
-        description: 'Monitor your company\'s cash flow and liquidity.'
-      };
-    case '/trial-balance':
-      return {
-        title: 'Trial Balance',
-        description: 'View your company\'s trial balance and account summaries.'
-      };
+    '/profit-loss': {
+      title: 'Profit & Loss Statement',
+      description: 'Financial performance overview'
+    },
+    '/balance-sheet': {
+      title: 'Balance Sheet',
+      description: 'Assets, liabilities and equity overview'
+    },
+    '/cash-flow': {
+      title: 'Cash Flow Statement',
+      description: 'Cash inflows and outflows analysis'
+    },
+    '/trial-balance': {
+      title: 'Trial Balance',
+      description: 'Account balances verification'
+    },
     
     // Payments
-    case '/payments-sent':
-      return {
-        title: 'Payments Sent',
-        description: 'Track outgoing payments to suppliers and vendors.'
-      };
-    case '/payments-received':
-      return {
-        title: 'Payments Received',
-        description: 'Monitor incoming payments from customers.'
-      };
-    case '/outstanding-payments':
-      return {
-        title: 'Outstanding Payments',
-        description: 'View and manage overdue and pending payments.'
-      };
-    case '/payment-tracking':
-      return {
-        title: 'Payment Tracking',
-        description: 'Track the status of all payments in real-time.'
-      };
-    case '/payments/new':
-      return {
-        title: 'Record Payment',
-        description: 'Record a new payment transaction.'
-      };
+    '/payments-sent': {
+      title: 'Payments Sent',
+      description: 'Track outgoing payments to suppliers'
+    },
+    '/payments-received': {
+      title: 'Payments Received',
+      description: 'Track incoming payments from customers'
+    },
+    '/outstanding-payments': {
+      title: 'Outstanding Payments',
+      description: 'Track pending receivables and payables'
+    },
+    '/payment-tracking': {
+      title: 'Payment Tracking',
+      description: 'Monitor all payment activities and history'
+    },
+    '/record-payment': {
+      title: 'Record Payment',
+      description: 'Record a new payment transaction'
+    },
     
     // Inventory & Stock
-    case '/stock-levels':
-      return {
-        title: 'Stock Levels',
-        description: 'Monitor current inventory levels and stock quantities.'
-      };
-    case '/stock-reports':
-      return {
-        title: 'Stock Reports',
-        description: 'Analyze inventory performance and stock movements.'
-      };
-    case '/low-stock-alerts':
-      return {
-        title: 'Low Stock Alerts',
-        description: 'View items that are running low in stock.'
-      };
+    '/stock-levels': {
+      title: 'Stock Levels',
+      description: 'Current inventory levels and stock status'
+    },
+    '/stock-reports': {
+      title: 'Stock Reports',
+      description: 'Inventory movement and analysis reports'
+    },
+    '/low-stock-alerts': {
+      title: 'Low Stock Alerts',
+      description: 'Items that need restocking'
+    },
     
     // Reports & Analytics
-    case '/financial-analytics':
-      return {
-        title: 'Financial Analytics',
-        description: 'Comprehensive financial analysis and insights.'
-      };
-    case '/business-insights':
-      return {
-        title: 'Business Insights',
-        description: 'Strategic insights and business performance metrics.'
-      };
-    case '/custom-reports':
-      return {
-        title: 'Custom Reports',
-        description: 'Create and manage custom business reports.'
-      };
-    case '/comparative-analysis':
-      return {
-        title: 'Comparative Analysis',
-        description: 'Compare performance across different periods and metrics.'
-      };
-    case '/reports':
-      return {
-        title: 'Generate Report',
-        description: 'Generate custom reports for your business needs.'
-      };
+    '/financial-analytics': {
+      title: 'Financial Analytics',
+      description: 'Comprehensive financial data analysis'
+    },
+    '/business-insights': {
+      title: 'Business Insights',
+      description: 'Key performance metrics and trends'
+    },
+    '/custom-reports': {
+      title: 'Custom Reports',
+      description: 'Create and manage custom business reports'
+    },
+    '/comparative-analysis': {
+      title: 'Comparative Analysis',
+      description: 'Compare performance across different periods'
+    },
+    '/generate-report': {
+      title: 'Generate Report',
+      description: 'Create custom reports for your business'
+    },
     
     // Settings
-    case '/company-profile':
-      return {
-        title: 'Company Profile',
-        description: 'Manage your company information and settings.'
-      };
-    case '/user-management':
-      return {
-        title: 'User Management',
-        description: 'Manage user accounts and permissions.'
-      };
-    case '/system-settings':
-      return {
-        title: 'System Settings',
-        description: 'Configure system preferences and options.'
-      };
-    case '/integrations':
-      return {
-        title: 'Integrations',
-        description: 'Manage third-party integrations and connections.'
-      };
-    
-    default:
-      return {
-        title: 'Dashboard',
-        description: 'Welcome back! Here\'s what\'s happening with your business today.'
-      };
-  }
-};
+    '/company-profile': {
+      title: 'Company Profile',
+      description: 'Manage your company information and settings'
+    },
+    '/user-management': {
+      title: 'User Management',
+      description: 'Manage user accounts and permissions'
+    },
+    '/system-settings': {
+      title: 'System Settings',
+      description: 'Configure system preferences and defaults'
+    },
+    '/integrations': {
+      title: 'Integrations',
+      description: 'Connect with third-party applications'
+    }
+  };
+
+  return pageMap[normalizedPath] || {
+    title: 'Page Not Found',
+    description: 'The requested page could not be found'
+  };
+}
