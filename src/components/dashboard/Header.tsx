@@ -17,6 +17,7 @@ import {
 import { Search, Bell, Settings, LayoutDashboard, Users, CreditCard, FileText } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useLocation } from 'react-router-dom';
+import { getPageInfo } from './pageInfo';
 
 interface HeaderProps {
   className?: string;
@@ -27,53 +28,7 @@ export function Header({ className }: HeaderProps) {
   const isMobile = useIsMobile();
   const location = useLocation();
 
-  // Function to get page title and description based on route
-  const getPageInfo = () => {
-    switch (location.pathname) {
-      case '/':
-        return {
-          title: 'Dashboard',
-          description: 'Welcome back! Here\'s what\'s happening with your business today.'
-        };
-      case '/sales-invoices':
-        return {
-          title: 'Sales Invoices',
-          description: 'Manage and track your sales invoices.'
-        };
-      case '/customers':
-        return {
-          title: 'Customers',
-          description: 'Manage your customer relationships and information.'
-        };
-      case '/sales-reports':
-        return {
-          title: 'Sales Reports',
-          description: 'Analyze your sales performance and trends.'
-        };
-      case '/purchase-bills':
-        return {
-          title: 'Purchase Bills',
-          description: 'Track and manage your purchase bills and expenses.'
-        };
-      case '/suppliers':
-        return {
-          title: 'Suppliers',
-          description: 'Manage your supplier relationships and contacts.'
-        };
-      case '/purchase-reports':
-        return {
-          title: 'Purchase Reports',
-          description: 'Analyze your purchase activities and spending.'
-        };
-      default:
-        return {
-          title: 'Dashboard',
-          description: 'Welcome back! Here\'s what\'s happening with your business today.'
-        };
-    }
-  };
-
-  const { title, description } = getPageInfo();
+  const { title, description } = getPageInfo(location.pathname);
 
   React.useEffect(() => {
     const down = (e: KeyboardEvent) => {

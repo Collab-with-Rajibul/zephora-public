@@ -104,10 +104,6 @@ const EmployeesPage: React.FC = () => {
   return (
     <div className="flex flex-col gap-8">
       <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Employees</h1>
-          <p className="text-muted-foreground">Manage your team members and their information.</p>
-        </div>
         <Button className="sm:w-auto">
           <Plus className="mr-2 h-4 w-4" />
           Add Employee

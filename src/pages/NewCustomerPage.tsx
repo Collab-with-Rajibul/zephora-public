@@ -41,7 +41,6 @@ const NewCustomerPage: React.FC = () => {
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Customers
           </Button>
-          <h1 className="text-3xl font-bold tracking-tight">New Customer</h1>
         </div>
         <div className="flex space-x-2">
           <Button variant="outline" onClick={() => navigate('/customers')}>

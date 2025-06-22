@@ -32,11 +32,6 @@ const chartConfig = {
 const PurchaseReportsPage: React.FC = () => {
   return (
     <div className="flex flex-col gap-8">
-      <header>
-        <h1 className="text-3xl font-bold tracking-tight">Purchase Reports</h1>
-        <p className="text-muted-foreground">Comprehensive analytics for your purchase activities and supplier performance.</p>
-      </header>
-
       {/* Summary Cards */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
