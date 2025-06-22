@@ -17,7 +17,7 @@ import {
 import { Search, Bell, Settings, LayoutDashboard, Users, CreditCard, FileText } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useLocation } from 'react-router-dom';
-import { getPageInfo } from './pageInfo';
+import { getPageInfo } from './PageInfo';
 
 interface HeaderProps {
   className?: string;
