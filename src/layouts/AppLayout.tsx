@@ -4,7 +4,6 @@
 import React, { useState } from 'react';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { Sidebar } from '@/components/dashboard/Sidebar';
-import { Header } from '@/components/dashboard/Header';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 interface AppLayoutProps {
@@ -22,7 +21,6 @@ const AppLayout = ({ children }: AppLayoutProps) => {
       setIsSidebarCollapsed(false);
     }
   }, [isMobile]);
-
 
   const toggleSidebar = () => {
     setIsSidebarCollapsed(!isSidebarCollapsed);
@@ -45,8 +43,6 @@ const AppLayout = ({ children }: AppLayoutProps) => {
               className="absolute inset-0 bg-black/20 backdrop-blur-sm z-30 transition-opacity duration-300 md:hidden"
             />
           )}
-
-          <Header />
           
           <main className="flex-1 overflow-y-auto">
             <div className="container mx-auto p-6 max-w-7xl">
