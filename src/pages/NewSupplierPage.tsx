@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -35,12 +34,11 @@ const NewSupplierPage: React.FC = () => {
 
   return (
     <div className="space-y-6">
+      {/* Header */}
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          <Button variant="ghost" size="sm" onClick={() => navigate('/suppliers')}>
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Suppliers
-          </Button>
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">New Supplier</h1>
+          <p className="text-muted-foreground">Add a new supplier to your database.</p>
         </div>
         <div className="flex space-x-2">
           <Button variant="outline" onClick={() => navigate('/suppliers')}>
@@ -48,6 +46,13 @@ const NewSupplierPage: React.FC = () => {
           </Button>
           <Button onClick={handleSave}>Save Supplier</Button>
         </div>
+      </div>
+
+      <div className="flex items-center space-x-4">
+        <Button variant="ghost" size="sm" onClick={() => navigate('/suppliers')}>
+          <ArrowLeft className="h-4 w-4 mr-2" />
+          Back to Suppliers
+        </Button>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">

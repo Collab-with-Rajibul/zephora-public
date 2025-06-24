@@ -64,13 +64,11 @@ const NewPurchaseBillPage: React.FC = () => {
 
   return (
     <div className="space-y-6">
+      {/* Header */}
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          <Button variant="ghost" size="sm" onClick={() => navigate('/')}>
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Dashboard
-          </Button>
+        <div>
           <h1 className="text-3xl font-bold tracking-tight">New Purchase Bill</h1>
+          <p className="text-muted-foreground">Create a new purchase bill for your suppliers.</p>
         </div>
         <div className="flex space-x-2">
           <Button variant="outline" onClick={() => navigate('/purchase-bills')}>
@@ -78,6 +76,13 @@ const NewPurchaseBillPage: React.FC = () => {
           </Button>
           <Button onClick={handleSave}>Save Bill</Button>
         </div>
+      </div>
+
+      <div className="flex items-center space-x-4">
+        <Button variant="ghost" size="sm" onClick={() => navigate('/')}>
+          <ArrowLeft className="h-4 w-4 mr-2" />
+          Back to Dashboard
+        </Button>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">

@@ -18,11 +18,11 @@ const SuppliersPage: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-2">
                     <Button variant="outline">
-                        <Download className="mr-2" />
+                        <Download className="mr-2 h-4 w-4" />
                         Export Data
                     </Button>
                     <Button onClick={() => navigate('/suppliers/new')}>
-                        <Plus className="mr-2" />
+                        <Plus className="mr-2 h-4 w-4" />
                         Add New Supplier
                     </Button>
                 </div>

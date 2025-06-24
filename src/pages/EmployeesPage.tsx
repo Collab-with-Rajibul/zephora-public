@@ -1,11 +1,10 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { Plus, Search, Users, DollarSign, Calendar, Clock } from 'lucide-react';
+import { Plus, Search, Users, DollarSign, Calendar, Clock, Bell } from 'lucide-react';
 
 interface Employee {
   id: string;
@@ -103,12 +102,26 @@ const EmployeesPage: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-8">
-      <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <Button className="sm:w-auto">
-          <Plus className="mr-2 h-4 w-4" />
-          Add Employee
-        </Button>
-      </header>
+      {/* Header */}
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">Employees</h1>
+          <p className="text-muted-foreground">Manage your team members and their information.</p>
+        </div>
+        <div className="flex items-center space-x-2">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+            <Input placeholder="Search..." className="pl-10 w-64" />
+          </div>
+          <Button variant="ghost" size="sm">
+            <Bell className="h-4 w-4" />
+          </Button>
+          <Button className="sm:w-auto">
+            <Plus className="mr-2 h-4 w-4" />
+            Add Employee
+          </Button>
+        </div>
+      </div>
 
       {/* Summary Cards */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">

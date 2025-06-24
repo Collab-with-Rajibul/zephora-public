@@ -64,13 +64,11 @@ const NewSaleInvoicePage: React.FC = () => {
 
   return (
     <div className="space-y-6">
+      {/* Header */}
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          <Button variant="ghost" size="sm" onClick={() => navigate('/')}>
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Dashboard
-          </Button>
-          <h1 className="text-3xl font-bold tracking-tight">New Sale Invoice</h1>
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">New Sales Invoice</h1>
+          <p className="text-muted-foreground">Create a new sales invoice for your customers.</p>
         </div>
         <div className="flex space-x-2">
           <Button variant="outline" onClick={() => navigate('/sales-invoices')}>
@@ -78,6 +76,13 @@ const NewSaleInvoicePage: React.FC = () => {
           </Button>
           <Button onClick={handleSave}>Save Invoice</Button>
         </div>
+      </div>
+
+      <div className="flex items-center space-x-4">
+        <Button variant="ghost" size="sm" onClick={() => navigate('/')}>
+          <ArrowLeft className="h-4 w-4 mr-2" />
+          Back to Dashboard
+        </Button>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">

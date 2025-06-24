@@ -1,10 +1,10 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { TrendingUp, TrendingDown, Download, Calendar } from 'lucide-react';
+import { TrendingUp, TrendingDown, Download, Calendar, Bell } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { toast } from 'sonner';
 
 const ProfitLossPage: React.FC = () => {
   const profitLossData = {
@@ -28,12 +28,16 @@ const ProfitLossPage: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      {/* Header */}
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Profit & Loss Statement</h1>
-          <p className="text-muted-foreground">Financial performance overview</p>
+          <h1 className="text-3xl font-bold tracking-tight">Profit & Loss</h1>
+          <p className="text-muted-foreground">View your company's profit and loss statement.</p>
         </div>
         <div className="flex items-center space-x-2">
+          <Button variant="ghost" size="sm">
+            <Bell className="h-4 w-4" />
+          </Button>
           <Select defaultValue="current-month">
             <SelectTrigger className="w-48">
               <SelectValue />
@@ -45,13 +49,16 @@ const ProfitLossPage: React.FC = () => {
               <SelectItem value="current-year">Current Year</SelectItem>
             </SelectContent>
           </Select>
-          <Button variant="outline">
+          <Button variant="outline" onClick={() => toast.info("Setting custom date...")}>
             <Calendar className="mr-2 h-4 w-4" />
             Custom Date
           </Button>
-          <Button variant="outline">
+          <Button variant="outline" onClick={() => toast.info("Exporting statement...")}>
             <Download className="mr-2 h-4 w-4" />
-            Export PDF
+            Export Statement
+          </Button>
+          <Button onClick={() => toast.info("Refreshing data...")}>
+            Refresh Data
           </Button>
         </div>
       </div>
@@ -59,6 +66,7 @@ const ProfitLossPage: React.FC = () => {
       <div className="grid gap-6">
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* ... keep existing code (summary cards and detailed statement) the same ... */}
           <Card>
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium text-muted-foreground">Total Revenue</CardTitle>

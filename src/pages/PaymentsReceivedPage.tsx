@@ -1,12 +1,12 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import { Plus, Download, Search, Filter, ArrowDownToLine } from 'lucide-react';
+import { Plus, Download, Search, Filter, ArrowDownToLine, Bell } from 'lucide-react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { toast } from 'sonner';
 
 const PaymentsReceivedPage: React.FC = () => {
   const paymentsReceived = [
@@ -32,17 +32,25 @@ const PaymentsReceivedPage: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      {/* Header */}
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Payments Received</h1>
-          <p className="text-muted-foreground">Track incoming payments from customers</p>
+          <p className="text-muted-foreground">Monitor incoming payments from customers.</p>
         </div>
         <div className="flex items-center space-x-2">
-          <Button variant="outline">
-            <Download className="mr-2 h-4 w-4" />
-            Export
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+            <Input placeholder="Search..." className="pl-10 w-64" />
+          </div>
+          <Button variant="ghost" size="sm">
+            <Bell className="h-4 w-4" />
           </Button>
-          <Button>
+          <Button variant="outline" onClick={() => toast.info("Exporting data...")}>
+            <Download className="mr-2 h-4 w-4" />
+            Export Data
+          </Button>
+          <Button onClick={() => toast.info("Recording payment...")}>
             <Plus className="mr-2 h-4 w-4" />
             Record Payment
           </Button>

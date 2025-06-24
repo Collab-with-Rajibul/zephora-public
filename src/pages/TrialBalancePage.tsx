@@ -1,11 +1,11 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Download, Calendar, Search } from 'lucide-react';
+import { Download, Calendar, Search, Bell } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { toast } from 'sonner';
 
 const TrialBalancePage: React.FC = () => {
   const trialBalanceData = [
@@ -33,12 +33,16 @@ const TrialBalancePage: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      {/* Header */}
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Trial Balance</h1>
-          <p className="text-muted-foreground">Account balances verification</p>
+          <p className="text-muted-foreground">View your company's trial balance and account summaries.</p>
         </div>
         <div className="flex items-center space-x-2">
+          <Button variant="ghost" size="sm">
+            <Bell className="h-4 w-4" />
+          </Button>
           <Select defaultValue="current-date">
             <SelectTrigger className="w-48">
               <SelectValue />
@@ -50,13 +54,16 @@ const TrialBalancePage: React.FC = () => {
               <SelectItem value="end-of-year">End of Year</SelectItem>
             </SelectContent>
           </Select>
-          <Button variant="outline">
+          <Button variant="outline" onClick={() => toast.info("Setting custom date...")}>
             <Calendar className="mr-2 h-4 w-4" />
             Custom Date
           </Button>
-          <Button variant="outline">
+          <Button variant="outline" onClick={() => toast.info("Exporting statement...")}>
             <Download className="mr-2 h-4 w-4" />
-            Export PDF
+            Export Statement
+          </Button>
+          <Button onClick={() => toast.info("Refreshing data...")}>
+            Refresh Data
           </Button>
         </div>
       </div>

@@ -1,10 +1,12 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from 'recharts';
-import { TrendingUp, Package, DollarSign, Calendar } from 'lucide-react';
+import { TrendingUp, Package, DollarSign, Calendar, Search, Bell, Download } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { toast } from 'sonner';
 
 const monthlyPurchases = [
   { month: 'Jan', amount: 45000, orders: 23 },
@@ -32,6 +34,29 @@ const chartConfig = {
 const PurchaseReportsPage: React.FC = () => {
   return (
     <div className="flex flex-col gap-8">
+      {/* Header */}
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">Purchase Reports</h1>
+          <p className="text-muted-foreground">Analyze your purchase activities and spending.</p>
+        </div>
+        <div className="flex items-center space-x-2">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+            <Input placeholder="Search..." className="pl-10 w-64" />
+          </div>
+          <Button variant="ghost" size="sm">
+            <Bell className="h-4 w-4" />
+          </Button>
+          <Button variant="outline" size="sm" onClick={() => toast.info("Exporting report...")}>
+            <Download className="mr-2 h-4 w-4" /> Export Report
+          </Button>
+          <Button variant="default" size="sm" onClick={() => toast.info("Generating report...")}>
+            Generate Report
+          </Button>
+        </div>
+      </div>
+
       {/* Summary Cards */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <Card>
