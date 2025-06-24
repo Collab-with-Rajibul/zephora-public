@@ -9,8 +9,11 @@ import { Input } from "@/components/ui/input";
 import { invoices } from "@/data/sales-invoices";
 import { Badge } from '@/components/ui/badge';
 import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
 
 export default function SalesInvoicesPage() {
+  const navigate = useNavigate();
+  
   const totalAmount = invoices.reduce((sum, inv) => sum + inv.amount, 0);
   const outstandingAmount = invoices.filter(inv => ['sent', 'overdue', 'partially-paid'].includes(inv.status)).reduce((sum, inv) => sum + inv.amount, 0);
   const overdueAmount = invoices.filter(inv => inv.status === 'overdue').reduce((sum, inv) => sum + inv.amount, 0);
