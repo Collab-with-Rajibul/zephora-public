@@ -35,7 +35,7 @@ const NewCustomerPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <header className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">New Customer</h1>
           <p className="text-muted-foreground">Add a new customer to your database.</p>
@@ -46,7 +46,7 @@ const NewCustomerPage: React.FC = () => {
           </Button>
           <Button onClick={handleSave}>Save Customer</Button>
         </div>
-      </div>
+      </header>
 
       <div className="flex items-center space-x-4">
         <Button variant="ghost" size="sm" onClick={() => navigate('/customers')}>

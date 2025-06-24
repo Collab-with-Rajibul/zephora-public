@@ -1,8 +1,7 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Download, Printer, Search, Bell } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { Download, Printer } from "lucide-react";
 import { toast } from "sonner";
 import { RevenueChart } from '@/components/sales-reports/RevenueChart';
 import { SalesByCustomerChart } from '@/components/sales-reports/SalesByCustomerChart';
@@ -26,19 +25,12 @@ export default function SalesReportsPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0">
+      <header className="flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Sales Reports</h1>
           <p className="text-muted-foreground">Analyze your sales performance and trends.</p>
         </div>
         <div className="flex items-center space-x-2">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-            <Input placeholder="Search..." className="pl-10 w-64" />
-          </div>
-          <Button variant="ghost" size="sm">
-            <Bell className="h-4 w-4" />
-          </Button>
           <Button variant="outline" size="sm" onClick={() => toast.info("Downloading PDF report...")}>
             <Download className="mr-2 h-4 w-4" /> Download PDF
           </Button>
@@ -46,7 +38,7 @@ export default function SalesReportsPage() {
             <Printer className="mr-2 h-4 w-4" /> Print Report
           </Button>
         </div>
-      </div>
+      </header>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <SummaryCard title="Total Revenue" value={totalRevenue.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} icon={DollarSign} />

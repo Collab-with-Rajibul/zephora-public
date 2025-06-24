@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from "@/components/ui/button";
-import { Download, Plus, Search, Bell } from "lucide-react";
+import { Download, Plus, Search } from "lucide-react";
 import { InvoicesTable } from "@/components/sales-invoices/InvoicesTable";
 import { SummaryCard } from "@/components/sales-invoices/SummaryCard";
 import { DollarSign, FileText, XCircle, Clock } from "lucide-react";
@@ -21,19 +21,12 @@ export default function SalesInvoicesPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0">
+      <header className="flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Sales Invoices</h1>
           <p className="text-muted-foreground">Manage and track your sales invoices.</p>
         </div>
         <div className="flex items-center space-x-2">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-            <Input placeholder="Search..." className="pl-10 w-64" />
-          </div>
-          <Button variant="ghost" size="sm">
-            <Bell className="h-4 w-4" />
-          </Button>
           <Button variant="outline" size="sm" onClick={() => toast.info("Importing invoices...")}>
             Import Invoices
           </Button>
@@ -44,7 +37,7 @@ export default function SalesInvoicesPage() {
             <Plus className="mr-2 h-4 w-4" /> Create New Invoice
           </Button>
         </div>
-      </div>
+      </header>
 
       <div className="flex items-center gap-2">
         <Badge variant="secondary">{invoices.length}</Badge>

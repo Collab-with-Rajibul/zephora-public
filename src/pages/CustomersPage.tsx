@@ -15,7 +15,7 @@ export default function CustomersPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0">
+      <header className="flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Customers</h1>
           <p className="text-muted-foreground">Manage your customer relationships and information.</p>
@@ -31,7 +31,7 @@ export default function CustomersPage() {
             <Plus className="mr-2 h-4 w-4" /> Add New Customer
           </Button>
         </div>
-      </div>
+      </header>
       
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
