@@ -8,7 +8,7 @@ import React from 'react';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
 
-export default function PurchaseBillsPage: React.FC = () => {
+export default function PurchaseBillsPage() {
     const navigate = useNavigate();
     
     const totalBills = purchaseBills.length;
@@ -19,7 +19,10 @@ export default function PurchaseBillsPage: React.FC = () => {
     return (
         <div className="flex flex-col gap-8">
             <header className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center space-x-2">
+                    <Button variant="outline" size="sm" onClick={() => toast.info("Importing invoices...")}>
+                        Import Invoices
+                    </Button>
                     <Button variant="ghost" size="sm" onClick={() => toast.info("Exporting data...")}>
                         <Download className="mr-2 h-4 w-4" /> Export Data
                     </Button>
