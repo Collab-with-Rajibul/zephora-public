@@ -28,7 +28,7 @@ export default function SalesInvoicesPage() {
           <Button variant="ghost" size="sm" onClick={() => toast.info("Exporting data...")}>
             <Download className="mr-2 h-4 w-4" /> Export Data
           </Button>
-          <Button size="sm" onClick={() => toast.success("This would open the invoice creation page.")}>
+          <Button size="sm" onClick={() => navigate('/sales-invoices/new')}>
             <Plus className="mr-2 h-4 w-4" /> Create New Invoice
           </Button>
         </div>
