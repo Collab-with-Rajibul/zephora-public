@@ -5,8 +5,12 @@ import { PurchaseBillsTable } from "@/components/purchase-bills/PurchaseBillsTab
 import { SummaryCard } from "@/components/purchase-bills/SummaryCard";
 import { Plus, Download, FileText, AlertCircle } from "lucide-react";
 import React from 'react';
+import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
 
-const PurchaseBillsPage: React.FC = () => {
+export default function PurchaseBillsPage: React.FC = () => {
+    const navigate = useNavigate();
+    
     const totalBills = purchaseBills.length;
     const totalAmount = purchaseBills.reduce((sum, bill) => sum + bill.amount, 0);
     const outstandingAmount = purchaseBills.filter(b => b.status === 'unpaid' || b.status === 'partially-paid' || b.status === 'overdue').reduce((sum, bill) => sum + bill.amount, 0);
@@ -16,13 +20,11 @@ const PurchaseBillsPage: React.FC = () => {
         <div className="flex flex-col gap-8">
             <header className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                 <div className="flex items-center gap-2">
-                    <Button variant="outline">
-                        <Download className="mr-2" />
-                        Export Data
+                    <Button variant="ghost" size="sm" onClick={() => toast.info("Exporting data...")}>
+                        <Download className="mr-2 h-4 w-4" /> Export Data
                     </Button>
-                    <Button>
-                        <Plus className="mr-2" />
-                        Create New Bill
+                    <Button size="sm" onClick={() => navigate('/purchase-bills/new')}>
+                        <Plus className="mr-2" /> Create New Bill
                     </Button>
                 </div>
             </header>
@@ -57,6 +59,4 @@ const PurchaseBillsPage: React.FC = () => {
             </section>
         </div>
     );
-};
-
-export default PurchaseBillsPage;
+}
