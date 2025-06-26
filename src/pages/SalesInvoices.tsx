@@ -39,10 +39,6 @@ export default function SalesInvoicesPage() {
         </div>
       </header>
 
-      <div className="flex items-center gap-2">
-        <Badge variant="secondary">{invoices.length}</Badge>
-      </div>
-
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <SummaryCard title="Total Invoices" value={invoices.length.toString()} icon={FileText} />
         <SummaryCard title="Total Amount" value={totalAmount.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} icon={DollarSign} />
