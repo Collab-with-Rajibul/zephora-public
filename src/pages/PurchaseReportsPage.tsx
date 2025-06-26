@@ -3,9 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from 'recharts';
-import { TrendingUp, Package, DollarSign, Calendar, Search, Bell, Download } from 'lucide-react';
+import { TrendingUp, Package, DollarSign, Calendar, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 
 const monthlyPurchases = [
@@ -41,13 +40,6 @@ const PurchaseReportsPage: React.FC = () => {
           <p className="text-muted-foreground">Analyze your purchase activities and spending.</p>
         </div>
         <div className="flex items-center space-x-2">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-            <Input placeholder="Search..." className="pl-10 w-64" />
-          </div>
-          <Button variant="ghost" size="sm">
-            <Bell className="h-4 w-4" />
-          </Button>
           <Button variant="outline" size="sm" onClick={() => toast.info("Exporting report...")}>
             <Download className="mr-2 h-4 w-4" /> Export Report
           </Button>
