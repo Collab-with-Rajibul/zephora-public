@@ -1,9 +1,11 @@
 
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { purchaseBills } from "@/data/purchase-bills";
 import { PurchaseBillsTable } from "@/components/purchase-bills/PurchaseBillsTable";
 import { SummaryCard } from "@/components/purchase-bills/SummaryCard";
-import { Plus, Download, FileText, AlertCircle } from "lucide-react";
+import { Plus, Download, FileText, AlertCircle, Search } from "lucide-react";
 import React from 'react';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
@@ -61,10 +63,24 @@ export default function PurchaseBillsPage() {
                     color="text-red-500"
                 />
             </section>
+
+            {/* Search Box */}
+            <div className="flex items-center justify-between">
+                <div className="relative w-full max-w-md">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                    <Input placeholder="Search purchase bills by number, supplier, or description..." className="pl-10 w-full" />
+                </div>
+            </div>
             
-            <section>
-                <PurchaseBillsTable bills={purchaseBills} />
-            </section>
+            {/* Purchase Bills Table in Card */}
+            <Card>
+                <CardHeader>
+                    <CardTitle>Purchase Bills</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <PurchaseBillsTable bills={purchaseBills} />
+                </CardContent>
+            </Card>
         </div>
     );
 }
