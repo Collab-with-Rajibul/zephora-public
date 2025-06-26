@@ -34,9 +34,6 @@ export default function CustomersPage() {
       </header>
       
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Badge variant="secondary">{customers.length}</Badge>
-        </div>
         <div className="relative">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
           <Input placeholder="Search customers by name, email, or company..." className="pl-10 max-w-sm" />
