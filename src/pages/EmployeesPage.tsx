@@ -109,7 +109,7 @@ const EmployeesPage: React.FC = () => {
           <p className="text-muted-foreground">Manage your team members and their information.</p>
         </div>
         <div className="flex items-center space-x-2">
-          <Button className="sm:w-auto">
+          <Button className="sm:w-auto" onClick={() => toast.info("Adding New Employees...")}>>
             <Plus className="mr-2 h-4 w-4" />
             Add Employee
           </Button>
