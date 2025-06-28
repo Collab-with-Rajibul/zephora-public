@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Plus, Search, Users, DollarSign, Calendar, Clock, Bell } from 'lucide-react';
+import { toast } from 'sonner';
 
 interface Employee {
   id: string;
