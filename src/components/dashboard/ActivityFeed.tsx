@@ -64,9 +64,9 @@ export function ActivityFeed({ className }: ActivityFeedProps) {
               <div key={item.id} className="relative">
                 <div className="flex items-start space-x-4 p-6 hover:bg-muted/50 transition-colors">
                   {/* Timeline line */}
-                  {!isLast && (
+{/*                   {!isLast && (
                     <div className="absolute left-10 top-16 w-px h-6 bg-border" />
-                  )}
+                  )} */}
                   
                   {/* Icon */}
                   <div className="flex-shrink-0 w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
