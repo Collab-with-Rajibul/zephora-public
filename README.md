@@ -51,7 +51,7 @@ Get Zephora locally in a few steps:
     npm run dev
     ```
 
-5. Open [http://localhost:5173](http://localhost:5173) in your browser to see the app locally.
+5. Open [http://localhost:8080](http://localhost:8080) in your browser to see the app locally.
 
 ---
 
