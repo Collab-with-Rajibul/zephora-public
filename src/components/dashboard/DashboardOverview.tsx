@@ -24,17 +24,26 @@ import {
 export function DashboardOverview() {
   const [open, setOpen] = useState(false);
   const [showDescription, setShowDescription] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY;
+      const currentScrollY = window.scrollY;
       
-      // Show description when at top (0-30px), hide when scrolled beyond 30px
-      if (scrollY <= 30) {
+      // If at the very top, always show description
+      if (currentScrollY === 0) {
         setShowDescription(true);
-      } else {
+      }
+      // If scrolling down and past 20px, hide description
+      else if (currentScrollY > lastScrollY && currentScrollY > 20) {
         setShowDescription(false);
       }
+      // If scrolling up, show description
+      else if (currentScrollY < lastScrollY) {
+        setShowDescription(true);
+      }
+      
+      setLastScrollY(currentScrollY);
     };
 
     // Add scroll listener
@@ -44,7 +53,7 @@ export function DashboardOverview() {
     handleScroll();
     
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   const runCommand = React.useCallback((command: () => void) => {
     setOpen(false);
