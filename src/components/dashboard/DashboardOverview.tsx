@@ -1,7 +1,7 @@
 
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { dashboardMetrics } from '@/lib/constants';
 import { MetricCard } from './MetricCard';
 import { QuickActions } from './QuickActions';
@@ -23,37 +23,6 @@ import {
 
 export function DashboardOverview() {
   const [open, setOpen] = useState(false);
-  const [showDescription, setShowDescription] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      
-      // If at the very top, always show description
-      if (currentScrollY === 0) {
-        setShowDescription(true);
-      }
-      // If scrolling down and past 20px, hide description
-      else if (currentScrollY > lastScrollY && currentScrollY > 20) {
-        setShowDescription(false);
-      }
-      // If scrolling up, show description
-      else if (currentScrollY < lastScrollY) {
-        setShowDescription(true);
-      }
-      
-      setLastScrollY(currentScrollY);
-    };
-
-    // Add scroll listener
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    // Initial check
-    handleScroll();
-    
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
 
   const runCommand = React.useCallback((command: () => void) => {
     setOpen(false);
@@ -63,15 +32,11 @@ export function DashboardOverview() {
   return (
     <div className="space-y-6">
       {/* Sticky Header */}
-      <header className="sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b py-3 transition-all duration-300">
+      <header className="sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b py-3">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div>
             <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-            <div className={`overflow-hidden transition-all duration-300 ${showDescription ? 'max-h-10 opacity-100 mt-1' : 'max-h-0 opacity-0 mt-0'}`}>
-              <p className="text-muted-foreground">
-                Welcome back! Here's what's happening with your business today.
-              </p>
-            </div>
+            <p className="text-muted-foreground">Welcome back! Here's what's happening with your business today.</p>
           </div>
           
           {/* Right side - Actions (Desktop) */}
