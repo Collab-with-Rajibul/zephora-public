@@ -1,7 +1,6 @@
-
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { dashboardMetrics } from '@/lib/constants';
 import { MetricCard } from './MetricCard';
 import { QuickActions } from './QuickActions';
@@ -23,6 +22,27 @@ import {
 
 export function DashboardOverview() {
   const [open, setOpen] = useState(false);
+  const [showDescription, setShowDescription] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      if (currentScrollY < lastScrollY || currentScrollY < 50) {
+        // Scrolling up or near top - show description
+        setShowDescription(true);
+      } else if (currentScrollY > lastScrollY && currentScrollY > 50) {
+        // Scrolling down and not near top - hide description
+        setShowDescription(false);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   const runCommand = React.useCallback((command: () => void) => {
     setOpen(false);
@@ -32,11 +52,15 @@ export function DashboardOverview() {
   return (
     <div className="space-y-6">
       {/* Sticky Header */}
-      <header className="sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b py-3">
+      <header className="sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b py-3 transition-all duration-200">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div>
             <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-            <p className="text-muted-foreground">Welcome back! Here's what's happening with your business today.</p>
+            {showDescription && (
+              <p className="text-muted-foreground transition-all duration-200">
+                Welcome back! Here's what's happening with your business today.
+              </p>
+            )}
           </div>
           
           {/* Right side - Actions (Desktop) */}
