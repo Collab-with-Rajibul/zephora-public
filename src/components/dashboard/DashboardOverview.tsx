@@ -31,48 +31,50 @@ export function DashboardOverview() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-          <p className="text-muted-foreground">Welcome back! Here's what's happening with your business today.</p>
-        </div>
-        
-        {/* Right side - Actions (Desktop) */}
-        <div className="hidden md:flex items-center space-x-4">
-          <Button variant="ghost" size="icon" className="rounded-xl" onClick={() => setOpen(true)}>
-            <Search className="h-5 w-5" />
-          </Button>
-
-          <div className="relative">
-            <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-xl">
-              <Bell className="h-5 w-5 text-blue-500" />
-            </Button>
-            <Badge 
-              variant="destructive" 
-              className="absolute top-0 right-0 h-5 w-5 rounded-full p-0 text-xs flex items-center justify-center"
-            >
-              3
-            </Badge>
+      {/* Sticky Header */}
+      <header className="sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b pb-4 mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-6">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+            <p className="text-muted-foreground">Welcome back! Here's what's happening with your business today.</p>
           </div>
-        </div>
-
-        {/* Mobile Actions */}
-        <div className="md:hidden flex items-center space-x-1">
-          <Button variant="ghost" size="icon" onClick={() => setOpen(true)} className="rounded-xl">
-            <Search className="h-5 w-5" />
-          </Button>
-
-          <div className="relative">
-            <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-xl">
-              <Bell className="h-5 w-5 text-blue-500" />
+          
+          {/* Right side - Actions (Desktop) */}
+          <div className="hidden md:flex items-center space-x-4">
+            <Button variant="ghost" size="icon" className="rounded-xl" onClick={() => setOpen(true)}>
+              <Search className="h-5 w-5" />
             </Button>
-            <Badge 
-              variant="destructive" 
-              className="absolute top-0 right-0 h-4 w-4 rounded-full p-0 text-[10px] flex items-center justify-center"
-            >
-              3
-            </Badge>
+
+            <div className="relative">
+              <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-xl">
+                <Bell className="h-5 w-5 text-blue-500" />
+              </Button>
+              <Badge 
+                variant="destructive" 
+                className="absolute top-0 right-0 h-5 w-5 rounded-full p-0 text-xs flex items-center justify-center"
+              >
+                3
+              </Badge>
+            </div>
+          </div>
+
+          {/* Mobile Actions */}
+          <div className="md:hidden flex items-center space-x-1">
+            <Button variant="ghost" size="icon" onClick={() => setOpen(true)} className="rounded-xl">
+              <Search className="h-5 w-5" />
+            </Button>
+
+            <div className="relative">
+              <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-xl">
+                <Bell className="h-5 w-5 text-blue-500" />
+              </Button>
+              <Badge 
+                variant="destructive" 
+                className="absolute top-0 right-0 h-4 w-4 rounded-full p-0 text-[10px] flex items-center justify-center"
+              >
+                3
+              </Badge>
+            </div>
           </div>
         </div>
       </header>
