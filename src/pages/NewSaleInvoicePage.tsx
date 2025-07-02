@@ -71,7 +71,7 @@ const NewSaleInvoicePage: React.FC = () => {
           <p className="text-muted-foreground">Create a new sales invoice for your customers.</p>
         </div>
         <div className="flex space-x-2">
-          <Button variant="outline" onClick={() => navigate('/sales-invoices')}>
+          <Button variant="outline" onClick={() => navigate(-1)}>
             Cancel
           </Button>
           <Button onClick={handleSave}>Save Invoice</Button>
