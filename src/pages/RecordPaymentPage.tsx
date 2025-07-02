@@ -45,10 +45,6 @@ const RecordPaymentPage: React.FC = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
-          <Button variant="ghost" size="sm" onClick={() => navigate('/')}>
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Back to Dashboard
-          </Button>
           <h1 className="text-3xl font-bold tracking-tight">Record Payment</h1>
         </div>
         <div className="flex space-x-2">
