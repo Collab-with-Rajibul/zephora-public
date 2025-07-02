@@ -41,7 +41,7 @@ const NewSupplierPage: React.FC = () => {
           <p className="text-muted-foreground">Add a new supplier to your database.</p>
         </div>
         <div className="flex space-x-2">
-          <Button variant="outline" onClick={() => navigate('/suppliers')}>
+          <Button variant="outline" onClick={() => navigate(-1)}>
             Cancel
           </Button>
           <Button onClick={handleSave}>Save Supplier</Button>
@@ -49,9 +49,9 @@ const NewSupplierPage: React.FC = () => {
       </div>
 
       <div className="flex items-center space-x-4">
-        <Button variant="ghost" size="sm" onClick={() => navigate('/suppliers')}>
+        <Button variant="ghost" size="sm" onClick={() => navigate('/')}>
           <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to Suppliers
+          Back to Dashboard
         </Button>
       </div>
 
