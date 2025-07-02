@@ -71,7 +71,7 @@ const NewPurchaseBillPage: React.FC = () => {
           <p className="text-muted-foreground">Create a new purchase bill for your suppliers.</p>
         </div>
         <div className="flex space-x-2">
-          <Button variant="outline" onClick={() => navigate('/purchase-bills')}>
+          <Button variant="outline" onClick={() => navigate(-1)}>
             Cancel
           </Button>
           <Button onClick={handleSave}>Save Bill</Button>
