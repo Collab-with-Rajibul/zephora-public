@@ -41,7 +41,7 @@ const NewCustomerPage: React.FC = () => {
           <p className="text-muted-foreground">Add a new customer to your database.</p>
         </div>
         <div className="flex space-x-2">
-          <Button variant="outline" onClick={() => navigate('/customers')}>
+          <Button variant="outline" onClick={() => navigate(-1)}>
             Cancel
           </Button>
           <Button onClick={handleSave}>Save Customer</Button>
@@ -49,9 +49,9 @@ const NewCustomerPage: React.FC = () => {
       </header>
 
       <div className="flex items-center space-x-4">
-        <Button variant="ghost" size="sm" onClick={() => navigate('/customers')}>
+        <Button variant="ghost" size="sm" onClick={() => navigate('/')}>
           <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to Customers
+          Back to Dashboard
         </Button>
       </div>
 
