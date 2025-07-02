@@ -52,7 +52,7 @@ const RecordPaymentPage: React.FC = () => {
           <h1 className="text-3xl font-bold tracking-tight">Record Payment</h1>
         </div>
         <div className="flex space-x-2">
-          <Button variant="outline" onClick={() => navigate('/')}>
+          <Button variant="outline" onClick={() => navigate(-1)}>
             Cancel
           </Button>
           <Button onClick={handleSave}>
