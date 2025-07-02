@@ -7,19 +7,29 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppLayout from "./layouts/AppLayout";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
-import SalesInvoicesPage from "./pages/SalesInvoices";
-import CustomersPage from "./pages/CustomersPage";
-import SalesReportsPage from "./pages/SalesReportsPage";
-import PurchaseBillsPage from "./pages/PurchaseBillsPage";
-import SuppliersPage from "./pages/SuppliersPage";
-import PurchaseReportsPage from "./pages/PurchaseReportsPage";
-import EmployeesPage from "./pages/EmployeesPage";
-import AttendancePage from "./pages/AttendancePage";
-import AdvancesPage from "./pages/AdvancesPage";
+
+// Quick Action Pages
 import NewSaleInvoicePage from "./pages/NewSaleInvoicePage";
 import NewPurchaseBillPage from "./pages/NewPurchaseBillPage";
 import NewCustomerPage from "./pages/NewCustomerPage";
 import NewSupplierPage from "./pages/NewSupplierPage";
+import RecordPaymentPage from "./pages/RecordPaymentPage";
+import GenerateReportPage from "./pages/GenerateReportPage";
+
+// Sales Management
+import SalesInvoicesPage from "./pages/SalesInvoices";
+import CustomersPage from "./pages/CustomersPage";
+import SalesReportsPage from "./pages/SalesReportsPage";
+
+//Purchase Management
+import PurchaseBillsPage from "./pages/PurchaseBillsPage";
+import SuppliersPage from "./pages/SuppliersPage";
+import PurchaseReportsPage from "./pages/PurchaseReportsPage";
+
+//Employee Management
+import EmployeesPage from "./pages/EmployeesPage";
+import AttendancePage from "./pages/AttendancePage";
+import AdvancesPage from "./pages/AdvancesPage";
 
 // Financial Statements
 import ProfitLossPage from "./pages/ProfitLossPage";
@@ -50,10 +60,6 @@ import UserManagementPage from "./pages/UserManagementPage";
 import SystemSettingsPage from "./pages/SystemSettingsPage";
 import IntegrationsPage from "./pages/IntegrationsPage";
 
-// Quick Action Pages
-import RecordPaymentPage from "./pages/RecordPaymentPage";
-import GenerateReportPage from "./pages/GenerateReportPage";
-
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -65,18 +71,22 @@ const App = () => (
         <Routes>
           <Route path="/" element={<AppLayout><Index /></AppLayout>} />
           
+          {/* Quick Action Pages */}
+          <Route path="/sales-invoices/new" element={<AppLayout><NewSaleInvoicePage /></AppLayout>} />
+          <Route path="/purchase-bills/new" element={<AppLayout><NewPurchaseBillPage /></AppLayout>} />
+          <Route path="/customers/new" element={<AppLayout><NewCustomerPage /></AppLayout>} />
+          <Route path="/suppliers/new" element={<AppLayout><NewSupplierPage /></AppLayout>} />
+          <Route path="/payments/new" element={<AppLayout><RecordPaymentPage /></AppLayout>} />
+          <Route path="/reports" element={<AppLayout><GenerateReportPage /></AppLayout>} />
+          
           {/* Sales Management */}
           <Route path="/sales-invoices" element={<AppLayout><SalesInvoicesPage /></AppLayout>} />
-          <Route path="/sales-invoices/new" element={<AppLayout><NewSaleInvoicePage /></AppLayout>} />
-          <Route path="/customers" element={<AppLayout><CustomersPage /></AppLayout>} />
-          <Route path="/customers/new" element={<AppLayout><NewCustomerPage /></AppLayout>} />
+          <Route path="/customers" element={<AppLayout><CustomersPage /></AppLayout>} />        
           <Route path="/sales-reports" element={<AppLayout><SalesReportsPage /></AppLayout>} />
           
           {/* Purchase Management */}
-          <Route path="/purchase-bills" element={<AppLayout><PurchaseBillsPage /></AppLayout>} />
-          <Route path="/purchase-bills/new" element={<AppLayout><NewPurchaseBillPage /></AppLayout>} />
-          <Route path="/suppliers" element={<AppLayout><SuppliersPage /></AppLayout>} />
-          <Route path="/suppliers/new" element={<AppLayout><NewSupplierPage /></AppLayout>} />
+          <Route path="/purchase-bills" element={<AppLayout><PurchaseBillsPage /></AppLayout>} />          
+          <Route path="/suppliers" element={<AppLayout><SuppliersPage /></AppLayout>} />          
           <Route path="/purchase-reports" element={<AppLayout><PurchaseReportsPage /></AppLayout>} />
           
           {/* Employee Management */}
@@ -112,10 +122,6 @@ const App = () => (
           <Route path="/user-management" element={<AppLayout><UserManagementPage /></AppLayout>} />
           <Route path="/system-settings" element={<AppLayout><SystemSettingsPage /></AppLayout>} />
           <Route path="/integrations" element={<AppLayout><IntegrationsPage /></AppLayout>} />
-          
-          {/* Quick Action Pages */}
-          <Route path="/payments/new" element={<AppLayout><RecordPaymentPage /></AppLayout>} />
-          <Route path="/reports" element={<AppLayout><GenerateReportPage /></AppLayout>} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
