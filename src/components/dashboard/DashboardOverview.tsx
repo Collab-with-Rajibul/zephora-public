@@ -1,7 +1,7 @@
 
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { dashboardMetrics } from '@/lib/constants';
 import { MetricCard } from './MetricCard';
 import { QuickActions } from './QuickActions';
@@ -23,6 +23,27 @@ import {
 
 export function DashboardOverview() {
   const [open, setOpen] = useState(false);
+  const [isHeaderCollapsed, setIsHeaderCollapsed] = useState(false);
+  const [isAtTop, setIsAtTop] = useState(true);
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+    const scrollThreshold = 50;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const isScrollingDown = currentScrollY > lastScrollY;
+      const isNearTop = currentScrollY <= scrollThreshold;
+
+      setIsAtTop(currentScrollY === 0);
+      setIsHeaderCollapsed(isScrollingDown && !isNearTop);
+
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const runCommand = React.useCallback((command: () => void) => {
     setOpen(false);
@@ -32,11 +53,19 @@ export function DashboardOverview() {
   return (
     <div className="space-y-6">
       {/* Sticky Header */}
-      <header className="sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b py-3">
+      <header className="sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b py-3 transition-all duration-300 ease-in-out">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-          <div>
+          <div className="transition-all duration-300 ease-in-out">
             <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-            <p className="text-muted-foreground">Welcome back! Here's what's happening with your business today.</p>
+            <p 
+              className={`text-muted-foreground transition-all duration-300 ease-in-out ${
+                isHeaderCollapsed && !isAtTop 
+                  ? 'opacity-0 max-h-0 overflow-hidden' 
+                  : 'opacity-100 max-h-10'
+              }`}
+            >
+              Welcome back! Here's what's happening with your business today.
+            </p>
           </div>
           
           {/* Right side - Actions (Desktop) */}
