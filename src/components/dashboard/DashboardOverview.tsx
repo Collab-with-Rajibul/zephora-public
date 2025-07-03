@@ -1,7 +1,7 @@
 
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { dashboardMetrics } from '@/lib/constants';
 import { MetricCard } from './MetricCard';
 import { QuickActions } from './QuickActions';
@@ -24,10 +24,30 @@ import {
 export function DashboardOverview() {
   const [open, setOpen] = useState(false);
 
+  const [showDescription, setShowDescription] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
   const runCommand = React.useCallback((command: () => void) => {
     setOpen(false);
     command();
   }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      // Show description only when at the top of the page
+      if (currentScrollY < 10) {
+        setShowDescription(true);
+      } 
+      // Hide description when scrolling down away from top
+      else if (currentScrollY > 50) {
+        setShowDescription(false);
+      }
+      setLastScrollY(currentScrollY);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   return (
     <div className="space-y-6">
@@ -36,7 +56,23 @@ export function DashboardOverview() {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div>
             <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-            <p className="text-muted-foreground">Welcome back! Here's what's happening with your business today.</p>
+            {/* Animated Description */}
+              <div 
+                className={`transition-all duration-300 ease-in-out ${
+                  showDescription 
+                    ? 'max-h-10 opacity-100 translate-y-0' 
+                    : 'max-h-0 opacity-0 -translate-y-2'
+                }`}
+                style={{ 
+                  transitionProperty: 'max-height, opacity, transform',
+                  overflow: 'hidden'
+                }}
+              >
+                <p className="text-sm text-gray-600 mt-1 whitespace-nowrap">
+                  Welcome back! Here's what's happening with your business today.
+                </p>
+              </div>
+{/*             <p className="text-muted-foreground">Welcome back! Here's what's happening with your business today.</p> */}
           </div>
           
           {/* Right side - Actions (Desktop) */}
