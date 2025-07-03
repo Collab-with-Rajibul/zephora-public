@@ -23,22 +23,29 @@ import {
 export function DashboardOverview() {
   const [open, setOpen] = useState(false);
   const [showDescription, setShowDescription] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       
-      // Simple logic: show description only when at the very top
-      if (currentScrollY <= 5) {
+      // If at the very top, always show description
+      if (currentScrollY === 0) {
         setShowDescription(true);
-      } else {
+      } else if (currentScrollY > lastScrollY && currentScrollY > 10) {
+        // Scrolling down (swiping up) - hide description
         setShowDescription(false);
+      } else if (currentScrollY < lastScrollY) {
+        // Scrolling up (swiping down) - show description
+        setShowDescription(true);
       }
+      
+      setLastScrollY(currentScrollY);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   const runCommand = React.useCallback((command: () => void) => {
     setOpen(false);
