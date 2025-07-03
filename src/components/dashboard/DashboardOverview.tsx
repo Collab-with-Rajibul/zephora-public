@@ -25,20 +25,32 @@ export function DashboardOverview() {
   const [open, setOpen] = useState(false);
   const [showDescription, setShowDescription] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [scrollDirection, setScrollDirection] = useState<'up' | 'down'>('up');
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       
-      // Show description when at the very top or scrolling up towards the top
+      // Determine scroll direction
+      if (currentScrollY > lastScrollY) {
+        setScrollDirection('down');
+      } else {
+        setScrollDirection('up');
+      }
+      
+      // Show/hide description logic
       if (currentScrollY === 0) {
+        // At the very top - always show description
         setShowDescription(true);
-      } else if (currentScrollY < lastScrollY && currentScrollY < 50) {
-        // Scrolling up and close to top
+      } else if (currentScrollY < 10 && scrollDirection === 'up') {
+        // Very close to top and scrolling up - show description
         setShowDescription(true);
-      } else if (currentScrollY > lastScrollY && currentScrollY > 20) {
-        // Scrolling down and past threshold
+      } else if (currentScrollY > 30 && scrollDirection === 'down') {
+        // Scrolled down enough - hide description
         setShowDescription(false);
+      } else if (currentScrollY < 50 && scrollDirection === 'up') {
+        // Scrolling up from below - show description
+        setShowDescription(true);
       }
       
       setLastScrollY(currentScrollY);
@@ -46,7 +58,7 @@ export function DashboardOverview() {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
+  }, [lastScrollY, scrollDirection]);
 
   const runCommand = React.useCallback((command: () => void) => {
     setOpen(false);
@@ -62,13 +74,13 @@ export function DashboardOverview() {
             <div className="flex-1">
               <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
               <div 
-                className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                className={`overflow-hidden transition-all duration-500 ease-in-out ${
                   showDescription 
-                    ? 'max-h-8 opacity-100 mt-1' 
+                    ? 'max-h-10 opacity-100 mt-2' 
                     : 'max-h-0 opacity-0 mt-0'
                 }`}
               >
-                <p className="text-muted-foreground whitespace-nowrap">
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   Welcome back! Here's what's happening with your business today.
                 </p>
               </div>
