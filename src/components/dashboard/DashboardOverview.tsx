@@ -32,8 +32,8 @@ export function DashboardOverview() {
   return (
     <div className="space-y-6">
       {/* Sticky Header */}
-      <header className="sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b py-3">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+      <header className="sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b h-[88px] flex items-center">
+        <div className="w-full flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-6">
           <div>
             <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
             <p className="text-muted-foreground">Welcome back! Here's what's happening with your business today.</p>
@@ -114,21 +114,23 @@ export function DashboardOverview() {
         </CommandList>
       </CommandDialog>
       
-      {/* Quick Actions */}
-      <QuickActions />
-      
-      {/* Metrics Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {dashboardMetrics.map((metric) => (
-          <MetricCard key={metric.id} metric={metric} />
-        ))}
+      <div className="px-6 space-y-6">
+        {/* Quick Actions */}
+        <QuickActions />
+        
+        {/* Metrics Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {dashboardMetrics.map((metric) => (
+            <MetricCard key={metric.id} metric={metric} />
+          ))}
+        </div>
+        
+        {/* Charts Section */}
+        <Charts />
+        
+        {/* Recent Activity */}
+        <ActivityFeed />
       </div>
-      
-      {/* Charts Section */}
-      <Charts />
-      
-      {/* Recent Activity */}
-      <ActivityFeed />
     </div>
   );
 }
