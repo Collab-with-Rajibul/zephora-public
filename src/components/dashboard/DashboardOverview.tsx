@@ -22,7 +22,7 @@ import {
 
 export function DashboardOverview() {
  const [open, setOpen] = useState(false);
- const [showDescription, setShowDescription] = useState(true);
+ const [showDescription, setShowDescription] = useState(false);
  const [lastScrollY, setLastScrollY] = useState(0);
 
  const runCommand = React.useCallback((command: () => void) => {
