@@ -31,8 +31,8 @@ export function DashboardOverview() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      {/* Sticky Header */}
+      <header className="sticky top-0 z-40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-4">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
           <p className="text-muted-foreground">Welcome back! Here's what's happening with your business today.</p>
