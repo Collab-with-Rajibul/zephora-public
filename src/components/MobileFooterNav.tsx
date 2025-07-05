@@ -19,7 +19,6 @@ import {
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
 
-
 const CLICK_THRESHOLD = 10; // pixels
 
 export function MobileFooterNav() {
@@ -50,7 +49,9 @@ export function MobileFooterNav() {
       // It was a click
       if (itemPath) {
         navigate(itemPath);
+        setOpenDropdown(null); // Close any open dropdown when navigating
       } else if (itemTitle) {
+        // Toggle dropdown: close if same item is clicked, open if different item
         setOpenDropdown(openDropdown === itemTitle ? null : itemTitle);
       }
     }
@@ -142,7 +143,7 @@ export function MobileFooterNav() {
           })}
 
           {/* User Profile Avatar */}
-          <DropdownMenu>
+          <DropdownMenu open={openDropdown === 'user-profile'} onOpenChange={handleDropdownOpenChange('user-profile')}>
             <DropdownMenuTrigger asChild>
               <Button
                 variant="ghost"
