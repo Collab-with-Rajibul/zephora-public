@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useRef } from 'react';
@@ -66,6 +67,10 @@ export function MobileFooterNav() {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
+  const handleDropdownOpenChange = (itemTitle: string) => (open: boolean) => {
+    setOpenDropdown(open ? itemTitle : null);
+  };
+
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 bg-background border-t border-border md:hidden shadow-lg">
       <ScrollArea className="w-full whitespace-nowrap">
@@ -88,7 +93,7 @@ export function MobileFooterNav() {
             
             if (item.children && item.children.length > 0) {
               return (
-                <DropdownMenu key={item.title} open={openDropdown === item.title} onOpenChange={setOpenDropdown}>
+                <DropdownMenu key={item.title} open={openDropdown === item.title} onOpenChange={handleDropdownOpenChange(item.title)}>
                   <DropdownMenuTrigger asChild>
                     <Button
                       variant="ghost"
@@ -125,7 +130,7 @@ export function MobileFooterNav() {
                 className="flex flex-col h-auto w-auto p-2 items-center justify-center text-muted-foreground hover:text-primary hover:bg-accent transition-all duration-200 ease-in-out rounded-lg active:scale-95"
                 onPointerDown={handlePointerDown}
                 onPointerMove={handlePointerMove}
-                onPointerUp={(e) => handlePointerUp(e, item.path || '/')}
+                onPointerUp={(e) => handlePointerUp(e, '/')} // Since main nav items don't have direct paths
               >
                 <Icon className={cn("h-6 w-6", item.color)} />
                 <span className="text-xs mt-1">{item.title.split(' ')[0]}</span>
