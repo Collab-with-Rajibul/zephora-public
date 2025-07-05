@@ -24,19 +24,6 @@ export function SidebarNavigation({ isCollapsed, onToggle }: SidebarNavigationPr
     );
   };
 
-  const handleLinkClick = () => {
-    if (isMobileScreen() && !isCollapsed) {
-        onToggle();
-    } else if (!isMobileScreen()) {
-        // any other logic for non-mobile
-    }
-  };
-
-  const isMobileScreen = () => {
-      return window.innerWidth < 768;
-  }
-
-
   return (
     <div className="flex-1 overflow-y-auto p-4">
       <nav className="space-y-2">
@@ -98,7 +85,7 @@ export function SidebarNavigation({ isCollapsed, onToggle }: SidebarNavigationPr
 
                     if (child.path) {
                       return (
-                        <Button {...buttonProps} asChild key={child.title} onClick={handleLinkClick}>
+                        <Button {...buttonProps} asChild key={child.title}>
                           <Link to={child.path}>
                             {buttonContent}
                           </Link>
