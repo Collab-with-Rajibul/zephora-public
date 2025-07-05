@@ -175,7 +175,7 @@ export function MobileFooterNav() {
                 ) : (
                   <Moon className="mr-2 h-4 w-4 text-slate-900" />
                 )}
-                <span>Toggle Theme</span>
+                <span>{theme === 'dark' ? 'Light' : 'Dark'} Mode</span>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem className="text-red-600" onClick={() => console.log('Logout')}> {/* Replace with actual logout logic */}
