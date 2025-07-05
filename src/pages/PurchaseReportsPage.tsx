@@ -32,156 +32,152 @@ const chartConfig = {
 
 const PurchaseReportsPage: React.FC = () => {
   return (
-    <div className="space-y-6">
-      {/* Sticky Header */}
-      <header className="sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b h-[88px] flex items-center">
-        <div className="w-full flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0 px-6">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">Purchase Reports</h1>
-            <p className="text-muted-foreground">Analyze your purchase activities and spending.</p>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Button variant="outline" size="sm" onClick={() => toast.info("Exporting report...")}>
-              <Download className="mr-2 h-4 w-4" /> Export Report
-            </Button>
-            <Button variant="default" size="sm" onClick={() => toast.info("Generating report...")}>
-              Generate Report
-            </Button>
-          </div>
+    <div className="flex flex-col gap-8">
+      {/* Header */}
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">Purchase Reports</h1>
+          <p className="text-muted-foreground">Analyze your purchase activities and spending.</p>
         </div>
-      </header>
-
-      <div className="px-6 space-y-8">
-        {/* Summary Cards */}
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Purchases</CardTitle>
-              <DollarSign className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">$328,000</div>
-              <p className="text-xs text-muted-foreground">+12% from last month</p>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Orders</CardTitle>
-              <Package className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">190</div>
-              <p className="text-xs text-muted-foreground">+8% from last month</p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Avg Order Value</CardTitle>
-              <TrendingUp className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">$1,726</div>
-              <p className="text-xs text-muted-foreground">+3% from last month</p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Active Suppliers</CardTitle>
-              <Calendar className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">24</div>
-              <p className="text-xs text-muted-foreground">2 new this month</p>
-            </CardContent>
-          </Card>
+        <div className="flex items-center space-x-2">
+          <Button variant="outline" size="sm" onClick={() => toast.info("Exporting report...")}>
+            <Download className="mr-2 h-4 w-4" /> Export Report
+          </Button>
+          <Button variant="default" size="sm" onClick={() => toast.info("Generating report...")}>
+            Generate Report
+          </Button>
         </div>
-
-        {/* Charts Section */}
-        <Tabs defaultValue="monthly" className="space-y-4">
-          <TabsList>
-            <TabsTrigger value="monthly">Monthly Trends</TabsTrigger>
-            <TabsTrigger value="suppliers">Supplier Analysis</TabsTrigger>
-            <TabsTrigger value="categories">Category Breakdown</TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="monthly" className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>Monthly Purchase Trends</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ChartContainer config={chartConfig} className="h-[400px]">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <BarChart data={monthlyPurchases}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="month" />
-                      <YAxis />
-                      <ChartTooltip content={<ChartTooltipContent />} />
-                      <Bar dataKey="amount" fill="var(--color-amount)" />
-                    </BarChart>
-                  </ResponsiveContainer>
-                </ChartContainer>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="suppliers" className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>Top Suppliers by Purchase Volume</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ChartContainer config={chartConfig} className="h-[400px]">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <PieChart>
-                      <Pie
-                        data={supplierData}
-                        cx="50%"
-                        cy="50%"
-                        labelLine={false}
-                        label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                        outerRadius={80}
-                        fill="#8884d8"
-                        dataKey="value"
-                      >
-                        {supplierData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                        ))}
-                      </Pie>
-                      <ChartTooltip content={<ChartTooltipContent />} />
-                    </PieChart>
-                  </ResponsiveContainer>
-                </ChartContainer>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="categories" className="space-y-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>Purchase Categories Over Time</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ChartContainer config={chartConfig} className="h-[400px]">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={monthlyPurchases}>
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="month" />
-                      <YAxis />
-                      <ChartTooltip content={<ChartTooltipContent />} />
-                      <Line type="monotone" dataKey="amount" stroke="var(--color-amount)" strokeWidth={2} />
-                      <Line type="monotone" dataKey="orders" stroke="var(--color-orders)" strokeWidth={2} />
-                    </LineChart>
-                  </ResponsiveContainer>
-                </ChartContainer>
-              </CardContent>
-            </Card>
-          </TabsContent>
-        </Tabs>
       </div>
+
+      {/* Summary Cards */}
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total Purchases</CardTitle>
+            <DollarSign className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">$328,000</div>
+            <p className="text-xs text-muted-foreground">+12% from last month</p>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Total Orders</CardTitle>
+            <Package className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">190</div>
+            <p className="text-xs text-muted-foreground">+8% from last month</p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Avg Order Value</CardTitle>
+            <TrendingUp className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">$1,726</div>
+            <p className="text-xs text-muted-foreground">+3% from last month</p>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Active Suppliers</CardTitle>
+            <Calendar className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <div className="text-2xl font-bold">24</div>
+            <p className="text-xs text-muted-foreground">2 new this month</p>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Charts Section */}
+      <Tabs defaultValue="monthly" className="space-y-4">
+        <TabsList>
+          <TabsTrigger value="monthly">Monthly Trends</TabsTrigger>
+          <TabsTrigger value="suppliers">Supplier Analysis</TabsTrigger>
+          <TabsTrigger value="categories">Category Breakdown</TabsTrigger>
+        </TabsList>
+        
+        <TabsContent value="monthly" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Monthly Purchase Trends</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ChartContainer config={chartConfig} className="h-[400px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={monthlyPurchases}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="month" />
+                    <YAxis />
+                    <ChartTooltip content={<ChartTooltipContent />} />
+                    <Bar dataKey="amount" fill="var(--color-amount)" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </ChartContainer>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="suppliers" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Top Suppliers by Purchase Volume</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ChartContainer config={chartConfig} className="h-[400px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={supplierData}
+                      cx="50%"
+                      cy="50%"
+                      labelLine={false}
+                      label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                      outerRadius={80}
+                      fill="#8884d8"
+                      dataKey="value"
+                    >
+                      {supplierData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                      ))}
+                    </Pie>
+                    <ChartTooltip content={<ChartTooltipContent />} />
+                  </PieChart>
+                </ResponsiveContainer>
+              </ChartContainer>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="categories" className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle>Purchase Categories Over Time</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <ChartContainer config={chartConfig} className="h-[400px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart data={monthlyPurchases}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="month" />
+                    <YAxis />
+                    <ChartTooltip content={<ChartTooltipContent />} />
+                    <Line type="monotone" dataKey="amount" stroke="var(--color-amount)" strokeWidth={2} />
+                    <Line type="monotone" dataKey="orders" stroke="var(--color-orders)" strokeWidth={2} />
+                  </LineChart>
+                </ResponsiveContainer>
+              </ChartContainer>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };

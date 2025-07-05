@@ -20,41 +20,37 @@ export default function SalesInvoicesPage() {
 
   return (
     <div className="space-y-6">
-      {/* Sticky Header */}
-      <header className="sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b h-[88px] flex items-center">
-        <div className="w-full flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0 px-6">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">Sales Invoices</h1>
-            <p className="text-muted-foreground">Manage and track your sales invoices.</p>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Button variant="outline" size="sm" onClick={() => toast.info("Importing invoices...")}>
-              Import Invoices
-            </Button>
-            <Button variant="ghost" size="sm" onClick={() => toast.info("Exporting data...")}>
-              <Download className="mr-2 h-4 w-4" /> Export Data
-            </Button>
-            <Button size="sm" onClick={() => navigate('/sales-invoices/new')}>
-              <Plus className="mr-2 h-4 w-4" /> Create New Invoice
-            </Button>
-          </div>
+      {/* Header */}
+      <header className="flex flex-col md:flex-row items-start md:items-center justify-between space-y-4 md:space-y-0">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">Sales Invoices</h1>
+          <p className="text-muted-foreground">Manage and track your sales invoices.</p>
+        </div>
+        <div className="flex items-center space-x-2">
+          <Button variant="outline" size="sm" onClick={() => toast.info("Importing invoices...")}>
+            Import Invoices
+          </Button>
+          <Button variant="ghost" size="sm" onClick={() => toast.info("Exporting data...")}>
+            <Download className="mr-2 h-4 w-4" /> Export Data
+          </Button>
+          <Button size="sm" onClick={() => navigate('/sales-invoices/new')}>
+            <Plus className="mr-2 h-4 w-4" /> Create New Invoice
+          </Button>
         </div>
       </header>
 
-      <div className="px-6 space-y-6">
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <SummaryCard title="Total Invoices" value={invoices.length.toString()} icon={FileText} />
-          <SummaryCard title="Total Amount" value={totalAmount.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} icon={DollarSign} />
-          <SummaryCard title="Outstanding Amount" value={outstandingAmount.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} icon={Clock} />
-          <SummaryCard title="Overdue Amount" value={overdueAmount.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} icon={XCircle} />
-        </div>
-        
-        <div className="py-4">
-          <Input placeholder="Search invoices by #, customer, or description..." className="max-w-sm" />
-        </div>
-
-        <InvoicesTable />
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <SummaryCard title="Total Invoices" value={invoices.length.toString()} icon={FileText} />
+        <SummaryCard title="Total Amount" value={totalAmount.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} icon={DollarSign} />
+        <SummaryCard title="Outstanding Amount" value={outstandingAmount.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} icon={Clock} />
+        <SummaryCard title="Overdue Amount" value={overdueAmount.toLocaleString('en-US', { style: 'currency', currency: 'USD' })} icon={XCircle} />
       </div>
+      
+      <div className="py-4">
+        <Input placeholder="Search invoices by #, customer, or description..." className="max-w-sm" />
+      </div>
+
+      <InvoicesTable />
     </div>
   );
 }

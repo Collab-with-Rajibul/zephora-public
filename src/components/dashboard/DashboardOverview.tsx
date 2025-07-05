@@ -31,50 +31,48 @@ export function DashboardOverview() {
 
   return (
     <div className="space-y-6">
-      {/* Sticky Header */}
-      <header className="sticky top-0 z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b h-[88px] flex items-center">
-        <div className="w-full flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 px-6">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-            <p className="text-muted-foreground">Welcome back! Here's what's happening with your business today.</p>
-          </div>
-          
-          {/* Right side - Actions (Desktop) */}
-          <div className="hidden md:flex items-center space-x-4">
-            <Button variant="ghost" size="icon" className="rounded-xl" onClick={() => setOpen(true)}>
-              <Search className="h-5 w-5" />
+      {/* Header */}
+      <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
+          <p className="text-muted-foreground">Welcome back! Here's what's happening with your business today.</p>
+        </div>
+        
+        {/* Right side - Actions (Desktop) */}
+        <div className="hidden md:flex items-center space-x-4">
+          <Button variant="ghost" size="icon" className="rounded-xl" onClick={() => setOpen(true)}>
+            <Search className="h-5 w-5" />
+          </Button>
+
+          <div className="relative">
+            <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-xl">
+              <Bell className="h-5 w-5 text-blue-500" />
             </Button>
-
-            <div className="relative">
-              <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-xl">
-                <Bell className="h-5 w-5 text-blue-500" />
-              </Button>
-              <Badge 
-                variant="destructive" 
-                className="absolute top-0 right-0 h-5 w-5 rounded-full p-0 text-xs flex items-center justify-center"
-              >
-                3
-              </Badge>
-            </div>
+            <Badge 
+              variant="destructive" 
+              className="absolute top-0 right-0 h-5 w-5 rounded-full p-0 text-xs flex items-center justify-center"
+            >
+              3
+            </Badge>
           </div>
+        </div>
 
-          {/* Mobile Actions */}
-          <div className="md:hidden flex items-center space-x-1">
-            <Button variant="ghost" size="icon" onClick={() => setOpen(true)} className="rounded-xl">
-              <Search className="h-5 w-5" />
+        {/* Mobile Actions */}
+        <div className="md:hidden flex items-center space-x-1">
+          <Button variant="ghost" size="icon" onClick={() => setOpen(true)} className="rounded-xl">
+            <Search className="h-5 w-5" />
+          </Button>
+
+          <div className="relative">
+            <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-xl">
+              <Bell className="h-5 w-5 text-blue-500" />
             </Button>
-
-            <div className="relative">
-              <Button variant="ghost" size="icon" className="text-muted-foreground hover:text-foreground rounded-xl">
-                <Bell className="h-5 w-5 text-blue-500" />
-              </Button>
-              <Badge 
-                variant="destructive" 
-                className="absolute top-0 right-0 h-4 w-4 rounded-full p-0 text-[10px] flex items-center justify-center"
-              >
-                3
-              </Badge>
-            </div>
+            <Badge 
+              variant="destructive" 
+              className="absolute top-0 right-0 h-4 w-4 rounded-full p-0 text-[10px] flex items-center justify-center"
+            >
+              3
+            </Badge>
           </div>
         </div>
       </header>
@@ -114,23 +112,21 @@ export function DashboardOverview() {
         </CommandList>
       </CommandDialog>
       
-      <div className="px-6 space-y-6">
-        {/* Quick Actions */}
-        <QuickActions />
-        
-        {/* Metrics Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {dashboardMetrics.map((metric) => (
-            <MetricCard key={metric.id} metric={metric} />
-          ))}
-        </div>
-        
-        {/* Charts Section */}
-        <Charts />
-        
-        {/* Recent Activity */}
-        <ActivityFeed />
+      {/* Quick Actions */}
+      <QuickActions />
+      
+      {/* Metrics Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {dashboardMetrics.map((metric) => (
+          <MetricCard key={metric.id} metric={metric} />
+        ))}
       </div>
+      
+      {/* Charts Section */}
+      <Charts />
+      
+      {/* Recent Activity */}
+      <ActivityFeed />
     </div>
   );
 }
