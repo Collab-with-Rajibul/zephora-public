@@ -46,7 +46,8 @@ export interface NavItem {
   title: string;
   icon: string;
   color: string;
-  children?: NavItemChild[];
+  path?: string;
+  children?: NavItem[];
 }
 
 export const navigationItems: NavItem[] = [
