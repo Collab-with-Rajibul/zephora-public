@@ -1,3 +1,13 @@
+import { type LucideIcon } from 'lucide-react';
+
+export interface NavItem {
+  title: string;
+  icon: LucideIcon;
+  color: string;
+  path?: string;
+  children?: NavItem[];
+}
+
 export interface DashboardMetric {
   id: string;
   title: string;
@@ -38,14 +48,6 @@ export interface ChartData {
   expenses?: number;
   profit?: number;
   value?: number;
-}
-
-export interface NavItem {
-  title: string;
-  href: string;
-  icon: string;
-  badge?: string;
-  children?: NavItem[];
 }
 
 export interface Customer {
