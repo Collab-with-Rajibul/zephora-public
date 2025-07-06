@@ -1,4 +1,3 @@
-
 import { 
   ChevronDown,
   DollarSign,
@@ -34,13 +33,6 @@ import {
   CalendarDays,
   Banknote,
 } from 'lucide-react';
-
-export interface NavItemChild {
-  title: string;
-  icon: string;
-  color: string;
-  path?: string;
-}
 
 export interface NavItem {
   title: string;
