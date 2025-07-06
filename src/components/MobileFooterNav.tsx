@@ -66,8 +66,12 @@ export function MobileFooterNav() {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
-  const handleDropdownOpenChange = (itemTitle: string) => (open: boolean) => {
-    setOpenDropdown(open ? itemTitle : null);
+  const createDropdownOpenChangeHandler = (itemTitle: string) => (open: boolean) => {
+    // Only close the dropdown when open becomes false
+    // Opening is handled by the pointer events to maintain drag detection
+    if (!open) {
+      setOpenDropdown(null);
+    }
   };
 
   return (
@@ -92,7 +96,7 @@ export function MobileFooterNav() {
             
             if (item.children && item.children.length > 0) {
               return (
-                <DropdownMenu key={item.title} open={openDropdown === item.title} onOpenChange={handleDropdownOpenChange(item.title)}>
+                <DropdownMenu key={item.title} open={openDropdown === item.title} onOpenChange={createDropdownOpenChangeHandler(item.title)}>
                   <DropdownMenuTrigger asChild>
                     <Button
                       variant="ghost"
