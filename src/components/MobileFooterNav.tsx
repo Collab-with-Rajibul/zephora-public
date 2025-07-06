@@ -66,6 +66,10 @@ export function MobileFooterNav() {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
+  const handleDropdownOpenChange = (itemTitle: string) => (open: boolean) => {
+    setOpenDropdown(open ? itemTitle : null);
+  };
+
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 bg-background border-t border-border md:hidden shadow-lg">
       <ScrollArea className="w-full whitespace-nowrap">
@@ -88,7 +92,7 @@ export function MobileFooterNav() {
             
             if (item.children && item.children.length > 0) {
               return (
-                <DropdownMenu key={item.title} open={openDropdown === item.title} onOpenChange={setOpenDropdown}>
+                <DropdownMenu key={item.title} open={openDropdown === item.title} onOpenChange={handleDropdownOpenChange(item.title)}>
                   <DropdownMenuTrigger asChild>
                     <Button
                       variant="ghost"
