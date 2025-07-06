@@ -5,7 +5,7 @@ import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import { navigationItems } from '@/config/dashboard-nav';
+import { navigationItems } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Sun, Moon, Users, Settings, LogOut } from 'lucide-react';
