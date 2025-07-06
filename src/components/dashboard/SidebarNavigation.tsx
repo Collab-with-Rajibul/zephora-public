@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
-import { navigationItems } from '@/config/dashboard-nav';
+import { navigationItems } from '@/lib/constants';
 
 interface SidebarNavigationProps {
   isCollapsed: boolean;
