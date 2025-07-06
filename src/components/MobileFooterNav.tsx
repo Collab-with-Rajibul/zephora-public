@@ -1,10 +1,11 @@
+
 "use client";
 
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import { navigationItems, iconMap } from '@/config/dashboard-nav';
+import { navigationItems } from '@/config/dashboard-nav';
 import { cn } from '@/lib/utils';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Sun, Moon, Users, Settings, LogOut } from 'lucide-react';
@@ -17,7 +18,6 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
-
 
 const CLICK_THRESHOLD = 10; // pixels
 
@@ -84,7 +84,7 @@ export function MobileFooterNav() {
           </Button>
 
           {navigationItems.map((item) => {
-            const Icon = iconMap[item.icon as keyof typeof iconMap];
+            const Icon = item.icon;
             
             if (item.children && item.children.length > 0) {
               return (
@@ -104,7 +104,7 @@ export function MobileFooterNav() {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent side="top" align="center" className="w-56 mb-2">
                     {item.children.map((child) => {
-                      const ChildIcon = iconMap[child.icon as keyof typeof iconMap];
+                      const ChildIcon = child.icon;
                       return (
                         <DropdownMenuItem key={child.title} onClick={() => handleDropdownItemClick(child.path || '/')}>
                           <ChildIcon className={cn("mr-2 h-4 w-4", child.color)} />

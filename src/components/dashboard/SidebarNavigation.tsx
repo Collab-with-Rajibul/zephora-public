@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { ChevronDown } from 'lucide-react';
-import { navigationItems, iconMap } from '@/config/dashboard-nav';
+import { navigationItems } from '@/config/dashboard-nav';
 
 interface SidebarNavigationProps {
   isCollapsed: boolean;
@@ -36,12 +36,11 @@ export function SidebarNavigation({ isCollapsed, onToggle }: SidebarNavigationPr
       return window.innerWidth < 768;
   }
 
-
   return (
     <div className="flex-1 overflow-y-auto p-4">
       <nav className="space-y-2">
         {navigationItems.map((item) => {
-          const Icon = iconMap[item.icon as keyof typeof iconMap];
+          const Icon = item.icon;
           const isExpanded = expandedItems.includes(item.title);
           
           return (
@@ -82,7 +81,7 @@ export function SidebarNavigation({ isCollapsed, onToggle }: SidebarNavigationPr
               {!isCollapsed && item.children && isExpanded && (
                 <div className="ml-8 mt-2 space-y-1">
                   {item.children.map((child) => {
-                    const ChildIcon = iconMap[child.icon as keyof typeof iconMap];
+                    const ChildIcon = child.icon;
                     
                     const buttonContent = (
                       <>

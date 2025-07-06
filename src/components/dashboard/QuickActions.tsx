@@ -13,7 +13,8 @@ import {
   Building, 
   BarChart3,
   Receipt,
-  CreditCard
+  CreditCard,
+  type LucideIcon
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -22,7 +23,7 @@ interface QuickAction {
   id: string;
   title: string;
   description: string;
-  icon: string;
+  icon: LucideIcon;
   variant: string;
   href: string;
 }
@@ -32,7 +33,7 @@ const quickActions: QuickAction[] = [
     id: 'new-sale-invoice',
     title: 'New Sale Invoice',
     description: 'Create a new sales invoice',
-    icon: 'receipt',
+    icon: Receipt,
     variant: 'primary',
     href: '/sales-invoices/new'
   },
@@ -40,7 +41,7 @@ const quickActions: QuickAction[] = [
     id: 'new-purchase-bill',
     title: 'New Purchase Bill',
     description: 'Record a new purchase',
-    icon: 'file-text',
+    icon: FileText,
     variant: 'success',
     href: '/purchase-bills/new'
   },
@@ -48,7 +49,7 @@ const quickActions: QuickAction[] = [
     id: 'record-payment',
     title: 'Record Payment',
     description: 'Log payment received or sent',
-    icon: 'credit-card',
+    icon: CreditCard,
     variant: 'warning',
     href: '/payments/new'
   },
@@ -56,7 +57,7 @@ const quickActions: QuickAction[] = [
     id: 'new-customer',
     title: 'New Customer',
     description: 'Add a new customer',
-    icon: 'users',
+    icon: Users,
     variant: 'info',
     href: '/customers/new'
   },
@@ -64,7 +65,7 @@ const quickActions: QuickAction[] = [
     id: 'new-supplier',
     title: 'New Supplier',
     description: 'Add a new supplier',
-    icon: 'building',
+    icon: Building,
     variant: 'purple',
     href: '/suppliers/new'
   },
@@ -72,22 +73,11 @@ const quickActions: QuickAction[] = [
     id: 'generate-report',
     title: 'Generate Report',
     description: 'Create financial reports',
-    icon: 'bar-chart-3',
+    icon: BarChart3,
     variant: 'secondary',
     href: '/reports'
   }
 ];
-
-const iconMap = {
-  'plus': Plus,
-  'dollar-sign': DollarSign,
-  'file-text': FileText,
-  'users': Users,
-  'building': Building,
-  'bar-chart-3': BarChart3,
-  'receipt': Receipt,
-  'credit-card': CreditCard
-};
 
 interface QuickActionsProps {
   className?: string;
@@ -124,7 +114,7 @@ export function QuickActions({ className }: QuickActionsProps) {
           isMobile ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
         )}>
           {quickActions.map((action) => {
-            const Icon = iconMap[action.icon as keyof typeof iconMap];
+            const Icon = action.icon;
             
             if (isMobile) {
               return (
