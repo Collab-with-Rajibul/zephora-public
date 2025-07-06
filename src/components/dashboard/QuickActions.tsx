@@ -16,6 +16,7 @@ import {
   CreditCard
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface QuickAction {
   id: string;
@@ -94,6 +95,7 @@ interface QuickActionsProps {
 
 export function QuickActions({ className }: QuickActionsProps) {
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
 
   const getActionStyles = (variant: string) => {
     switch (variant) {
@@ -117,9 +119,31 @@ export function QuickActions({ className }: QuickActionsProps) {
   return (
     <Card className={cn("overflow-hidden border-0 bg-transparent shadow-none", className)}>
       <CardContent className="p-0">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className={cn(
+          "grid gap-4",
+          isMobile ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+        )}>
           {quickActions.map((action) => {
             const Icon = iconMap[action.icon as keyof typeof iconMap];
+            
+            if (isMobile) {
+              return (
+                <Button
+                  key={action.id}
+                  variant="outline"
+                  className={cn(
+                    "h-20 p-4 flex flex-col items-start justify-start space-y-2 rounded-xl transition-all duration-200 hover:scale-105 relative",
+                    getActionStyles(action.variant)
+                  )}
+                  onClick={() => navigate(action.href)}
+                >
+                  <Icon className="w-6 h-6 self-start" />
+                  <div className="text-left self-start">
+                    <div className="text-sm font-medium leading-tight">{action.title}</div>
+                  </div>
+                </Button>
+              );
+            }
             
             return (
               <Button
