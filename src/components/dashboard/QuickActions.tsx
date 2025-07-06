@@ -79,6 +79,16 @@ const quickActions: QuickAction[] = [
   }
 ];
 
+// Mobile-specific order: Row1: Sale Invoice, Purchase Bill | Row2: Customer, Supplier | Row3: Payment, Report
+const mobileOrder = [
+  'new-sale-invoice',
+  'new-purchase-bill',
+  'new-customer', 
+  'new-supplier',
+  'record-payment',
+  'generate-report'
+];
+
 interface QuickActionsProps {
   className?: string;
 }
@@ -106,6 +116,11 @@ export function QuickActions({ className }: QuickActionsProps) {
     }
   };
 
+  // Get actions in the appropriate order
+  const actionsToRender = isMobile 
+    ? mobileOrder.map(id => quickActions.find(action => action.id === id)).filter(Boolean)
+    : quickActions;
+
   return (
     <Card className={cn("overflow-hidden border-0 bg-transparent shadow-none", className)}>
       <CardContent className="p-0">
@@ -113,7 +128,7 @@ export function QuickActions({ className }: QuickActionsProps) {
           "grid gap-4",
           isMobile ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
         )}>
-          {quickActions.map((action) => {
+          {actionsToRender.map((action) => {
             const Icon = action.icon;
             
             if (isMobile) {
