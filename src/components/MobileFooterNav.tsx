@@ -1,7 +1,7 @@
 
 "use client";
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
@@ -21,85 +21,81 @@ import {
 
 const CLICK_THRESHOLD = 10; // pixels
 
-// Define icon groups for mobile
-const mobileIconGroups = [
+// Mobile icon order - similar to QuickActions approach
+const mobileIconOrder = [
   // Group 1: Home, Sales, Purchase, Payments, Profile
-  [
-    {
-      id: 'home',
-      title: 'Home',
-      icon: 'home',
-      path: '/',
-      component: () => (
-        <img src="/lovable-uploads/zephora-logo.png" alt="Zephora Logo" className="w-6 h-6 rounded-full object-cover" />
-      )
-    },
-    {
-      id: 'sales',
-      title: 'Sales',
-      icon: DollarSign,
-      color: 'text-green-500',
-      navItem: navigationItems.find(item => item.title === 'Sales Management')
-    },
-    {
-      id: 'purchase',
-      title: 'Purchase',
-      icon: ShoppingCart,
-      color: 'text-blue-500',
-      navItem: navigationItems.find(item => item.title === 'Purchase Management')
-    },
-    {
-      id: 'payments',
-      title: 'Payments',
-      icon: CreditCard,
-      color: 'text-pink-500',
-      navItem: navigationItems.find(item => item.title === 'Payments')
-    },
-    {
-      id: 'profile',
-      title: 'Profile',
-      icon: 'profile',
-      isProfile: true
-    }
-  ],
-  // Group 2: Employees, Inventory, Financial, Reports, Settings
-  [
-    {
-      id: 'employees',
-      title: 'Employees',
-      icon: UserCheck,
-      color: 'text-purple-500',
-      navItem: navigationItems.find(item => item.title === 'Employee Management')
-    },
-    {
-      id: 'inventory',
-      title: 'Inventory',
-      icon: Package,
-      color: 'text-purple-500',
-      navItem: navigationItems.find(item => item.title === 'Inventory & Stock')
-    },
-    {
-      id: 'financial',
-      title: 'Financial',
-      icon: BookOpen,
-      color: 'text-cyan-500',
-      navItem: navigationItems.find(item => item.title === 'Financial Statements')
-    },
-    {
-      id: 'reports',
-      title: 'Reports',
-      icon: PieChart,
-      color: 'text-yellow-400',
-      navItem: navigationItems.find(item => item.title === 'Reports & Analytics')
-    },
-    {
-      id: 'settings',
-      title: 'Settings',
-      icon: Settings,
-      color: 'text-gray-500',
-      navItem: navigationItems.find(item => item.title === 'Settings')
-    }
-  ]
+  'home', 'sales', 'purchase', 'payments', 'profile',
+  // Group 2: Employees, Inventory, Financial, Reports, Settings  
+  'employees', 'inventory', 'financial', 'reports', 'settings'
+];
+
+// Icon definitions with consistent mapping
+const iconDefinitions = {
+  home: {
+    title: 'Home',
+    component: () => (
+      <img src="/lovable-uploads/zephora-logo.png" alt="Zephora Logo" className="w-6 h-6 rounded-full object-cover" />
+    ),
+    path: '/'
+  },
+  sales: {
+    title: 'Sales',
+    icon: DollarSign,
+    color: 'text-green-500',
+    navItem: navigationItems.find(item => item.title === 'Sales Management')
+  },
+  purchase: {
+    title: 'Purchase',
+    icon: ShoppingCart,
+    color: 'text-blue-500',
+    navItem: navigationItems.find(item => item.title === 'Purchase Management')
+  },
+  payments: {
+    title: 'Payments',
+    icon: CreditCard,
+    color: 'text-pink-500',
+    navItem: navigationItems.find(item => item.title === 'Payments')
+  },
+  profile: {
+    title: 'Profile',
+    isProfile: true
+  },
+  employees: {
+    title: 'Employees',
+    icon: UserCheck,
+    color: 'text-purple-500',
+    navItem: navigationItems.find(item => item.title === 'Employee Management')
+  },
+  inventory: {
+    title: 'Inventory',
+    icon: Package,
+    color: 'text-purple-500',
+    navItem: navigationItems.find(item => item.title === 'Inventory & Stock')
+  },
+  financial: {
+    title: 'Financial',
+    icon: BookOpen,
+    color: 'text-cyan-500',
+    navItem: navigationItems.find(item => item.title === 'Financial Statements')
+  },
+  reports: {
+    title: 'Reports',
+    icon: PieChart,
+    color: 'text-yellow-400',
+    navItem: navigationItems.find(item => item.title === 'Reports & Analytics')
+  },
+  settings: {
+    title: 'Settings',
+    icon: Settings,
+    color: 'text-gray-500',
+    navItem: navigationItems.find(item => item.title === 'Settings')
+  }
+};
+
+// Create groups from the ordered list
+const mobileIconGroups = [
+  mobileIconOrder.slice(0, 5).map(id => ({ id, ...iconDefinitions[id] })),
+  mobileIconOrder.slice(5, 10).map(id => ({ id, ...iconDefinitions[id] }))
 ];
 
 export function MobileFooterNav() {
@@ -109,12 +105,12 @@ export function MobileFooterNav() {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const { theme, setTheme } = useTheme();
 
-  const handlePointerDown = (e: React.PointerEvent<HTMLButtonElement>) => {
+  const handlePointerDown = useCallback((e: React.PointerEvent<HTMLButtonElement>) => {
     isDragging.current = false;
     startCoords.current = { x: e.clientX, y: e.clientY };
-  };
+  }, []);
 
-  const handlePointerMove = (e: React.PointerEvent<HTMLButtonElement>) => {
+  const handlePointerMove = useCallback((e: React.PointerEvent<HTMLButtonElement>) => {
     if (startCoords.current) {
       const dx = e.clientX - startCoords.current.x;
       const dy = e.clientY - startCoords.current.y;
@@ -123,39 +119,32 @@ export function MobileFooterNav() {
         isDragging.current = true;
       }
     }
-  };
+  }, []);
 
-  const handlePointerUp = (e: React.PointerEvent<HTMLButtonElement>, itemPath?: string, itemTitle?: string) => {
+  const handleClick = useCallback((itemPath?: string, itemTitle?: string) => {
     if (!isDragging.current) {
-      // It was a click
       if (itemPath) {
         navigate(itemPath);
       } else if (itemTitle) {
-        setOpenDropdown(openDropdown === itemTitle ? null : itemTitle);
+        setOpenDropdown(prev => prev === itemTitle ? null : itemTitle);
       }
     }
-    startCoords.current = { x: 0, y: 0 }; // Reset coords
+    startCoords.current = { x: 0, y: 0 };
     isDragging.current = false;
-  };
+  }, [navigate]);
 
-  const handleDropdownItemClick = (path: string) => {
+  const handleDropdownItemClick = useCallback((path: string) => {
     navigate(path);
-    setOpenDropdown(null); // Close dropdown after navigation
-  };
+    setOpenDropdown(null);
+  }, [navigate]);
 
-  const toggleTheme = () => {
+  const toggleTheme = useCallback(() => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
-  };
+  }, [theme, setTheme]);
 
-  const createDropdownOpenChangeHandler = (itemTitle: string) => (open: boolean) => {
-    // Only close the dropdown when open becomes false
-    // Opening is handled by the pointer events to maintain drag detection
-    if (!open) {
-      setOpenDropdown(null);
-    }
-  };
+  const renderIconButton = useCallback((item: any) => {
+    const baseButtonClass = "flex flex-col h-auto w-auto p-3 items-center justify-center text-muted-foreground hover:text-primary hover:bg-accent transition-all duration-300 ease-in-out rounded-xl active:scale-95 transform hover:scale-105";
 
-  const renderIconButton = (item: any) => {
     // Handle Home button
     if (item.id === 'home') {
       return (
@@ -163,13 +152,15 @@ export function MobileFooterNav() {
           key={item.id}
           variant="ghost"
           size="sm"
-          className="flex flex-col h-auto w-auto p-2 items-center justify-center text-muted-foreground hover:text-primary hover:bg-accent transition-all duration-200 ease-in-out rounded-lg active:scale-95"
+          className={baseButtonClass}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
-          onPointerUp={(e) => handlePointerUp(e, item.path)}
+          onPointerUp={() => handleClick(item.path)}
         >
-          {item.component()}
-          <span className="text-xs mt-1">{item.title}</span>
+          <div className="w-6 h-6 flex items-center justify-center mb-1">
+            {item.component()}
+          </div>
+          <span className="text-xs font-medium">{item.title}</span>
         </Button>
       );
     }
@@ -177,30 +168,30 @@ export function MobileFooterNav() {
     // Handle Profile button
     if (item.isProfile) {
       return (
-        <DropdownMenu key={item.id}>
+        <DropdownMenu key={item.id} open={openDropdown === 'user-profile'} onOpenChange={(open) => !open && setOpenDropdown(null)}>
           <DropdownMenuTrigger asChild>
             <Button
               variant="ghost"
               size="sm"
-              className="flex flex-col h-auto w-auto p-2 items-center justify-center text-muted-foreground hover:text-primary hover:bg-accent transition-all duration-200 ease-in-out rounded-lg active:scale-95"
+              className={baseButtonClass}
               onPointerDown={handlePointerDown}
               onPointerMove={handlePointerMove}
-              onPointerUp={(e) => handlePointerUp(e, undefined, 'user-profile')}
+              onPointerUp={() => handleClick(undefined, 'user-profile')}
             >
-              <Avatar className="w-6 h-6">
-                <AvatarImage src="/placeholder-avatar.jpg" />
-                <AvatarFallback className="text-primary-foreground text-xs font-medium bg-gradient-to-br from-blue-500 to-purple-600">JD</AvatarFallback>
-              </Avatar>
-              <span className="text-xs mt-1">{item.title}</span>
+              <div className="w-6 h-6 flex items-center justify-center mb-1">
+                <Avatar className="w-6 h-6">
+                  <AvatarImage src="/placeholder-avatar.jpg" />
+                  <AvatarFallback className="text-primary-foreground text-xs font-medium bg-gradient-to-br from-blue-500 to-purple-600">JD</AvatarFallback>
+                </Avatar>
+              </div>
+              <span className="text-xs font-medium">{item.title}</span>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent side="top" align="center" className="w-56 mb-2">
+          <DropdownMenuContent side="top" align="center" className="w-56 mb-2 animate-scale-in">
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col space-y-1">
                 <p className="text-sm font-medium leading-none">John Doe</p>
-                <p className="text-xs leading-none text-muted-foreground">
-                  john.doe@company.com
-                </p>
+                <p className="text-xs leading-none text-muted-foreground">john.doe@company.com</p>
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
@@ -234,21 +225,23 @@ export function MobileFooterNav() {
     if (item.navItem && item.navItem.children && item.navItem.children.length > 0) {
       const Icon = item.icon;
       return (
-        <DropdownMenu key={item.id} open={openDropdown === item.navItem.title} onOpenChange={createDropdownOpenChangeHandler(item.navItem.title)}>
+        <DropdownMenu key={item.id} open={openDropdown === item.navItem.title} onOpenChange={(open) => !open && setOpenDropdown(null)}>
           <DropdownMenuTrigger asChild>
             <Button
               variant="ghost"
               size="sm"
-              className="flex flex-col h-auto w-auto p-2 items-center justify-center text-muted-foreground hover:text-primary hover:bg-accent transition-all duration-200 ease-in-out rounded-lg active:scale-95"
+              className={baseButtonClass}
               onPointerDown={handlePointerDown}
               onPointerMove={handlePointerMove}
-              onPointerUp={(e) => handlePointerUp(e, undefined, item.navItem.title)}
+              onPointerUp={() => handleClick(undefined, item.navItem.title)}
             >
-              <Icon className={cn("h-6 w-6", item.color)} />
-              <span className="text-xs mt-1">{item.title}</span>
+              <div className="w-6 h-6 flex items-center justify-center mb-1">
+                <Icon className={cn("h-6 w-6", item.color)} />
+              </div>
+              <span className="text-xs font-medium">{item.title}</span>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent side="top" align="center" className="w-56 mb-2">
+          <DropdownMenuContent side="top" align="center" className="w-56 mb-2 animate-scale-in">
             {item.navItem.children.map((child: any) => {
               const ChildIcon = child.icon;
               return (
@@ -270,33 +263,38 @@ export function MobileFooterNav() {
         key={item.id}
         variant="ghost"
         size="sm"
-        className="flex flex-col h-auto w-auto p-2 items-center justify-center text-muted-foreground hover:text-primary hover:bg-accent transition-all duration-200 ease-in-out rounded-lg active:scale-95"
+        className={baseButtonClass}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
-        onPointerUp={(e) => handlePointerUp(e, item.navItem?.path || '/')}
+        onPointerUp={() => handleClick(item.navItem?.path || '/')}
       >
-        <Icon className={cn("h-6 w-6", item.color)} />
-        <span className="text-xs mt-1">{item.title}</span>
+        <div className="w-6 h-6 flex items-center justify-center mb-1">
+          <Icon className={cn("h-6 w-6", item.color)} />
+        </div>
+        <span className="text-xs font-medium">{item.title}</span>
       </Button>
     );
-  };
+  }, [handlePointerDown, handlePointerMove, handleClick, openDropdown, handleDropdownItemClick, toggleTheme, theme]);
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-50 bg-background border-t border-border md:hidden shadow-lg">
+    <div className="fixed inset-x-0 bottom-0 z-50 bg-background/95 backdrop-blur-sm border-t border-border md:hidden shadow-lg">
       <Carousel
         opts={{
-          align: "start",
+          align: "center",
           loop: false,
           containScroll: "trimSnaps",
-          skipSnaps: true,
+          skipSnaps: false,
+          duration: 25
         }}
         className="w-full"
       >
-        <CarouselContent className="-ml-0">
+        <CarouselContent className="ml-0">
           {mobileIconGroups.map((group, groupIndex) => (
             <CarouselItem key={groupIndex} className="pl-0 basis-full">
-              <div className="flex h-16 items-center justify-center space-x-6 px-4">
-                {group.map((item) => renderIconButton(item))}
+              <div className="flex h-20 items-center justify-center">
+                <div className="flex items-center justify-evenly w-full px-4 max-w-sm mx-auto">
+                  {group.map((item) => renderIconButton(item))}
+                </div>
               </div>
             </CarouselItem>
           ))}
