@@ -141,7 +141,7 @@ export function MobileFooterNav() {
   }, [theme, setTheme]);
 
   const renderIconButton = useCallback((item: any) => {
-    const baseButtonClass = "flex flex-col h-auto w-16 p-2 items-center justify-center text-muted-foreground hover:text-primary hover:bg-accent transition-all duration-300 ease-in-out rounded-xl active:scale-95 transform hover:scale-105";
+    const baseButtonClass = "flex flex-col items-center justify-center text-muted-foreground hover:text-primary hover:bg-accent transition-all duration-300 ease-in-out rounded-xl active:scale-95 transform hover:scale-105 min-w-0 flex-1 py-2 px-1";
 
     // Handle Home button
     if (item.id === 'home') {
@@ -158,7 +158,7 @@ export function MobileFooterNav() {
           <div className="w-6 h-6 flex items-center justify-center mb-1">
             {item.component()}
           </div>
-          <span className="text-xs font-medium text-center leading-tight">{item.title}</span>
+          <span className="text-xs font-medium text-center leading-tight truncate w-full">{item.title}</span>
         </Button>
       );
     }
@@ -182,7 +182,7 @@ export function MobileFooterNav() {
                   <AvatarFallback className="text-primary-foreground text-xs font-medium bg-gradient-to-br from-blue-500 to-purple-600">JD</AvatarFallback>
                 </Avatar>
               </div>
-              <span className="text-xs font-medium text-center leading-tight">{item.title}</span>
+              <span className="text-xs font-medium text-center leading-tight truncate w-full">{item.title}</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent side="top" align="center" className="w-56 mb-2 animate-scale-in">
@@ -236,7 +236,7 @@ export function MobileFooterNav() {
               <div className="w-6 h-6 flex items-center justify-center mb-1">
                 <Icon className={cn("h-6 w-6", item.color)} />
               </div>
-              <span className="text-xs font-medium text-center leading-tight">{item.title}</span>
+              <span className="text-xs font-medium text-center leading-tight truncate w-full">{item.title}</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent side="top" align="center" className="w-56 mb-2 animate-scale-in">
@@ -269,7 +269,7 @@ export function MobileFooterNav() {
         <div className="w-6 h-6 flex items-center justify-center mb-1">
           <Icon className={cn("h-6 w-6", item.color)} />
         </div>
-        <span className="text-xs font-medium text-center leading-tight">{item.title}</span>
+        <span className="text-xs font-medium text-center leading-tight truncate w-full">{item.title}</span>
       </Button>
     );
   }, [handlePointerDown, handlePointerMove, handleClick, openDropdown, handleDropdownItemClick, toggleTheme, theme]);
@@ -289,8 +289,8 @@ export function MobileFooterNav() {
         <CarouselContent className="ml-0">
           {mobileIconGroups.map((group, groupIndex) => (
             <CarouselItem key={groupIndex} className="pl-0 basis-full">
-              <div className="flex h-20 items-center justify-center">
-                <div className="flex items-center justify-between w-full px-6 max-w-sm mx-auto">
+              <div className="flex h-20 items-center justify-center px-4">
+                <div className="flex items-center w-full max-w-sm mx-auto">
                   {group.map((item) => renderIconButton(item))}
                 </div>
               </div>
