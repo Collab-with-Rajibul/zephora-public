@@ -32,7 +32,7 @@ const iconDefinitions = {
   home: {
     title: 'Home',
     component: () => (
-      <img src="/lovable-uploads/zephora-logo.png" alt="Zephora Logo" className="w-6 h-6 rounded-full object-cover" />
+      <img src="/zephora-logo.png" alt="Zephora Logo" className="w-6 h-6 rounded-full object-cover" />
     ),
     path: '/'
   },
