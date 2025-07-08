@@ -1,5 +1,6 @@
 import { type LucideIcon } from 'lucide-react';
 
+//Navigation Bar
 export interface NavItem {
   title: string;
   icon: LucideIcon;
@@ -8,6 +9,15 @@ export interface NavItem {
   children?: NavItem[];
 }
 
+//Dashboard
+export interface QuickAction {
+  id: string;
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  variant: string;
+  href?: string;
+}
 export interface DashboardMetric {
   id: string;
   title: string;
@@ -21,16 +31,6 @@ export interface DashboardMetric {
   status?: 'positive' | 'negative' | 'neutral';
   icon?: string;
 }
-
-export interface QuickAction {
-  id: string;
-  title: string;
-  description: string;
-  icon: string;
-  variant: 'primary' | 'secondary' | 'accent';
-  href?: string;
-}
-
 export interface ActivityItem {
   id: string;
   type: 'sale' | 'purchase' | 'payment' | 'customer' | 'supplier';
@@ -41,7 +41,6 @@ export interface ActivityItem {
   status?: string;
   icon?: string;
 }
-
 export interface ChartData {
   name: string;
   revenue?: number;
@@ -50,6 +49,7 @@ export interface ChartData {
   value?: number;
 }
 
+//Sales Management
 export interface Customer {
   id: string;
   name: string;
@@ -61,9 +61,7 @@ export interface Customer {
   last_order_date?: string;
   status: 'active' | 'churned' | 'new';
 }
-
 export type InvoiceStatus = 'draft' | 'sent' | 'paid' | 'overdue' | 'cancelled' | 'partially-paid';
-
 export interface Invoice {
   id: string;
   invoiceNumber: string;
@@ -75,6 +73,7 @@ export interface Invoice {
   description: string;
 }
 
+//Purchase Management
 export interface Supplier {
   id: string;
   name: string;
@@ -85,9 +84,7 @@ export interface Supplier {
   total_spent: number;
   last_order_date?: string;
 }
-
 export type BillStatus = 'draft' | 'unpaid' | 'paid' | 'overdue' | 'cancelled' | 'partially-paid';
-
 export interface PurchaseBill {
   id: string;
   billNumber: string;

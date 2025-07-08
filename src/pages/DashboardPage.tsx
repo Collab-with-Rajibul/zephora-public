@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { dashboardMetrics } from '@/lib/constants';
+import { dashboardMetrics } from '@/data/dashboard';
 import { MetricCard } from '@/components/dashboard/MetricCard';
 import { QuickActions } from '@/components/dashboard/QuickActions';
 import { Charts } from '@/components/dashboard/Charts';

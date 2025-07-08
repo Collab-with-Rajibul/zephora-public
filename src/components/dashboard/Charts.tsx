@@ -4,7 +4,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { chartData, topCustomersData } from '@/lib/constants';
+import { chartData, topCustomersData } from '@/data/dashboard';
 import {
   BarChart,
   Bar,

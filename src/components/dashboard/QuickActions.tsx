@@ -5,79 +5,9 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { 
-  Plus, 
-  DollarSign, 
-  FileText, 
-  Users, 
-  Building, 
-  BarChart3,
-  Receipt,
-  CreditCard,
-  type LucideIcon
-} from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
-
-interface QuickAction {
-  id: string;
-  title: string;
-  description: string;
-  icon: LucideIcon;
-  variant: string;
-  href: string;
-}
-
-const quickActions: QuickAction[] = [
-  {
-    id: 'new-sale-invoice',
-    title: 'New Sale Invoice',
-    description: 'Create a new sales invoice',
-    icon: Receipt,
-    variant: 'primary',
-    href: '/sales-invoices/new'
-  },
-  {
-    id: 'new-purchase-bill',
-    title: 'New Purchase Bill',
-    description: 'Record a new purchase',
-    icon: FileText,
-    variant: 'success',
-    href: '/purchase-bills/new'
-  },
-  {
-    id: 'record-payment',
-    title: 'Record Payment',
-    description: 'Log payment received or sent',
-    icon: CreditCard,
-    variant: 'warning',
-    href: '/payments/new'
-  },
-  {
-    id: 'new-customer',
-    title: 'New Customer',
-    description: 'Add a new customer',
-    icon: Users,
-    variant: 'info',
-    href: '/customers/new'
-  },
-  {
-    id: 'new-supplier',
-    title: 'New Supplier',
-    description: 'Add a new supplier',
-    icon: Building,
-    variant: 'purple',
-    href: '/suppliers/new'
-  },
-  {
-    id: 'generate-report',
-    title: 'Generate Report',
-    description: 'Create financial reports',
-    icon: BarChart3,
-    variant: 'secondary',
-    href: '/reports'
-  }
-];
+import { quickActions } from '@/lib/constants';
 
 // Mobile-specific order: Row1: Sale Invoice, Purchase Bill | Row2: Customer, Supplier | Row3: Payment, Report
 const mobileOrder = [
