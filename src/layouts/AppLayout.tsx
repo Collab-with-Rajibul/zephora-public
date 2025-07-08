@@ -3,8 +3,8 @@
 
 import React, { useState } from 'react';
 import { ThemeProvider } from '@/components/ThemeProvider';
-import { Sidebar } from '@/components/dashboard/Sidebar';
-import { MobileFooterNav } from '@/components/MobileFooterNav';
+import { Sidebar } from '@/components/layout/sidebar/Sidebar';
+import { MobileFooterNav } from '@/components/layout/MobileFooterNav';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 interface AppLayoutProps {
