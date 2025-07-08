@@ -1,7 +1,6 @@
-
 "use client";
 
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
@@ -19,15 +18,13 @@ import {
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
 
-const CLICK_THRESHOLD = 10;
-
-// Mobile icon order similar to QuickActions approach
+// Mobile icon order
 const mobileIconOrder = [
   'home', 'sales', 'purchase', 'payments', 'profile',
   'employees', 'inventory', 'financial', 'reports', 'settings'
 ];
 
-// Icon definitions with consistent mapping
+// Icon definitions
 const iconDefinitions = {
   home: {
     title: 'Home',
@@ -98,38 +95,18 @@ const mobileIconGroups = [
 
 export function MobileFooterNav() {
   const navigate = useNavigate();
-  const isDragging = useRef(false);
-  const startCoords = useRef({ x: 0, y: 0 });
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const { theme, setTheme } = useTheme();
 
-  const handlePointerDown = useCallback((e: React.PointerEvent<HTMLButtonElement>) => {
-    isDragging.current = false;
-    startCoords.current = { x: e.clientX, y: e.clientY };
-  }, []);
-
-  const handlePointerMove = useCallback((e: React.PointerEvent<HTMLButtonElement>) => {
-    if (startCoords.current) {
-      const dx = e.clientX - startCoords.current.x;
-      const dy = e.clientY - startCoords.current.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-      if (distance > CLICK_THRESHOLD) {
-        isDragging.current = true;
-      }
+  const handleNavigation = useCallback((itemPath?: string) => {
+    if (itemPath) {
+      navigate(itemPath);
     }
-  }, []);
-
-  const handleClick = useCallback((itemPath?: string, itemTitle?: string) => {
-    if (!isDragging.current) {
-      if (itemPath) {
-        navigate(itemPath);
-      } else if (itemTitle) {
-        setOpenDropdown(prev => prev === itemTitle ? null : itemTitle);
-      }
-    }
-    startCoords.current = { x: 0, y: 0 };
-    isDragging.current = false;
   }, [navigate]);
+
+  const handleDropdownToggle = useCallback((itemTitle: string) => {
+    setOpenDropdown(prev => prev === itemTitle ? null : itemTitle);
+  }, []);
 
   const handleDropdownItemClick = useCallback((path: string) => {
     navigate(path);
@@ -141,7 +118,7 @@ export function MobileFooterNav() {
   }, [theme, setTheme]);
 
   const renderIconButton = useCallback((item: any) => {
-    const baseButtonClass = "flex flex-col items-center justify-center text-muted-foreground hover:text-primary hover:bg-accent transition-all duration-300 ease-in-out rounded-xl active:scale-95 transform hover:scale-105 flex-1 py-2 px-1";
+    const baseButtonClass = "flex flex-col items-center justify-center text-muted-foreground hover:text-primary hover:bg-accent transition-all duration-200 ease-out rounded-xl select-none touch-manipulation";
 
     // Handle Home button
     if (item.id === 'home') {
@@ -151,9 +128,8 @@ export function MobileFooterNav() {
           variant="ghost"
           size="sm"
           className={baseButtonClass}
-          onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-          onPointerUp={() => handleClick(item.path)}
+          onClick={() => handleNavigation(item.path)}
+          aria-label={`Navigate to ${item.title}`}
         >
           <div className="w-6 h-6 flex items-center justify-center mb-1">
             {item.component()}
@@ -172,9 +148,8 @@ export function MobileFooterNav() {
               variant="ghost"
               size="sm"
               className={baseButtonClass}
-              onPointerDown={handlePointerDown}
-              onPointerMove={handlePointerMove}
-              onPointerUp={() => handleClick(undefined, 'user-profile')}
+              onClick={() => handleDropdownToggle('user-profile')}
+              aria-label="User profile menu"
             >
               <div className="w-6 h-6 flex items-center justify-center mb-1">
                 <Avatar className="w-6 h-6">
@@ -185,7 +160,7 @@ export function MobileFooterNav() {
               <span className="text-xs font-medium text-center leading-tight max-w-full truncate">{item.title}</span>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent side="top" align="center" className="w-56 mb-2 animate-scale-in">
+          <DropdownMenuContent side="top" align="center" className="w-56 mb-2 animate-in slide-in-from-bottom-2 duration-200">
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col space-y-1">
                 <p className="text-sm font-medium leading-none">John Doe</p>
@@ -229,9 +204,8 @@ export function MobileFooterNav() {
               variant="ghost"
               size="sm"
               className={baseButtonClass}
-              onPointerDown={handlePointerDown}
-              onPointerMove={handlePointerMove}
-              onPointerUp={() => handleClick(undefined, item.navItem.title)}
+              onClick={() => handleDropdownToggle(item.navItem.title)}
+              aria-label={`${item.title} menu`}
             >
               <div className="w-6 h-6 flex items-center justify-center mb-1">
                 <Icon className={cn("h-6 w-6", item.color)} />
@@ -239,7 +213,7 @@ export function MobileFooterNav() {
               <span className="text-xs font-medium text-center leading-tight max-w-full truncate">{item.title}</span>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent side="top" align="center" className="w-56 mb-2 animate-scale-in">
+          <DropdownMenuContent side="top" align="center" className="w-56 mb-2 animate-in slide-in-from-bottom-2 duration-200">
             {item.navItem.children.map((child: any) => {
               const ChildIcon = child.icon;
               return (
@@ -262,9 +236,8 @@ export function MobileFooterNav() {
         variant="ghost"
         size="sm"
         className={baseButtonClass}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={() => handleClick(item.navItem?.path || '/')}
+        onClick={() => handleNavigation(item.navItem?.path || '/')}
+        aria-label={`Navigate to ${item.title}`}
       >
         <div className="w-6 h-6 flex items-center justify-center mb-1">
           <Icon className={cn("h-6 w-6", item.color)} />
@@ -272,7 +245,7 @@ export function MobileFooterNav() {
         <span className="text-xs font-medium text-center leading-tight max-w-full truncate">{item.title}</span>
       </Button>
     );
-  }, [handlePointerDown, handlePointerMove, handleClick, openDropdown, handleDropdownItemClick, toggleTheme, theme]);
+  }, [handleNavigation, handleDropdownToggle, openDropdown, handleDropdownItemClick, toggleTheme, theme]);
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 bg-background/95 backdrop-blur-sm border-t border-border md:hidden shadow-lg">
@@ -280,9 +253,11 @@ export function MobileFooterNav() {
         opts={{
           align: "center",
           loop: false,
-          containScroll: "trimSnaps",
+          containScroll: "keepSnaps",
           skipSnaps: false,
-          duration: 25
+          duration: 25,
+          dragFree: false,
+          inViewThreshold: 0.7
         }}
         className="w-full"
       >
