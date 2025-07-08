@@ -1,14 +1,12 @@
-
 "use client";
 
 import React, { useState } from 'react';
 import { dashboardMetrics } from '@/lib/constants';
-import { MetricCard } from './MetricCard';
-import { QuickActions } from './QuickActions';
-import { Charts } from './Charts';
-import { ActivityFeed } from './ActivityFeed';
+import { MetricCard } from '@/components/dashboard/MetricCard';
+import { QuickActions } from '@/components/dashboard/QuickActions';
+import { Charts } from '@/components/dashboard/Charts';
+import { ActivityFeed } from '@/components/dashboard/ActivityFeed';
 import { Search, Bell, LayoutDashboard, Users, CreditCard, FileText, Settings } from 'lucide-react';
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -21,7 +19,7 @@ import {
   CommandSeparator,
 } from '@/components/ui/command';
 
-export function DashboardOverview() {
+const DashboardPage = () => {
   const [open, setOpen] = useState(false);
 
   const runCommand = React.useCallback((command: () => void) => {
@@ -129,4 +127,6 @@ export function DashboardOverview() {
       <ActivityFeed />
     </div>
   );
-}
+};
+
+export default DashboardPage;
