@@ -2,8 +2,8 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Download, Plus, Search } from "lucide-react";
-import { InvoicesTable } from "@/components/sales-invoices/InvoicesTable";
-import { SummaryCard } from "@/components/sales-invoices/SummaryCard";
+import { InvoicesTable } from "@/components/page/sales-invoices/InvoicesTable";
+import { SummaryCard } from "@/components/page/sales-invoices/SummaryCard";
 import { DollarSign, FileText, XCircle, Clock } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { invoices } from "@/data/sales-invoices";

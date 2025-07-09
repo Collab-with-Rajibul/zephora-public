@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Plus, Upload, Download, Search } from "lucide-react";
-import { CustomersTable } from "@/components/customers/CustomersTable";
+import { CustomersTable } from "@/components/page/customers/CustomersTable";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { customers } from "@/data/customers";

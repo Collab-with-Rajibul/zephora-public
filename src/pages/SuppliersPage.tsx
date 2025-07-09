@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { suppliers } from "@/data/suppliers";
-import { SuppliersTable } from "@/components/suppliers/SuppliersTable";
+import { SuppliersTable } from "@/components/page/suppliers/SuppliersTable";
 import { Plus, Download, Search } from "lucide-react";
 import React from 'react';
 import { useNavigate } from 'react-router-dom';

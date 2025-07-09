@@ -2,10 +2,10 @@
 
 import React, { useState } from 'react';
 import { dashboardMetrics } from '@/data/dashboard';
-import { MetricCard } from '@/components/dashboard/MetricCard';
-import { QuickActions } from '@/components/dashboard/QuickActions';
-import { Charts } from '@/components/dashboard/Charts';
-import { ActivityFeed } from '@/components/dashboard/ActivityFeed';
+import { MetricCard } from '@/components/page/dashboard/MetricCard';
+import { QuickActions } from '@/components/page/dashboard/QuickActions';
+import { Charts } from '@/components/page/dashboard/Charts';
+import { ActivityFeed } from '@/components/page/dashboard/ActivityFeed';
 import { Search, Bell, LayoutDashboard, Users, CreditCard, FileText, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
