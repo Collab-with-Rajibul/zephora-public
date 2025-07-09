@@ -11,10 +11,12 @@ import { navigationItems } from '@/lib/constants';
 interface SidebarNavigationProps {
   isCollapsed: boolean;
   onToggle: () => void;
+  expandedItems: string[];
+  setExpandedItems: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-export function SidebarNavigation({ isCollapsed, onToggle }: SidebarNavigationProps) {
-  const [expandedItems, setExpandedItems] = useState<string[]>(['Sales Management', 'Purchase Management']);
+export function SidebarNavigation({ isCollapsed, onToggle, expandedItems, setExpandedItems }: SidebarNavigationProps) {
+
 
   const toggleExpanded = (title: string) => {
     setExpandedItems(prev => 
@@ -23,18 +25,6 @@ export function SidebarNavigation({ isCollapsed, onToggle }: SidebarNavigationPr
         : [...prev, title]
     );
   };
-
-  const handleLinkClick = () => {
-    if (isMobileScreen() && !isCollapsed) {
-        onToggle();
-    } else if (!isMobileScreen()) {
-        // any other logic for non-mobile
-    }
-  };
-
-  const isMobileScreen = () => {
-      return window.innerWidth < 768;
-  }
 
   return (
     <div className="flex-1 overflow-y-auto p-4">
@@ -97,7 +87,7 @@ export function SidebarNavigation({ isCollapsed, onToggle }: SidebarNavigationPr
 
                     if (child.path) {
                       return (
-                        <Button {...buttonProps} asChild key={child.title} onClick={handleLinkClick}>
+                        <Button {...buttonProps} asChild key={child.title}>
                           <Link to={child.path}>
                             {buttonContent}
                           </Link>

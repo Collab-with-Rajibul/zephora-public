@@ -10,15 +10,15 @@ import { Link, useNavigate } from 'react-router-dom';
 interface SidebarHeaderProps {
   isCollapsed: boolean;
   onToggle: () => void;
+  setExpandedItems: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
-export function SidebarHeader({ isCollapsed, onToggle }: SidebarHeaderProps) {
+export function SidebarHeader({ isCollapsed, onToggle, setExpandedItems }: SidebarHeaderProps) {
   const navigate = useNavigate();
 
-  const handleLogoClick = () => {
-    if (!isCollapsed) {
-      onToggle();
-    }
+  const handleLogoClickAndReset = () => {
+    setExpandedItems(["Sales Management", "Purchase Management"]);
+    onToggle();
     navigate('/');
   };
 
@@ -28,7 +28,7 @@ export function SidebarHeader({ isCollapsed, onToggle }: SidebarHeaderProps) {
       isCollapsed ? "justify-center" : "justify-between p-6"
     )}>
       {!isCollapsed && (
-        <button onClick={handleLogoClick} className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+        <button onClick={handleLogoClickAndReset} className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
           <img src="/zephora-logo.png" alt="Zephora Logo" className="w-8 h-8 rounded-full object-cover" />
           <div>
             <h1 className="text-lg font-semibold text-foreground">Zephora</h1>
@@ -48,9 +48,7 @@ export function SidebarHeader({ isCollapsed, onToggle }: SidebarHeaderProps) {
         )}
       >
         {isCollapsed ? (
-          <button onClick={handleLogoClick}>
-            <img src="/zephora-logo.png" alt="Zephora Logo" className="w-8 h-8 rounded-full object-cover" />
-          </button>
+          <img src="/zephora-logo.png" alt="Zephora Logo" className="w-8 h-8 rounded-full object-cover" />
         ) : (
           <Sidebar className="w-4 h-4" />
         )}

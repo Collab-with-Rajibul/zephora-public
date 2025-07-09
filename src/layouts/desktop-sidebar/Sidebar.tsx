@@ -15,10 +15,27 @@ interface SidebarProps {
 }
 
 export function Sidebar({ className, isCollapsed, onToggle }: SidebarProps) {
+  const [expandedItems, setExpandedItems] = React.useState<string[]>([
+    "Sales Management",
+    "Purchase Management",
+  ]);
+
+  const resetAndToggle = () => {
+    if (!isCollapsed) {
+      setExpandedItems(["Sales Management", "Purchase Management"]);
+    }
+    onToggle();
+  };
+
   const sidebarContent = (
     <>
-      <SidebarHeader isCollapsed={isCollapsed} onToggle={onToggle} />
-      <SidebarNavigation isCollapsed={isCollapsed} onToggle={onToggle} />
+      <SidebarHeader isCollapsed={isCollapsed} onToggle={onToggle} setExpandedItems={setExpandedItems} />
+      <SidebarNavigation
+        isCollapsed={isCollapsed}
+        onToggle={onToggle}
+        expandedItems={expandedItems}
+        setExpandedItems={setExpandedItems}
+      />
       <Separator className="bg-border" />
       <SidebarFooter isCollapsed={isCollapsed} />
     </>
