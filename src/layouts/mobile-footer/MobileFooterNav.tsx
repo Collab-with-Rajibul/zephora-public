@@ -118,7 +118,7 @@ export function MobileFooterNav() {
   }, [theme, setTheme]);
 
   const renderIconButton = useCallback((item: any) => {
-    const baseButtonClass = "flex flex-col items-center justify-center text-muted-foreground hover:text-primary hover:bg-accent transition-all duration-200 ease-out rounded-xl select-none touch-manipulation";
+    const baseButtonClass = "flex flex-col items-center justify-start text-muted-foreground hover:text-primary hover:bg-accent transition-all duration-200 ease-out rounded-xl select-none touch-manipulation h-full w-full min-w-0 px-1 py-2";
 
     // Handle Home button
     if (item.id === 'home') {
@@ -131,10 +131,10 @@ export function MobileFooterNav() {
           onClick={() => handleNavigation(item.path)}
           aria-label={`Navigate to ${item.title}`}
         >
-          <div className="w-6 h-6 flex items-center justify-center mb-1">
+          <div className="w-6 h-6 flex items-center justify-center mb-1 flex-shrink-0">
             {item.component()}
           </div>
-          <span className="text-xs font-medium text-center leading-tight max-w-full truncate">{item.title}</span>
+          <span className="text-xs font-medium text-center leading-none block overflow-hidden text-ellipsis">{item.title}</span>
         </Button>
       );
     }
@@ -151,13 +151,13 @@ export function MobileFooterNav() {
               onClick={() => handleDropdownToggle('user-profile')}
               aria-label="User profile menu"
             >
-              <div className="w-6 h-6 flex items-center justify-center mb-1">
+              <div className="w-6 h-6 flex items-center justify-center mb-1 flex-shrink-0">
                 <Avatar className="w-6 h-6">
                   <AvatarImage src="/placeholder-avatar.jpg" />
                   <AvatarFallback className="text-primary-foreground text-xs font-medium bg-gradient-to-br from-blue-500 to-purple-600">JD</AvatarFallback>
                 </Avatar>
               </div>
-              <span className="text-xs font-medium text-center leading-tight max-w-full truncate">{item.title}</span>
+              <span className="text-xs font-medium text-center leading-none block overflow-hidden text-ellipsis">{item.title}</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent side="top" align="center" className="w-56 mb-2 animate-in slide-in-from-bottom-2 duration-200">
@@ -207,10 +207,10 @@ export function MobileFooterNav() {
               onClick={() => handleDropdownToggle(item.navItem.title)}
               aria-label={`${item.title} menu`}
             >
-              <div className="w-6 h-6 flex items-center justify-center mb-1">
+              <div className="w-6 h-6 flex items-center justify-center mb-1 flex-shrink-0">
                 <Icon className={cn("h-6 w-6", item.color)} />
               </div>
-              <span className="text-xs font-medium text-center leading-tight max-w-full truncate">{item.title}</span>
+              <span className="text-xs font-medium text-center leading-none block overflow-hidden text-ellipsis">{item.title}</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent side="top" align="center" className="w-56 mb-2 animate-in slide-in-from-bottom-2 duration-200">
@@ -239,10 +239,10 @@ export function MobileFooterNav() {
         onClick={() => handleNavigation(item.navItem?.path || '/')}
         aria-label={`Navigate to ${item.title}`}
       >
-        <div className="w-6 h-6 flex items-center justify-center mb-1">
+        <div className="w-6 h-6 flex items-center justify-center mb-1 flex-shrink-0">
           <Icon className={cn("h-6 w-6", item.color)} />
         </div>
-        <span className="text-xs font-medium text-center leading-tight max-w-full truncate">{item.title}</span>
+        <span className="text-xs font-medium text-center leading-none block overflow-hidden text-ellipsis">{item.title}</span>
       </Button>
     );
   }, [handleNavigation, handleDropdownToggle, openDropdown, handleDropdownItemClick, toggleTheme, theme]);
@@ -264,9 +264,13 @@ export function MobileFooterNav() {
         <CarouselContent className="ml-0">
           {mobileIconGroups.map((group, groupIndex) => (
             <CarouselItem key={groupIndex} className="pl-0 basis-full">
-              <div className="flex h-16 items-center justify-center">
-                <div className="flex items-center justify-evenly w-full px-4 max-w-md mx-auto">
-                  {group.map((item) => renderIconButton(item))}
+              <div className="flex h-20 items-stretch justify-center px-2 py-1">
+                <div className="flex items-stretch justify-evenly w-full max-w-lg mx-auto gap-1">
+                  {group.map((item) => (
+                    <div key={item.id} className="flex-1 min-w-0">
+                      {renderIconButton(item)}
+                    </div>
+                  ))}
                 </div>
               </div>
             </CarouselItem>
