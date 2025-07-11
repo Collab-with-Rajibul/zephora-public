@@ -118,7 +118,7 @@ export function MobileFooterNav() {
   }, [theme, setTheme]);
 
   const renderIconButton = useCallback((item: any) => {
-    const baseButtonClass = "flex flex-col items-center justify-start text-muted-foreground hover:text-primary hover:bg-accent transition-all duration-200 ease-out rounded-xl select-none touch-manipulation h-full w-full min-w-0 px-1 pt-1 pb-2";
+    const baseButtonClass = "flex flex-col items-center justify-start text-muted-foreground hover:text-primary hover:bg-accent transition-all duration-200 ease-out rounded-xl select-none touch-manipulation h-16 w-full min-w-0 px-1 pt-1 pb-2";
 
     // Handle Home button
     if (item.id === 'home') {
@@ -264,8 +264,8 @@ export function MobileFooterNav() {
         <CarouselContent className="ml-0">
           {mobileIconGroups.map((group, groupIndex) => (
             <CarouselItem key={groupIndex} className="pl-0 basis-full">
-              <div className="flex h-20 items-stretch justify-center px-2 pt-0 pb-1">
-                <div className="flex items-stretch justify-evenly w-full max-w-lg mx-auto gap-1">
+              <div className="flex h-20 items-start justify-center px-2 pt-0 pb-1">
+                <div className="flex items-start justify-evenly w-full max-w-lg mx-auto gap-1">
                   {group.map((item) => (
                     <div key={item.id} className="flex-1 min-w-0">
                       {renderIconButton(item)}
