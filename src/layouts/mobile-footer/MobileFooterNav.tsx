@@ -118,7 +118,6 @@ export function MobileFooterNav() {
   }, [theme, setTheme]);
 
   const renderIconButton = useCallback((item: any) => {
-    // Updated base button class - reduced top padding and tight icon-label spacing
     const baseButtonClass = "flex flex-col items-center justify-start text-muted-foreground hover:text-primary hover:bg-accent transition-all duration-200 ease-out rounded-xl select-none touch-manipulation h-full w-full min-w-0 px-1 pt-1 pb-2";
 
     // Handle Home button
@@ -135,7 +134,7 @@ export function MobileFooterNav() {
           <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
             {item.component()}
           </div>
-          <span className="text-xs font-medium text-center leading-none block overflow-hidden text-ellipsis mt-0.5">{item.title}</span>
+          <span className="text-xs font-medium text-center leading-tight block overflow-hidden text-ellipsis mt-0">{item.title}</span>
         </Button>
       );
     }
@@ -158,7 +157,7 @@ export function MobileFooterNav() {
                   <AvatarFallback className="text-primary-foreground text-xs font-medium bg-gradient-to-br from-blue-500 to-purple-600">JD</AvatarFallback>
                 </Avatar>
               </div>
-              <span className="text-xs font-medium text-center leading-none block overflow-hidden text-ellipsis mt-0.5">{item.title}</span>
+              <span className="text-xs font-medium text-center leading-tight block overflow-hidden text-ellipsis mt-0">{item.title}</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent side="top" align="center" className="w-56 mb-2 animate-in slide-in-from-bottom-2 duration-200">
@@ -211,7 +210,7 @@ export function MobileFooterNav() {
               <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
                 <Icon className={cn("h-6 w-6", item.color)} />
               </div>
-              <span className="text-xs font-medium text-center leading-none block overflow-hidden text-ellipsis mt-0.5">{item.title}</span>
+              <span className="text-xs font-medium text-center leading-tight block overflow-hidden text-ellipsis mt-0">{item.title}</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent side="top" align="center" className="w-56 mb-2 animate-in slide-in-from-bottom-2 duration-200">
@@ -243,7 +242,7 @@ export function MobileFooterNav() {
         <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
           <Icon className={cn("h-6 w-6", item.color)} />
         </div>
-        <span className="text-xs font-medium text-center leading-none block overflow-hidden text-ellipsis mt-0.5">{item.title}</span>
+        <span className="text-xs font-medium text-center leading-tight block overflow-hidden text-ellipsis mt-0">{item.title}</span>
       </Button>
     );
   }, [handleNavigation, handleDropdownToggle, openDropdown, handleDropdownItemClick, toggleTheme, theme]);
