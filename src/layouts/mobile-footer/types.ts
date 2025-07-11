@@ -9,6 +9,7 @@ export interface MobileIconItem {
   component?: () => JSX.Element;
   path?: string;
   isProfile?: boolean;
+  isHome?: boolean;
   navItem?: {
     title: string;
     path?: string;

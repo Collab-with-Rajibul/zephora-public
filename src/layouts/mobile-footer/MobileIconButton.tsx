@@ -5,6 +5,7 @@ import { MobileIconItem } from './types';
 import { MobileIcon } from './MobileIcon';
 import { ProfileDropdown } from './ProfileDropdown';
 import { NavigationDropdown } from './NavigationDropdown';
+import { HomeIcon } from './HomeIcon';
 
 interface MobileIconButtonProps {
   item: MobileIconItem;
@@ -22,11 +23,11 @@ export function MobileIconButton({
   onDropdownItemClick 
 }: MobileIconButtonProps) {
   // Handle Home button
-  if (item.id === 'home') {
+  if (item.isHome) {
     return (
       <MobileIcon item={item} onClick={() => onNavigation(item.path)}>
         <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
-          {item.component && item.component()}
+          <HomeIcon />
         </div>
       </MobileIcon>
     );

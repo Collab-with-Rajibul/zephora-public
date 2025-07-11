@@ -14,10 +14,8 @@ export const iconDefinitions: Record<string, MobileIconItem> = {
   home: {
     id: 'home',
     title: 'Home',
-    component: () => (
-      <img src="/zephora-logo.png" alt="Zephora Logo" className="w-6 h-6 rounded-full object-cover" />
-    ),
-    path: '/'
+    path: '/',
+    isHome: true
   },
   sales: {
     id: 'sales',
