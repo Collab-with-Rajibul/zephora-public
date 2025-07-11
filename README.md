@@ -6,7 +6,6 @@ Zephora is an open source platform that empowers small businesses and SME owners
 
 
 
-
 ---
 
 ## Features
