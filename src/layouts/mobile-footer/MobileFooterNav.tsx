@@ -131,10 +131,10 @@ export function MobileFooterNav() {
           onClick={() => handleNavigation(item.path)}
           aria-label={`Navigate to ${item.title}`}
         >
-          <div className="w-6 h-6 flex items-center justify-center mb-1 flex-shrink-0">
+          <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
             {item.component()}
           </div>
-          <span className="text-xs font-medium text-center leading-none block overflow-hidden text-ellipsis">{item.title}</span>
+          <span className="text-xs font-medium text-center leading-none block overflow-hidden text-ellipsis mt-0.5">{item.title}</span>
         </Button>
       );
     }
@@ -151,13 +151,13 @@ export function MobileFooterNav() {
               onClick={() => handleDropdownToggle('user-profile')}
               aria-label="User profile menu"
             >
-              <div className="w-6 h-6 flex items-center justify-center mb-1 flex-shrink-0">
+              <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
                 <Avatar className="w-6 h-6">
                   <AvatarImage src="/placeholder-avatar.jpg" />
                   <AvatarFallback className="text-primary-foreground text-xs font-medium bg-gradient-to-br from-blue-500 to-purple-600">JD</AvatarFallback>
                 </Avatar>
               </div>
-              <span className="text-xs font-medium text-center leading-none block overflow-hidden text-ellipsis">{item.title}</span>
+              <span className="text-xs font-medium text-center leading-none block overflow-hidden text-ellipsis mt-0.5">{item.title}</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent side="top" align="center" className="w-56 mb-2 animate-in slide-in-from-bottom-2 duration-200">
@@ -207,10 +207,10 @@ export function MobileFooterNav() {
               onClick={() => handleDropdownToggle(item.navItem.title)}
               aria-label={`${item.title} menu`}
             >
-              <div className="w-6 h-6 flex items-center justify-center mb-1 flex-shrink-0">
+              <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
                 <Icon className={cn("h-6 w-6", item.color)} />
               </div>
-              <span className="text-xs font-medium text-center leading-none block overflow-hidden text-ellipsis">{item.title}</span>
+              <span className="text-xs font-medium text-center leading-none block overflow-hidden text-ellipsis mt-0.5">{item.title}</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent side="top" align="center" className="w-56 mb-2 animate-in slide-in-from-bottom-2 duration-200">
@@ -239,10 +239,10 @@ export function MobileFooterNav() {
         onClick={() => handleNavigation(item.navItem?.path || '/')}
         aria-label={`Navigate to ${item.title}`}
       >
-        <div className="w-6 h-6 flex items-center justify-center mb-1 flex-shrink-0">
+        <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
           <Icon className={cn("h-6 w-6", item.color)} />
         </div>
-        <span className="text-xs font-medium text-center leading-none block overflow-hidden text-ellipsis">{item.title}</span>
+        <span className="text-xs font-medium text-center leading-none block overflow-hidden text-ellipsis mt-0.5">{item.title}</span>
       </Button>
     );
   }, [handleNavigation, handleDropdownToggle, openDropdown, handleDropdownItemClick, toggleTheme, theme]);
