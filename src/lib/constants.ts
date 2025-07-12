@@ -57,7 +57,7 @@ export const navigationItems: NavItem[] = [
       ],
     },
     {
-      title: 'Employee Management',
+      title: 'Employees Management',
       icon: UserCheck,
       color: 'text-purple-500',
       children: [

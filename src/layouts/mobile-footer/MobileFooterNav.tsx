@@ -7,7 +7,7 @@ import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carouse
 import { navigationItems } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Sun, Moon, Users, Settings, LogOut, UserCheck, Package, BookOpen, PieChart, DollarSign, ShoppingCart, CreditCard } from 'lucide-react';
+import { Sun, Moon, Users, Settings, LogOut } from 'lucide-react';
 import { useTheme } from '@/components/ThemeProvider';
 import {
   DropdownMenu,
@@ -18,94 +18,63 @@ import {
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
 
-// Mobile icon order
-const mobileIconOrder = [
-  'home', 'sales', 'purchase', 'payments', 'profile',
-  'employees', 'inventory', 'financial', 'reports', 'settings'
+// Mobile icon order with pre-defined groups using first words of titles
+const iconOrder = [
+  ['Home', 'Sales', 'Purchase', 'Payments', 'Profile'],
+  ['Employees', 'Inventory', 'Financial', 'Reports', 'Settings']
 ];
 
-// Icon definitions
-const iconDefinitions = {
-  home: {
-    title: 'Home',
-    component: () => (
-      <img src="/zephora-logo.png" alt="Zephora Logo" className="w-6 h-6 rounded-full object-cover" />
-    ),
-    path: '/'
-  },
-  sales: {
-    title: 'Sales',
-    icon: DollarSign,
-    color: 'text-green-500',
-    navItem: navigationItems.find(item => item.title === 'Sales Management')
-  },
-  purchase: {
-    title: 'Purchase',
-    icon: ShoppingCart,
-    color: 'text-blue-500',
-    navItem: navigationItems.find(item => item.title === 'Purchase Management')
-  },
-  payments: {
-    title: 'Payments',
-    icon: CreditCard,
-    color: 'text-pink-500',
-    navItem: navigationItems.find(item => item.title === 'Payments')
-  },
-  profile: {
-    title: 'Profile',
-    isProfile: true
-  },
-  employees: {
-    title: 'Employees',
-    icon: UserCheck,
-    color: 'text-purple-500',
-    navItem: navigationItems.find(item => item.title === 'Employee Management')
-  },
-  inventory: {
-    title: 'Inventory',
-    icon: Package,
-    color: 'text-purple-500',
-    navItem: navigationItems.find(item => item.title === 'Inventory & Stock')
-  },
-  financial: {
-    title: 'Financial',
-    icon: BookOpen,
-    color: 'text-cyan-500',
-    navItem: navigationItems.find(item => item.title === 'Financial Statements')
-  },
-  reports: {
-    title: 'Reports',
-    icon: PieChart,
-    color: 'text-yellow-400',
-    navItem: navigationItems.find(item => item.title === 'Reports & Analytics')
-  },
-  settings: {
-    title: 'Settings',
-    icon: Settings,
-    color: 'text-gray-500',
-    navItem: navigationItems.find(item => item.title === 'Settings')
-  }
+// Create mobile navigation items by combining navigation items with new items
+const createMobileNavItems = () => {
+  const navItemsMap = new Map(navigationItems.map(item => [item.title.split(' ')[0], item]));
+  
+  const newItems = {
+    'Home': {
+      title: 'Home',
+      icon: () => <img src="/zephora-logo.png" alt="Zephora Logo" className="w-6 h-6 rounded-full object-cover" />,
+      path: '/'
+    },
+    'Profile': {
+      title: 'Profile',
+      icon: () => (
+        <Avatar className="w-6 h-6">
+          <AvatarImage src="/placeholder-avatar.jpg" />
+          <AvatarFallback className="text-primary-foreground text-xs font-medium bg-gradient-to-br from-blue-500 to-purple-600">JD</AvatarFallback>
+        </Avatar>
+      )
+    }
+  };
+
+  return iconOrder.map(group => 
+    group.map(label => {
+      if (newItems[label]) {
+        return { ...newItems[label], label };
+      }
+      
+      const navItem = navItemsMap.get(label);
+      if (navItem) {
+        return { ...navItem, label };
+      }
+      
+      return null;
+    }).filter(Boolean)
+  );
 };
 
-// Create groups from the ordered list
-const mobileIconGroups = [
-  mobileIconOrder.slice(0, 5).map(id => ({ id, ...iconDefinitions[id] })),
-  mobileIconOrder.slice(5, 10).map(id => ({ id, ...iconDefinitions[id] }))
-];
+// Create mobile items with groups
+const mobileItems = createMobileNavItems();
 
 export function MobileFooterNav() {
   const navigate = useNavigate();
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const { theme, setTheme } = useTheme();
 
-  const handleNavigation = useCallback((itemPath?: string) => {
-    if (itemPath) {
-      navigate(itemPath);
-    }
+  const handleNavigation = useCallback((path?: string) => {
+    if (path) navigate(path);
   }, [navigate]);
 
-  const handleDropdownToggle = useCallback((itemTitle: string) => {
-    setOpenDropdown(prev => prev === itemTitle ? null : itemTitle);
+  const handleDropdownToggle = useCallback((title: string) => {
+    setOpenDropdown(prev => prev === title ? null : title);
   }, []);
 
   const handleDropdownItemClick = useCallback((path: string) => {
@@ -119,45 +88,44 @@ export function MobileFooterNav() {
 
   const renderIconButton = useCallback((item: any) => {
     const baseButtonClass = "flex flex-col items-center justify-start text-muted-foreground hover:text-primary hover:bg-accent transition-all duration-200 ease-out rounded-xl select-none touch-manipulation h-16 w-full min-w-0 px-1 pt-1 pb-2";
+    const iconContainerClass = "w-6 h-6 flex items-center justify-center flex-shrink-0";
+    const labelClass = "text-xs font-medium text-center leading-tight block overflow-hidden text-ellipsis mt-0";
 
     // Handle Home button
-    if (item.id === 'home') {
+    if (item.title === 'Home') {
       return (
         <Button
-          key={item.id}
+          key={item.title}
           variant="ghost"
           size="sm"
           className={baseButtonClass}
           onClick={() => handleNavigation(item.path)}
           aria-label={`Navigate to ${item.title}`}
         >
-          <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
-            {item.component()}
+          <div className={iconContainerClass}>
+            {item.icon()}
           </div>
-          <span className="text-xs font-medium text-center leading-tight block overflow-hidden text-ellipsis mt-0">{item.title}</span>
+          <span className={labelClass}>{item.label}</span>
         </Button>
       );
     }
 
     // Handle Profile button
-    if (item.isProfile) {
+    if (item.title === 'Profile') {
       return (
-        <DropdownMenu key={item.id} open={openDropdown === 'user-profile'} onOpenChange={(open) => !open && setOpenDropdown(null)}>
+        <DropdownMenu key={item.title} open={openDropdown === 'Profile'} onOpenChange={(open) => !open && setOpenDropdown(null)}>
           <DropdownMenuTrigger asChild>
             <Button
               variant="ghost"
               size="sm"
               className={baseButtonClass}
-              onClick={() => handleDropdownToggle('user-profile')}
+              onClick={() => handleDropdownToggle('Profile')}
               aria-label="User profile menu"
             >
-              <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
-                <Avatar className="w-6 h-6">
-                  <AvatarImage src="/placeholder-avatar.jpg" />
-                  <AvatarFallback className="text-primary-foreground text-xs font-medium bg-gradient-to-br from-blue-500 to-purple-600">JD</AvatarFallback>
-                </Avatar>
+              <div className={iconContainerClass}>
+                {item.icon()}
               </div>
-              <span className="text-xs font-medium text-center leading-tight block overflow-hidden text-ellipsis mt-0">{item.title}</span>
+              <span className={labelClass}>{item.label}</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent side="top" align="center" className="w-56 mb-2 animate-in slide-in-from-bottom-2 duration-200">
@@ -195,26 +163,26 @@ export function MobileFooterNav() {
     }
 
     // Handle navigation items with dropdowns
-    if (item.navItem && item.navItem.children && item.navItem.children.length > 0) {
+    if (item.children?.length > 0) {
       const Icon = item.icon;
       return (
-        <DropdownMenu key={item.id} open={openDropdown === item.navItem.title} onOpenChange={(open) => !open && setOpenDropdown(null)}>
+        <DropdownMenu key={item.title} open={openDropdown === item.title} onOpenChange={(open) => !open && setOpenDropdown(null)}>
           <DropdownMenuTrigger asChild>
             <Button
               variant="ghost"
               size="sm"
               className={baseButtonClass}
-              onClick={() => handleDropdownToggle(item.navItem.title)}
-              aria-label={`${item.title} menu`}
+              onClick={() => handleDropdownToggle(item.title)}
+              aria-label={`${item.label} menu`}
             >
-              <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+              <div className={iconContainerClass}>
                 <Icon className={cn("h-6 w-6", item.color)} />
               </div>
-              <span className="text-xs font-medium text-center leading-tight block overflow-hidden text-ellipsis mt-0">{item.title}</span>
+              <span className={labelClass}>{item.label}</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent side="top" align="center" className="w-56 mb-2 animate-in slide-in-from-bottom-2 duration-200">
-            {item.navItem.children.map((child: any) => {
+            {item.children.map((child: any) => {
               const ChildIcon = child.icon;
               return (
                 <DropdownMenuItem key={child.title} onClick={() => handleDropdownItemClick(child.path || '/')}>
@@ -228,21 +196,21 @@ export function MobileFooterNav() {
       );
     }
 
-    // Handle simple navigation items
+    // Handle simple navigation items (fallback, though most have children)
     const Icon = item.icon;
     return (
       <Button
-        key={item.id}
+        key={item.title}
         variant="ghost"
         size="sm"
         className={baseButtonClass}
-        onClick={() => handleNavigation(item.navItem?.path || '/')}
+        onClick={() => handleNavigation(item.path || '/')}
         aria-label={`Navigate to ${item.title}`}
       >
-        <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
+        <div className={iconContainerClass}>
           <Icon className={cn("h-6 w-6", item.color)} />
         </div>
-        <span className="text-xs font-medium text-center leading-tight block overflow-hidden text-ellipsis mt-0">{item.title}</span>
+        <span className={labelClass}>{item.label}</span>
       </Button>
     );
   }, [handleNavigation, handleDropdownToggle, openDropdown, handleDropdownItemClick, toggleTheme, theme]);
@@ -262,12 +230,12 @@ export function MobileFooterNav() {
         className="w-full"
       >
         <CarouselContent className="ml-0">
-          {mobileIconGroups.map((group, groupIndex) => (
+          {mobileItems.map((group, groupIndex) => (
             <CarouselItem key={groupIndex} className="pl-0 basis-full">
               <div className="flex h-20 items-start justify-center px-2 pt-0 pb-1">
                 <div className="flex items-start justify-evenly w-full max-w-lg mx-auto gap-1">
                   {group.map((item) => (
-                    <div key={item.id} className="flex-1 min-w-0">
+                    <div key={item.title} className="flex-1 min-w-0">
                       {renderIconButton(item)}
                     </div>
                   ))}
