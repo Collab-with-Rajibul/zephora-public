@@ -74,14 +74,7 @@ export function MobileFooterNav() {
   }, [navigate]);
 
   const handleDropdownToggle = useCallback((title: string) => {
-    setOpenDropdown(prev => {
-      // If clicking the same dropdown that's already open, close it
-      if (prev === title) {
-        return null;
-      }
-      // Otherwise, open the clicked dropdown (this will close any other open dropdown)
-      return title;
-    });
+    setOpenDropdown(prev => prev === title ? null : title);
   }, []);
 
   const handleDropdownItemClick = useCallback((path: string) => {
@@ -120,12 +113,7 @@ export function MobileFooterNav() {
     // Handle Profile button
     if (item.title === 'Profile') {
       return (
-        <DropdownMenu key={item.title} open={openDropdown === 'Profile'} onOpenChange={(open) => {
-          // Only close if the dropdown is being closed, don't interfere with opening
-          if (!open && openDropdown === 'Profile') {
-            setOpenDropdown(null);
-          }
-        }}>
+        <DropdownMenu key={item.title} open={openDropdown === 'Profile'} onOpenChange={(open) => !open && setOpenDropdown(null)}>
           <DropdownMenuTrigger asChild>
             <Button
               variant="ghost"
@@ -178,12 +166,7 @@ export function MobileFooterNav() {
     if (item.children?.length > 0) {
       const Icon = item.icon;
       return (
-        <DropdownMenu key={item.title} open={openDropdown === item.title} onOpenChange={(open) => {
-          // Only close if the dropdown is being closed, don't interfere with opening
-          if (!open && openDropdown === item.title) {
-            setOpenDropdown(null);
-          }
-        }}>
+        <DropdownMenu key={item.title} open={openDropdown === item.title} onOpenChange={(open) => !open && setOpenDropdown(null)}>
           <DropdownMenuTrigger asChild>
             <Button
               variant="ghost"
