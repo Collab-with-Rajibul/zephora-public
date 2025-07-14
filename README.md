@@ -11,7 +11,7 @@ Zephora is an open source platform that empowers small businesses and SME owners
 - 📊 **Live Dashboard:** Instantly visualize your business with dynamic metrics, recent activities, and financial overviews.
 - 🧾 **Easy Invoicing & Billing:** Create, send, and manage sales invoices and purchase bills without paperwork.
 - 📒 **Unified Directory:** Seamlessly organize all your customers and suppliers for effortless communication.
-- 👥 **Employee Hub:** Monitor team members, their attendance, payroll and advances with clarity.
+- 👥 **Employee Hub:** Manage team members and monitor their attendance, payroll and advances(if any) with clarity.
 - 💸 **Smart Payment Tracker:** Track received, due, and overdue payments to always stay on top of cash flow.
 - 📈 **Insightful Reports:** Generate powerful analytics revealing revenue, expenses, and growth trends.
 - 🛎️ **Real-Time Alerts:** Receive instant notifications for important business events and overdue actions.
