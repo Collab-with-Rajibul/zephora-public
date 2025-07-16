@@ -85,9 +85,9 @@ Feel free to open issues for help, feature requests, or questions!
 ## License
 
 This project is open source and available under the [MIT License](LICENSE).
--->
----
 
+---
+-->
 ## Acknowledgments
 
 - ⚡️ Fast development with [Vite](https://vitejs.dev/)
