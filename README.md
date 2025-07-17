@@ -81,14 +81,13 @@ We welcome contributions from the community! Whether you want to fix a bug, add 
 Feel free to open issues for help, feature requests, or questions!
 
 ---
-
+<!--
 ## License
 
 This project is open source and available under the [MIT License](LICENSE).
-(Not ready yet)
 
 ---
-
+-->
 ## Acknowledgments
 
 - ⚡️ Fast development with [Vite](https://vitejs.dev/)
