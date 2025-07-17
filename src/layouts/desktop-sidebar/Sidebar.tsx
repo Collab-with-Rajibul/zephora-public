@@ -17,7 +17,7 @@ interface SidebarProps {
 export function Sidebar({ className, isCollapsed, onToggle }: SidebarProps) {
   const [expandedItems, setExpandedItems] = React.useState<string[]>([
     "Sales Management",
-    "Purchase Management",
+    // "Purchase Management",
   ]);
 
   const resetAndToggle = () => {
