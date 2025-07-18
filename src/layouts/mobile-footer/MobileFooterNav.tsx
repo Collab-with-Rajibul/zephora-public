@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
@@ -62,7 +62,7 @@ const createMobileNavItems = () => {
 };
 
 // Create mobile items with groups
-const mobileItems = createMobileNavItems();
+const mobileNavItems = createMobileNavItems();
 
 export function MobileFooterNav() {
   const navigate = useNavigate();
@@ -230,7 +230,7 @@ export function MobileFooterNav() {
         className="w-full"
       >
         <CarouselContent className="ml-0">
-          {mobileItems.map((group, groupIndex) => (
+          {mobileNavItems.map((group, groupIndex) => (
             <CarouselItem key={groupIndex} className="pl-0 basis-full">
               <div className="flex h-20 items-start justify-center px-2 pt-0 pb-1">
                 <div className="flex items-start justify-evenly w-full max-w-lg mx-auto gap-1">
