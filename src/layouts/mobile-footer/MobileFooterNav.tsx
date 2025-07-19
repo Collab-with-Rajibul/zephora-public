@@ -3,7 +3,7 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel';
 import { navigationItems } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -63,6 +63,24 @@ export function MobileFooterNav() {
   const buttonRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({});
   const carouselRef = useRef<HTMLDivElement>(null);
   const { theme, setTheme } = useTheme();
+  const [carouselApi, setCarouselApi] = useState<CarouselApi>();
+
+  // Close dropdown on carousel swipe
+  useEffect(() => {
+    if (!carouselApi) {
+      return;
+    }
+
+    const handleSelect = () => {
+      setActiveMenu(null);
+    };
+
+    carouselApi.on('select', handleSelect);
+
+    return () => {
+      carouselApi.off('select', handleSelect);
+    };
+  }, [carouselApi]);
 
   const handleNavigation = useCallback((path?: string) => {
     if (path) navigate(path);
@@ -126,47 +144,6 @@ export function MobileFooterNav() {
       document.addEventListener('mousedown', handleClickOutside);
       return () => document.removeEventListener('mousedown', handleClickOutside);
     }
-  }, [activeMenu]);
-
-  // Close dropdown when carousel is swiped/moved
-  useEffect(() => {
-    if (!carouselRef.current) return;
-
-    const carouselElement = carouselRef.current;
-    const handleCarouselScroll = () => {
-      if (activeMenu) {
-        setActiveMenu(null);
-      }
-    };
-
-    const handleTouchStart = () => {
-      if (activeMenu) {
-        setActiveMenu(null);
-      }
-    };
-
-    const handlePointerDown = (event: PointerEvent) => {
-      // Check if the pointer event is on the carousel content area
-      const target = event.target as HTMLElement;
-      if (target.closest('[data-carousel-content]') && activeMenu) {
-        setActiveMenu(null);
-      }
-    };
-
-    // Listen for scroll events (carousel movement)
-    carouselElement.addEventListener('scroll', handleCarouselScroll, { passive: true });
-    
-    // Listen for touch events (swipe start)
-    carouselElement.addEventListener('touchstart', handleTouchStart, { passive: true });
-    
-    // Listen for pointer events (drag start)
-    carouselElement.addEventListener('pointerdown', handlePointerDown, { passive: true });
-
-    return () => {
-      carouselElement.removeEventListener('scroll', handleCarouselScroll);
-      carouselElement.removeEventListener('touchstart', handleTouchStart);
-      carouselElement.removeEventListener('pointerdown', handlePointerDown);
-    };
   }, [activeMenu]);
 
   const renderIconButton = useCallback((item: any) => {
@@ -344,6 +321,7 @@ export function MobileFooterNav() {
       <div className="fixed inset-x-0 bottom-0 z-50 bg-background/95 backdrop-blur-sm border-t border-border md:hidden shadow-lg">
         <Carousel
           ref={carouselRef}
+          setApi={setCarouselApi}
           opts={{
             align: "center",
             loop: false,
