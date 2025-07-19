@@ -250,7 +250,7 @@ export function MobileFooterNav() {
           style={dropdownMenuStyle}
           data-dropdown-menu
         >
-          <div className="px-2 py-1.5 text-sm font-semibold">
+          <div className="px-2 py-1.5 text-sm">
             <div className="flex flex-col space-y-1">
               <p className="text-sm font-medium leading-none">John Doe</p>
               <p className="text-xs leading-none text-muted-foreground">john.doe@company.com</p>
