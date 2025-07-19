@@ -235,7 +235,7 @@ export function MobileFooterNav() {
   const renderNavigationMenu = () => {
     if (!activeMenu) return null;
 
-    const dropdownMenuClass = "fixed bottom-20 z-50 min-w-[8rem] w-[200px] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md animate-in slide-in-from-bottom-2 duration-200 md:hidden";
+    const dropdownMenuClass = "fixed bottom-[5.5rem] z-50 min-w-[8rem] w-[200px] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md animate-in slide-in-from-bottom-2 duration-200 md:hidden";
     
     const dropdownMenuStyle = {
       left: `${menuPosition.left}px`,
