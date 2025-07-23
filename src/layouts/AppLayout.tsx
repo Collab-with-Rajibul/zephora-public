@@ -16,10 +16,8 @@ const AppLayout = ({ children }: AppLayoutProps) => {
   const isMobile = useIsMobile();
 
   React.useEffect(() => {
-    if (isMobile) {
-      setIsSidebarCollapsed(true);
-    } else {
-      setIsSidebarCollapsed(false);
+    if (isMobile !== undefined) {
+      setIsSidebarCollapsed(isMobile);
     }
   }, [isMobile]);
 
@@ -27,6 +25,10 @@ const AppLayout = ({ children }: AppLayoutProps) => {
     setIsSidebarCollapsed(!isSidebarCollapsed);
   };
   
+  if (isMobile === undefined) {
+    return null; // Or a loading spinner/skeleton
+  }
+
   return (
     <ThemeProvider defaultTheme="light" storageKey="financeflow-theme">
       <div className="flex h-screen w-full bg-background rounded-lg overflow-hidden">

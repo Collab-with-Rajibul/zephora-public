@@ -4,11 +4,39 @@ import { useState, useCallback, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from '@/components/ui/carousel';
-import { navigationItems } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Sun, Moon, Users, Settings, LogOut } from 'lucide-react';
 import { useTheme } from '@/components/ThemeProvider';
+import { NavItem } from '@/lib/types';
+import { navigationItems } from '@/lib/constants';
+
+// Define custom NavItem for Home
+// Define custom NavItems for Home and Profile
+const newNavItems: NavItem[] = [
+  {
+    title: 'Home',
+    icon: ({ className }) => <img src="/zephora-logo.png" alt="Zephora Logo" className={cn(className, "w-6 h-6 rounded-full object-cover")} />,
+    color: 'text-gray-500', // Default color
+    path: '/'
+  },
+  {
+    title: 'Profile',
+    icon: ({ className }) => (
+      <Avatar className={cn(className, "w-6 h-6")}>
+        <AvatarImage src="/placeholder-avatar.jpg" />
+        <AvatarFallback className="text-primary-foreground text-xs font-medium bg-gradient-to-br from-blue-500 to-purple-600">JD</AvatarFallback>
+      </Avatar>
+    ),
+    color: 'text-gray-500', // Default color
+  },
+];
+
+// Combine all navigation items, ensuring custom items are at the beginning if their titles are used in iconOrder
+const mobileNavigationItems: NavItem[] = [
+  ...newNavItems,
+  ...navigationItems
+];
 
 // Mobile icon order with pre-defined groups using first words of titles
 const iconOrder = [
@@ -18,36 +46,14 @@ const iconOrder = [
 
 // Create mobile navigation items by combining navigation items with new items
 const createMobileNavItems = () => {
-  const navItemsMap = new Map(navigationItems.map(item => [item.title.split(' ')[0], item]));
-  
-  const newItems = {
-    'Home': {
-      title: 'Home',
-      icon: () => <img src="/zephora-logo.png" alt="Zephora Logo" className="w-6 h-6 rounded-full object-cover" />,
-      path: '/'
-    },
-    'Profile': {
-      title: 'Profile',
-      icon: () => (
-        <Avatar className="w-6 h-6">
-          <AvatarImage src="/placeholder-avatar.jpg" />
-          <AvatarFallback className="text-primary-foreground text-xs font-medium bg-gradient-to-br from-blue-500 to-purple-600">JD</AvatarFallback>
-        </Avatar>
-      )
-    }
-  };
+  const navItemsMap = new Map(mobileNavigationItems.map(item => [item.title.split(' ')[0], item]));
 
-  return iconOrder.map(group => 
+  return iconOrder.map(group =>
     group.map(label => {
-      if (newItems[label]) {
-        return { ...newItems[label], label };
-      }
-      
       const navItem = navItemsMap.get(label);
       if (navItem) {
         return { ...navItem, label };
       }
-      
       return null;
     }).filter(Boolean)
   );
@@ -151,40 +157,22 @@ export function MobileFooterNav() {
     const iconContainerClass = "w-6 h-6 flex items-center justify-center flex-shrink-0";
     const labelClass = "text-xs font-medium text-center leading-tight block overflow-hidden text-ellipsis mt-0";
 
-    // Handle Home button
-    if (item.title === 'Home') {
+    // Handle Home and Profile buttons (which have custom icons)
+    if (item.title === 'Home' || item.title === 'Profile') {
+      const IconComponent = item.icon;
       return (
         <Button
           key={item.title}
           variant="ghost"
           size="sm"
-          className={baseButtonClass}
-          onClick={() => handleNavigation(item.path)}
-          aria-label={`Navigate to ${item.title}`}
+          className={cn(baseButtonClass, activeMenu === item.title && 'bg-accent text-primary')}
+          onClick={item.title === 'Home' ? () => handleNavigation(item.path) : (e) => handleMenuToggle(item.title, e)}
+          aria-label={item.title === 'Home' ? `Navigate to ${item.title}` : "User profile menu"}
+          data-dropdown-trigger={item.title === 'Profile' ? true : undefined}
+          ref={(el) => buttonRefs.current[item.title] = el}
         >
           <div className={iconContainerClass}>
-            {item.icon()}
-          </div>
-          <span className={labelClass}>{item.label}</span>
-        </Button>
-      );
-    }
-
-    // Handle Profile button
-    if (item.title === 'Profile') {
-      return (
-        <Button
-          key={item.title}
-          variant="ghost"
-          size="sm"
-          className={cn(baseButtonClass, activeMenu === 'Profile' && 'bg-accent text-primary')}
-          onClick={(e) => handleMenuToggle('Profile', e)}
-          aria-label="User profile menu"
-          data-dropdown-trigger
-          ref={(el) => buttonRefs.current['Profile'] = el}
-        >
-          <div className={iconContainerClass}>
-            {item.icon()}
+            <IconComponent className={cn("h-6 w-6", item.color)} />
           </div>
           <span className={labelClass}>{item.label}</span>
         </Button>
