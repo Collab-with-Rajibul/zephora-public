@@ -1,9 +1,11 @@
 import { type LucideIcon } from 'lucide-react';
+import { ComponentType } from 'react';
 
 //Navigation Bar
 export interface NavItem {
   title: string;
-  icon: LucideIcon;
+  // icon: LucideIcon;
+  icon: ComponentType<{ className?: string }>;
   color: string;
   path?: string;
   children?: NavItem[];
