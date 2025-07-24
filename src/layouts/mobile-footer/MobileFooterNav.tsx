@@ -11,13 +11,12 @@ import { useTheme } from '@/components/ThemeProvider';
 import { NavItem } from '@/lib/types';
 import { navigationItems } from '@/lib/constants';
 
-// Define custom NavItem for Home
-// Define custom NavItems for Home and Profile
+// Define custom NavItems for Home and Profile menu
 const newNavItems: NavItem[] = [
   {
     title: 'Home',
     icon: ({ className }) => <img src="/zephora-logo.png" alt="Zephora Logo" className={cn(className, "w-6 h-6 rounded-full object-cover")} />,
-    color: 'text-gray-500', // Default color
+    color: 'text-gray-500',
     path: '/'
   },
   {
@@ -28,11 +27,15 @@ const newNavItems: NavItem[] = [
         <AvatarFallback className="text-primary-foreground text-xs font-medium bg-gradient-to-br from-blue-500 to-purple-600">JD</AvatarFallback>
       </Avatar>
     ),
-    color: 'text-gray-500', // Default color
+    color: 'text-gray-500',
+    children: [
+      { title: 'Profile', path: '/company-profile', icon: Users, color: 'text-sky-600' },
+      { title: 'Settings', path: '/system-settings', icon: Settings, color: 'text-slate-500' },
+    ]
   },
 ];
 
-// Combine all navigation items, ensuring custom items are at the beginning if their titles are used in iconOrder
+// Combine all navigation items
 const mobileNavigationItems: NavItem[] = [
   ...newNavItems,
   ...navigationItems
@@ -73,16 +76,9 @@ export function MobileFooterNav() {
 
   // Close dropdown on carousel swipe
   useEffect(() => {
-    if (!carouselApi) {
-      return;
-    }
-
-    const handleSelect = () => {
-      setActiveMenu(null);
-    };
-
+    if (!carouselApi) return;
+    const handleSelect = () => setActiveMenu(null);
     carouselApi.on('select', handleSelect);
-
     return () => {
       carouselApi.off('select', handleSelect);
     };
@@ -99,37 +95,20 @@ export function MobileFooterNav() {
       return;
     }
 
-    // Calculate position relative to the clicked button
     const buttonElement = event.currentTarget as HTMLButtonElement;
     const buttonRect = buttonElement.getBoundingClientRect();
     const screenWidth = window.innerWidth;
-    
-    // Calculate the center of the button
     const buttonCenter = buttonRect.left + buttonRect.width / 2;
+    const dropdownWidth = 200;
     
-    // Standard dropdown width (adjust based on your content)
-    const dropdownWidth = 200; // Standard width for dropdown menus
-    
-    // Calculate left position to center dropdown on button
     let leftPosition = buttonCenter;
-    let transformValue = 'translateX(-50%)';
-    
-    // Adjust if dropdown would go off screen
     if (buttonCenter - dropdownWidth / 2 < 16) {
-      // Too close to left edge
       leftPosition = 16 + dropdownWidth / 2;
-      transformValue = 'translateX(-50%)';
     } else if (buttonCenter + dropdownWidth / 2 > screenWidth - 16) {
-      // Too close to right edge  
       leftPosition = screenWidth - 16 - dropdownWidth / 2;
-      transformValue = 'translateX(-50%)';
     }
     
-    setMenuPosition({
-      left: leftPosition,
-      transform: transformValue
-    });
-    
+    setMenuPosition({ left: leftPosition, transform: 'translateX(-50%)' });
     setActiveMenu(title);
   }, [activeMenu]);
 
@@ -152,65 +131,32 @@ export function MobileFooterNav() {
     }
   }, [activeMenu]);
 
-  const renderIconButton = useCallback((item: any) => {
+  const renderIconButton = useCallback((item: NavItem & { label: string }) => {
     const baseButtonClass = "flex flex-col items-center justify-start text-muted-foreground hover:text-primary hover:bg-accent transition-all duration-200 ease-out rounded-xl select-none touch-manipulation h-16 w-full min-w-0 px-1 pt-1 pb-2";
     const iconContainerClass = "w-6 h-6 flex items-center justify-center flex-shrink-0";
     const labelClass = "text-xs font-medium text-center leading-tight block overflow-hidden text-ellipsis mt-0";
 
-    // Handle Home and Profile buttons (which have custom icons)
-    if (item.title === 'Home' || item.title === 'Profile') {
-      const IconComponent = item.icon;
-      return (
-        <Button
-          key={item.title}
-          variant="ghost"
-          size="sm"
-          className={cn(baseButtonClass, activeMenu === item.title && 'bg-accent text-primary')}
-          onClick={item.title === 'Home' ? () => handleNavigation(item.path) : (e) => handleMenuToggle(item.title, e)}
-          aria-label={item.title === 'Home' ? `Navigate to ${item.title}` : "User profile menu"}
-          data-dropdown-trigger={item.title === 'Profile' ? true : undefined}
-          ref={(el) => buttonRefs.current[item.title] = el}
-        >
-          <div className={iconContainerClass}>
-            <IconComponent className={cn("h-6 w-6", item.color)} />
-          </div>
-          <span className={labelClass}>{item.label}</span>
-        </Button>
-      );
-    }
-
-    // Handle navigation items with dropdowns
-    if (item.children?.length > 0) {
-      const Icon = item.icon;
-      return (
-        <Button
-          key={item.title}
-          variant="ghost"
-          size="sm"
-          className={cn(baseButtonClass, activeMenu === item.title && 'bg-accent text-primary')}
-          onClick={(e) => handleMenuToggle(item.title, e)}
-          aria-label={`${item.label} menu`}
-          data-dropdown-trigger
-          ref={(el) => buttonRefs.current[item.title] = el}
-        >
-          <div className={iconContainerClass}>
-            <Icon className={cn("h-6 w-6", item.color)} />
-          </div>
-          <span className={labelClass}>{item.label}</span>
-        </Button>
-      );
-    }
-
-    // Handle simple navigation items (fallback, though most have children)
+    const hasDropdown = !!item.children?.length;
     const Icon = item.icon;
+
+    const handleClick = (e: React.MouseEvent) => {
+      if (hasDropdown) {
+        handleMenuToggle(item.title, e);
+      } else if (item.path) {
+        handleNavigation(item.path);
+      }
+    };
+
     return (
       <Button
         key={item.title}
         variant="ghost"
         size="sm"
-        className={baseButtonClass}
-        onClick={() => handleNavigation(item.path || '/')}
-        aria-label={`Navigate to ${item.title}`}
+        className={cn(baseButtonClass, activeMenu === item.title && 'bg-accent text-primary')}
+        onClick={handleClick}
+        aria-label={hasDropdown ? `${item.label} menu` : `Navigate to ${item.title}`}
+        data-dropdown-trigger={hasDropdown || undefined}
+        ref={(el) => (buttonRefs.current[item.title] = el)}
       >
         <div className={iconContainerClass}>
           <Icon className={cn("h-6 w-6", item.color)} />
@@ -218,89 +164,70 @@ export function MobileFooterNav() {
         <span className={labelClass}>{item.label}</span>
       </Button>
     );
-  }, [handleNavigation, handleMenuToggle, activeMenu, theme, toggleTheme]);
+  }, [handleNavigation, handleMenuToggle, activeMenu]);
 
   const renderNavigationMenu = () => {
     if (!activeMenu) return null;
 
     const dropdownMenuClass = "fixed bottom-[5.5rem] z-50 min-w-[8rem] w-[200px] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md animate-in slide-in-from-bottom-2 duration-200 md:hidden";
-    
     const dropdownMenuStyle = {
       left: `${menuPosition.left}px`,
-      transform: menuPosition.transform
+      transform: 'translateX(-50%)'
     };
 
-    // Handle Profile menu
-    if (activeMenu === 'Profile') {
-      return (
-        <div 
-          className={dropdownMenuClass}
-          style={dropdownMenuStyle}
-          data-dropdown-menu
-        >
-          <div className="px-2 py-1.5 text-sm">
-            <div className="flex flex-col space-y-1">
-              <p className="text-sm font-medium leading-none">John Doe</p>
-              <p className="text-xs leading-none text-muted-foreground">john.doe@company.com</p>
-            </div>
-          </div>
-          <div className="h-px bg-muted my-1"></div>
-          <div className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground hover:bg-accent hover:text-accent-foreground"
-               onClick={() => handleNavigation('/company-profile')}>
-            <Users className="mr-2 h-4 w-4" />
-            <span>Profile</span>
-          </div>
-          <div className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground hover:bg-accent hover:text-accent-foreground"
-               onClick={() => handleNavigation('/system-settings')}>
-            <Settings className="mr-2 h-4 w-4" />
-            <span>Settings</span>
-          </div>
-          <div className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground hover:bg-accent hover:text-accent-foreground"
-               onClick={toggleTheme}>
-            {theme === 'dark' ? (
-              <Sun className="mr-2 h-4 w-4" />
-            ) : (
-              <Moon className="mr-2 h-4 w-4" />
-            )}
-            <span>{theme === 'dark' ? 'Light' : 'Dark'} Mode</span>
-          </div>
-          <div className="h-px bg-muted my-1"></div>
-          <div className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 text-red-600 focus:text-red-600"
-               onClick={() => console.log('Logout')}>
-            <LogOut className="mr-2 h-4 w-4" />
-            <span>Log out</span>
-          </div>
-        </div>
-      );
-    }
+    const activeItem = mobileNavItems.flat().find(item => item?.title === activeMenu);
+    if (!activeItem) return null;
 
-    // Handle navigation items with children
-    const activeItem = mobileNavItems.flat().find(item => item.title === activeMenu);
-    if (activeItem?.children?.length > 0) {
-      return (
-        <div 
-          className={dropdownMenuClass}
-          style={dropdownMenuStyle}
-          data-dropdown-menu
-        >
-          {activeItem.children.map((child: any) => {
-            const ChildIcon = child.icon;
-            return (
-              <div
-                key={child.title}
-                className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
-                onClick={() => handleNavigation(child.path || '/')}
-              >
-                <ChildIcon className={cn("mr-2 h-4 w-4", child.color)} />
-                <span className="truncate">{child.title}</span>
+    const menuItemClasses = "relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors focus:bg-accent focus:text-accent-foreground hover:bg-accent hover:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50";
+
+    return (
+      <div
+        className={dropdownMenuClass}
+        style={dropdownMenuStyle}
+        data-dropdown-menu
+      >
+        {activeMenu === 'Profile' && (
+          <>
+            <div className="px-2 py-1.5 text-sm">
+              <div className="flex flex-col space-y-1">
+                <p className="text-sm font-medium leading-none">John Doe</p>
+                <p className="text-xs leading-none text-muted-foreground">john.doe@company.com</p>
               </div>
-            );
-          })}
-        </div>
-      );
-    }
+            </div>
+            <div className="h-px bg-muted my-1" />
+          </>
+        )}
+        
+        {activeItem.children?.map((child) => {
+          const ChildIcon = child.icon;
+          return (
+            <div key={child.title} className={menuItemClasses} onClick={() => handleNavigation(child.path)}>
+              <ChildIcon className={cn("mr-2 h-4 w-4", child.color)} />
+              <span className="truncate">{child.title}</span>
+            </div>
+          );
+        })}
 
-    return null;
+        {activeMenu === 'Profile' && (
+          <>
+            {/* <div className="h-px bg-muted my-1" /> */}
+            <div className={menuItemClasses} onClick={toggleTheme}>
+              {theme === 'dark' ? (
+                <Sun className="mr-2 h-4 w-4 text-yellow-400" />
+              ) : (
+                <Moon className="mr-2 h-4 w-4" />
+              )}
+              <span>{theme === 'dark' ? 'Light' : 'Dark'} Mode</span>
+            </div>
+            <div className="h-px bg-muted my-1" />
+            <div className={cn(menuItemClasses, "text-red-600 focus:text-red-600")} onClick={() => console.log('Logout')}>
+              <LogOut className="mr-2 h-4 w-4" />
+              <span>Log out</span>
+            </div>
+          </>
+        )}
+      </div>
+    );
   };
 
   return (
