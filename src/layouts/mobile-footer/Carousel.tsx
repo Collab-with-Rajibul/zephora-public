@@ -7,11 +7,10 @@ interface CarouselProps {
   setCarouselApi: (api: CarouselApi) => void;
   activeMenu: string | null;
   handleNavigation: (path?: string) => void;
-  handleMenuToggle: (title: string, event: React.MouseEvent) => void;
-  buttonRefs: React.MutableRefObject<{ [key: string]: HTMLButtonElement | null }>;
+  handleMenuToggle: (title: string, event: React.MouseEvent) => void;  
 }
 
-export function Carousel({ setCarouselApi, activeMenu, handleNavigation, handleMenuToggle, buttonRefs }: CarouselProps) {
+export function Carousel({ setCarouselApi, activeMenu, handleNavigation, handleMenuToggle }: CarouselProps) {
   return (
     <UiCarousel
       setApi={setCarouselApi}
@@ -37,8 +36,7 @@ export function Carousel({ setCarouselApi, activeMenu, handleNavigation, handleM
                       item={item as NavItem & { label: string }}
                       activeMenu={activeMenu}
                       handleNavigation={handleNavigation}
-                      handleMenuToggle={handleMenuToggle}
-                      buttonRefs={buttonRefs}
+                      handleMenuToggle={handleMenuToggle}                      
                     />
                   </div>
                 ))}

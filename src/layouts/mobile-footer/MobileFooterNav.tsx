@@ -10,8 +10,7 @@ import { Carousel } from './Carousel';
 export function MobileFooterNav() {
   const navigate = useNavigate();
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
-  const [menuPosition, setMenuPosition] = useState({ left: 0, transform: 'translateX(-50%)' });
-  const buttonRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({});
+  const [menuPosition, setMenuPosition] = useState({ left: 0, transform: 'translateX(-50%)' });  
   const { theme, setTheme } = useTheme();
   const [carouselApi, setCarouselApi] = useState<CarouselApi>();
 
@@ -85,8 +84,7 @@ export function MobileFooterNav() {
           setCarouselApi={setCarouselApi}
           activeMenu={activeMenu}
           handleNavigation={handleNavigation}
-          handleMenuToggle={handleMenuToggle}
-          buttonRefs={buttonRefs}
+          handleMenuToggle={handleMenuToggle}          
         />
       </div>
     </>
