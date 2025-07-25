@@ -7,7 +7,7 @@ import { type CarouselApi } from '@/components/ui/carousel';
 import { DropdownMenu } from './DropdownMenu';
 import { Carousel } from './Carousel';
 
-export function MobileFooterNav() {
+export function Footer() {
   const navigate = useNavigate();
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [menuPosition, setMenuPosition] = useState({ left: 0, transform: 'translateX(-50%)' });  

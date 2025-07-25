@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { Sidebar } from '@/layouts/desktop-sidebar/Sidebar';
-import { MobileFooterNav } from '@/layouts/mobile-footer/MobileFooterNav';
+import { Footer } from '@/layouts/mobile-footer/Footer';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 interface AppLayoutProps {
@@ -47,7 +47,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
             </div>
           </main>
           
-          {isMobile && <MobileFooterNav />}
+          {isMobile && <Footer />}
         </div>
       </div>
     </ThemeProvider>
