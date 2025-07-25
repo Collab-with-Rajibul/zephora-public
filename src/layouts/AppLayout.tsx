@@ -1,7 +1,7 @@
 
 "use client";
 
-import React, { useState } from 'react';
+import React from 'react';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { Sidebar } from '@/layouts/desktop-sidebar/Sidebar';
 import { Footer } from '@/layouts/mobile-footer/Footer';
@@ -12,18 +12,7 @@ interface AppLayoutProps {
 }
 
 const AppLayout = ({ children }: AppLayoutProps) => {
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const isMobile = useIsMobile();
-
-  React.useEffect(() => {
-    if (isMobile !== undefined) {
-      setIsSidebarCollapsed(isMobile);
-    }
-  }, [isMobile]);
-
-  const toggleSidebar = () => {
-    setIsSidebarCollapsed(!isSidebarCollapsed);
-  };
   
   if (isMobile === undefined) {
     return null; // Or a loading spinner/skeleton
@@ -33,10 +22,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
     <ThemeProvider defaultTheme="light" storageKey="financeflow-theme">
       <div className="flex h-screen w-full bg-background rounded-lg overflow-hidden">
         {!isMobile && (
-          <Sidebar 
-            isCollapsed={isSidebarCollapsed}
-            onToggle={toggleSidebar}
-          />
+          <Sidebar />
         )}
         
         <div className="flex-1 flex flex-col overflow-hidden relative">

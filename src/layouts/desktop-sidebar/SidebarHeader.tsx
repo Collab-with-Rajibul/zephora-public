@@ -17,7 +17,10 @@ export function SidebarHeader({ isCollapsed, onToggle, setExpandedItems }: Sideb
   const navigate = useNavigate();
 
   const handleLogoClickAndReset = () => {
-    setExpandedItems(["Sales Management", "Purchase Management"]);
+    setExpandedItems([
+      "Sales Management", 
+      // "Purchase Management"
+    ]);
     onToggle();
     navigate('/');
   };

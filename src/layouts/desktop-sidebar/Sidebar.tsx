@@ -1,7 +1,7 @@
 
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { Separator } from '@/components/ui/separator';
 import { SidebarHeader } from './SidebarHeader';
@@ -10,41 +10,37 @@ import { SidebarFooter } from './SidebarFooter';
 
 interface SidebarProps {
   className?: string;
-  isCollapsed: boolean;
-  onToggle: () => void;
 }
 
-export function Sidebar({ className, isCollapsed, onToggle }: SidebarProps) {
-  const [expandedItems, setExpandedItems] = React.useState<string[]>([
+export function Sidebar({ className }: SidebarProps) {
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [expandedItems, setExpandedItems] = useState<string[]>([
     "Sales Management",
     // "Purchase Management",
   ]);
-
-  const resetAndToggle = () => {
-    if (!isCollapsed) {
-      setExpandedItems(["Sales Management", "Purchase Management"]);
-    }
-    onToggle();
+  
+  const toggleSidebar = () => {
+    setIsSidebarCollapsed(!isSidebarCollapsed);
   };
 
   const sidebarContent = (
     <>
-      <SidebarHeader isCollapsed={isCollapsed} onToggle={onToggle} setExpandedItems={setExpandedItems} />
+      <SidebarHeader isCollapsed={isSidebarCollapsed} onToggle={toggleSidebar} setExpandedItems={setExpandedItems} />
       <SidebarNavigation
-        isCollapsed={isCollapsed}
-        onToggle={onToggle}
+        isCollapsed={isSidebarCollapsed}
+        onToggle={toggleSidebar}
         expandedItems={expandedItems}
         setExpandedItems={setExpandedItems}
       />
       <Separator className="bg-border" />
-      <SidebarFooter isCollapsed={isCollapsed} />
+      <SidebarFooter isCollapsed={isSidebarCollapsed} />
     </>
   );
 
   return (
     <div className={cn(
       "flex flex-col h-screen bg-background text-foreground border-r border-border transition-all duration-300 rounded-r-lg",
-      isCollapsed ? "w-16" : "w-72",
+      isSidebarCollapsed ? "w-16" : "w-72",
       className
     )}>
       {sidebarContent}
