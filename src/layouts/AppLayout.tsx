@@ -21,9 +21,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
   return (
     <ThemeProvider defaultTheme="light" storageKey="financeflow-theme">
       <div className="flex h-screen w-full bg-background rounded-lg overflow-hidden">
-        {!isMobile && (
-          <Sidebar />
-        )}
+        {!isMobile && <Sidebar />}
         
         <div className="flex-1 flex flex-col overflow-hidden relative">
           
