@@ -54,6 +54,7 @@ export function Footer() {
 
   const toggleTheme = useCallback(() => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
+    setActiveMenu(null);
   }, [theme, setTheme]);
 
   // Close dropdown when clicking outside

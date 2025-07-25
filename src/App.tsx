@@ -4,61 +4,63 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import AppLayout from "./layouts/AppLayout";
+
 import DashboardPage from "./pages/DashboardPage";
 import NotFound from "./pages/NotFound";
 
 // Quick Action Pages
-import NewSaleInvoicePage from "./pages/NewSaleInvoicePage";
-import NewPurchaseBillPage from "./pages/NewPurchaseBillPage";
-import NewCustomerPage from "./pages/NewCustomerPage";
-import NewSupplierPage from "./pages/NewSupplierPage";
-import RecordPaymentPage from "./pages/RecordPaymentPage";
-import GenerateReportPage from "./pages/GenerateReportPage";
+import NewSaleInvoicePage from "./pages/sales/NewSaleInvoicePage";
+import NewPurchaseBillPage from "./pages/purchase/NewPurchaseBillPage";
+import NewCustomerPage from "./pages/sales/NewCustomerPage";
+import NewSupplierPage from "./pages/purchase/NewSupplierPage";
+import RecordPaymentPage from "./pages/payments/RecordPaymentPage";
+import GenerateReportPage from "./pages/reports/GenerateReportPage";
 
 // Sales Management
-import SalesInvoicesPage from "./pages/SalesInvoices";
-import CustomersPage from "./pages/CustomersPage";
-import SalesReportsPage from "./pages/SalesReportsPage";
+import SalesInvoicesPage from "./pages/sales/SalesInvoices";
+import CustomersPage from "./pages/sales/CustomersPage";
+import SalesReportsPage from "./pages/sales/SalesReportsPage";
 
 //Purchase Management
-import PurchaseBillsPage from "./pages/PurchaseBillsPage";
-import SuppliersPage from "./pages/SuppliersPage";
-import PurchaseReportsPage from "./pages/PurchaseReportsPage";
+import PurchaseBillsPage from "./pages/purchase/PurchaseBillsPage";
+import SuppliersPage from "./pages/purchase/SuppliersPage";
+import PurchaseReportsPage from "./pages/purchase/PurchaseReportsPage";
 
 //Employee Management
-import EmployeesPage from "./pages/EmployeesPage";
-import AttendancePage from "./pages/AttendancePage";
-import AdvancesPage from "./pages/AdvancesPage";
+import EmployeesPage from "./pages/employees/EmployeesPage";
+import AttendancePage from "./pages/employees/AttendancePage";
+import AdvancesPage from "./pages/employees/AdvancesPage";
 
 // Financial Statements
-import ProfitLossPage from "./pages/ProfitLossPage";
-import BalanceSheetPage from "./pages/BalanceSheetPage";
-import CashFlowPage from "./pages/CashFlowPage";
-import TrialBalancePage from "./pages/TrialBalancePage";
+import ProfitLossPage from "./pages/financial/ProfitLossPage";
+import BalanceSheetPage from "./pages/financial/BalanceSheetPage";
+import CashFlowPage from "./pages/financial/CashFlowPage";
+import TrialBalancePage from "./pages/financial/TrialBalancePage";
 
 // Payments
-import PaymentsSentPage from "./pages/PaymentsSentPage";
-import PaymentsReceivedPage from "./pages/PaymentsReceivedPage";
-import OutstandingPaymentsPage from "./pages/OutstandingPaymentsPage";
-import PaymentTrackingPage from "./pages/PaymentTrackingPage";
+import PaymentsSentPage from "./pages/payments/PaymentsSentPage";
+import PaymentsReceivedPage from "./pages/payments/PaymentsReceivedPage";
+import OutstandingPaymentsPage from "./pages/payments/OutstandingPaymentsPage";
+import PaymentTrackingPage from "./pages/payments/PaymentTrackingPage";
 
 // Inventory & Stock
-import StockLevelsPage from "./pages/StockLevelsPage";
-import StockReportsPage from "./pages/StockReportsPage";
-import LowStockAlertsPage from "./pages/LowStockAlertsPage";
+import StockLevelsPage from "./pages/inventory/StockLevelsPage";
+import StockReportsPage from "./pages/inventory/StockReportsPage";
+import LowStockAlertsPage from "./pages/inventory/LowStockAlertsPage";
 
 // Reports & Analytics
-import FinancialAnalyticsPage from "./pages/FinancialAnalyticsPage";
-import BusinessInsightsPage from "./pages/BusinessInsightsPage";
-import CustomReportsPage from "./pages/CustomReportsPage";
-import ComparativeAnalysisPage from "./pages/ComparativeAnalysisPage";
+import FinancialAnalyticsPage from "./pages/reports/FinancialAnalyticsPage";
+import BusinessInsightsPage from "./pages/reports/BusinessInsightsPage";
+import CustomReportsPage from "./pages/reports/CustomReportsPage";
+import ComparativeAnalysisPage from "./pages/reports/ComparativeAnalysisPage";
 
 // Settings
-import CompanyProfilePage from "./pages/CompanyProfilePage";
-import UserManagementPage from "./pages/UserManagementPage";
-import SystemSettingsPage from "./pages/SystemSettingsPage";
-import IntegrationsPage from "./pages/IntegrationsPage";
+import CompanyProfilePage from "./pages/settings/CompanyProfilePage";
+import UserManagementPage from "./pages/settings/UserManagementPage";
+import SystemSettingsPage from "./pages/settings/SystemSettingsPage";
+import IntegrationsPage from "./pages/settings/IntegrationsPage";
 
 const queryClient = new QueryClient();
 
