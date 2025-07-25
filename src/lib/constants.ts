@@ -126,7 +126,7 @@ export const navigationItems: NavItem[] = [
 export const quickActions: QuickAction[] = [
   {
     id: 'new-sale-invoice',
-    title: 'New Sale Invoice',
+    title: 'New Sales Invoice',
     description: 'Create a new sales invoice',
     icon: Receipt,
     variant: 'primary',
