@@ -1,6 +1,5 @@
 import { useTheme } from '@/components/ThemeProvider';
 import { cn } from '@/lib/utils';
-import { NavItem } from '@/lib/types';
 import { Sun, Moon, LogOut } from 'lucide-react';
 import { mobileNavItems } from './nav-items';
 

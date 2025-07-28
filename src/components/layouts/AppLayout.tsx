@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { ThemeProvider } from '@/components/ThemeProvider';
-import { Sidebar } from '@/layouts/desktop-sidebar/Sidebar';
-import { Footer } from '@/layouts/mobile-footer/Footer';
+import { Sidebar } from './desktop-sidebar/Sidebar';
+import { Footer } from './mobile-footer/Footer';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 interface AppLayoutProps {
