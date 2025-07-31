@@ -62,7 +62,7 @@ Get Zephora locally in a few steps:
 ## Contributing
 
 We welcome contributions from the community! Whether you want to fix a bug, add a feature, or improve documentation, your input is appreciated.
-
+<!-- 
 **How to contribute:**
 
 1. **Fork** the repository.
@@ -80,7 +80,7 @@ We welcome contributions from the community! Whether you want to fix a bug, add 
     git push origin your-feature-name
     ```
 5. **Open a pull request** to the main repository with a description of your changes.
-
+ -->
 Feel free to open issues for help, feature requests, or questions!
 
 ---
