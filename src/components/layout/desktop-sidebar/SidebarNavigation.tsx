@@ -44,8 +44,8 @@ export function SidebarNavigation({ isCollapsed, onToggle, expandedItems, setExp
                 onClick={() => {
                   if (isCollapsed) {
                     onToggle();
-                    if (item.children && !expandedItems.includes(item.title)) {
-                      setExpandedItems(prev => [...prev, item.title]);
+                    if (item.children) {
+                      setExpandedItems([item.title]);
                     }
                   } else if (item.children) {
                     toggleExpanded(item.title);
