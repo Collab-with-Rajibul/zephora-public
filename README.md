@@ -96,4 +96,4 @@ This project is open source and available under the [MIT License](LICENSE).
 - ⚡️ Fast development with [Vite](https://vitejs.dev/)
 - 🛠️ Type-safe codebase with [TypeScript](https://www.typescriptlang.org/)
 - ⚛️ Built using [React](https://react.dev/)
-- 🎨 Beautiful UI with [Tailwind CSS](https://tailwindcss.com/) and [shadcn-ui](https://ui.shadcn.com/)
+- 🎨 Beautiful UI with [Tailwind CSS](https://tailwindcss.com/), [shadcn-ui](https://ui.shadcn.com/), and [lucide-react](https://lucide.dev/)
