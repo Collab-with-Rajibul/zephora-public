@@ -60,11 +60,11 @@ export function SidebarFooter({ isCollapsed }: SidebarFooterProps) {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem className="rounded-lg">
-          <Users className="mr-2 h-4 w-4" />
+          <Users className="text-sky-600 mr-2 h-4 w-4" />
           <span>Profile</span>
         </DropdownMenuItem>
         <DropdownMenuItem className="rounded-lg">
-          <Settings className="mr-2 h-4 w-4" />
+          <Settings className="text-slate-500 mr-2 h-4 w-4" />
           <span>Settings</span>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
