@@ -19,7 +19,7 @@ Zephora is an open source platform that empowers small businesses and SME owners
 - 📈 **Insightful Reports:** Generate powerful analytics revealing revenue, expenses, and growth trends.
 - 🛎️ **Real-Time Alerts:** Receive instant notifications for important business events and overdue actions.
 - 🛡️ **Secure & Customizable:** Modern security, robust permissions, and workflow-tailored customization.
-- ⚡ **Lightning-Fast Interface:** Enjoy a clean, modern, and responsive user experience.
+- ⚡ **Lightning-Fast Interface:** Enjoy a clean, modern, and elegant user experience.
 
 ---
 
