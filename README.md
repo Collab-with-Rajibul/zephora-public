@@ -1,7 +1,7 @@
 # Zephora
 
 ![Desktop Preview](./public/desktop.png)
-<!-- ![Mobile Preview](./public/mobile.png) -->
+![Mobile Preview](./public/mobile.png)
 
 🔗 **Preview :** [https://zephora-public.lovable.app](https://zephora-public.lovable.app)
 
