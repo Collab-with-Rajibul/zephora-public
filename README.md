@@ -1,4 +1,4 @@
-# Zephora
+# Zephora to be deleted
 
 ![Desktop Preview](./public/desktop.png)
 <!-- ![Mobile Preview](./public/mobile.png) -->
