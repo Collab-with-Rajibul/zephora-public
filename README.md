@@ -9,7 +9,7 @@ Zephora is an open source platform that empowers small businesses and MSME owner
 
 ---
 
-## Features
+## Features to be deleted
 - 📱 **Responsive Across Desktop & Mobile:** Whether you’re in the office, home or vacation, Zephora works perfectly everywhere.
 - 📊 **Live Dashboard:** Instantly visualize your business with dynamic metrics, recent activities, and financial overviews.
 - 🧾 **Easy Invoicing & Billing:** Create, send, and manage sales invoices and purchase bills without any hassle.
