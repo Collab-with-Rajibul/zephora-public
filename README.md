@@ -26,7 +26,7 @@ Zephora is an open source platform that empowers small businesses and MSME owner
 ## Getting Started
 
 Get Zephora locally in a few steps:
-123
+
 ### Prerequisites
 
 - [Node.js](https://nodejs.org/) (v18 or higher recommended)
